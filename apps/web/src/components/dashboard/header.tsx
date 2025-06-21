@@ -71,7 +71,7 @@ export function Header() {
                     {session?.user?.email}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {(session as any)?.user?.role?.toLowerCase().replace('_', ' ')}
+                    {session?.user?.role?.toLowerCase().replace('_', ' ')}
                   </p>
                 </div>
               </DropdownMenuLabel>

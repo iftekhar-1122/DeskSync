@@ -53,18 +53,18 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id
         token.email = user.email
         token.name = user.name
-        token.role = (user as any).role
-        token.isActive = (user as any).isActive
+        token.role = user.role
+        token.isActive = user.isActive
       }
       return token
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id as string
-        session.user.email = token.email as string
-        session.user.name = token.name as string
-        ;(session as any).user.role = token.role
-        ;(session as any).user.isActive = token.isActive
+        session.user.id = token.id
+        session.user.email = token.email || ''
+        session.user.name = token.name || ''
+        session.user.role = token.role
+        session.user.isActive = token.isActive
       }
       return session
     },
