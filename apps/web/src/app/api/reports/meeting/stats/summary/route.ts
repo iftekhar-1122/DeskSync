@@ -38,7 +38,8 @@ export async function GET(request: NextRequest) {
       successfulMeetings: Math.floor(Math.random() * 40) + 15, // 15-55 successful
       cancelledMeetings: Math.floor(Math.random() * 10) + 2, // 2-12 cancelled
       totalAttendees: Math.floor(Math.random() * 200) + 50, // 50-250 attendees
-      averageAttendeesPerMeeting: (Math.random() * 5 + 3).toFixed(1), // 3.0-8.0
+      averageAttendeesPerMeeting: parseFloat((Math.random() * 5 + 3).toFixed(1)), // 3.0-8.0
+      successRate: 0, // Will be calculated later
       period: {
         days,
         startDate: new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
