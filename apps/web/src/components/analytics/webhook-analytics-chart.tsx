@@ -30,12 +30,13 @@ interface WebhookAnalyticsChartProps {
 export function WebhookAnalyticsChart({ data }: WebhookAnalyticsChartProps) {
   // Ensure webhooks is always an array
   const webhooks = Array.isArray(data?.webhooks) ? data.webhooks : []
-  const systemStats = data?.systemStats || {}
+  // Type assertion to handle empty object type
+  const systemStats = (data?.systemStats || {}) as any
 
-  // Prepare data for charts
+  // Prepare data for charts with safe property access
   const deliveryStatusData = systemStats ? [
-    { name: 'Successful', value: systemStats.successfulDeliveries, color: '#10b981' },
-    { name: 'Failed', value: systemStats.failedDeliveries, color: '#ef4444' },
+    { name: 'Successful', value: systemStats.successfulDeliveries || 0, color: '#10b981' },
+    { name: 'Failed', value: systemStats.failedDeliveries || 0, color: '#ef4444' },
   ] : []
 
   const webhookPerformanceData = webhooks.slice(0, 10).map(webhook => ({
@@ -94,7 +95,7 @@ export function WebhookAnalyticsChart({ data }: WebhookAnalyticsChartProps) {
               <div className="flex items-center justify-between p-4 bg-muted rounded-lg">
                 <div>
                   <div className="text-sm font-medium">Total Deliveries</div>
-                  <div className="text-2xl font-bold">{systemStats.totalDeliveries}</div>
+                  <div className="text-2xl font-bold">{systemStats.totalDeliveries || 0}</div>
                 </div>
                 <div className="text-right">
                   <div className="text-sm text-muted-foreground">Last 24h</div>
@@ -105,15 +106,15 @@ export function WebhookAnalyticsChart({ data }: WebhookAnalyticsChartProps) {
                 <div>
                   <div className="text-sm font-medium">Success Rate</div>
                   <div className={`text-2xl font-bold ${
-                    systemStats.successRate > 95 ? 'text-green-600' : 
-                    systemStats.successRate > 90 ? 'text-yellow-600' : 'text-red-600'
+                    (systemStats.successRate || 0) > 95 ? 'text-green-600' :
+                    (systemStats.successRate || 0) > 90 ? 'text-yellow-600' : 'text-red-600'
                   }`}>
-                    {systemStats.successRate.toFixed(1)}%
+                    {(systemStats.successRate || 0).toFixed(1)}%
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-sm text-muted-foreground">
-                    {systemStats.successfulDeliveries} / {systemStats.totalDeliveries}
+                    {systemStats.successfulDeliveries || 0} / {systemStats.totalDeliveries || 0}
                   </div>
                 </div>
               </div>
@@ -122,16 +123,16 @@ export function WebhookAnalyticsChart({ data }: WebhookAnalyticsChartProps) {
                 <div>
                   <div className="text-sm font-medium">Avg Response Time</div>
                   <div className={`text-2xl font-bold ${
-                    systemStats.averageResponseTime < 1000 ? 'text-green-600' : 
-                    systemStats.averageResponseTime < 2000 ? 'text-yellow-600' : 'text-red-600'
+                    (systemStats.averageResponseTime || 0) < 1000 ? 'text-green-600' :
+                    (systemStats.averageResponseTime || 0) < 2000 ? 'text-yellow-600' : 'text-red-600'
                   }`}>
-                    {Math.round(systemStats.averageResponseTime)}ms
+                    {Math.round(systemStats.averageResponseTime || 0)}ms
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-sm text-muted-foreground">
-                    {systemStats.averageResponseTime < 1000 ? 'Excellent' : 
-                     systemStats.averageResponseTime < 2000 ? 'Good' : 'Needs Attention'}
+                    {(systemStats.averageResponseTime || 0) < 1000 ? 'Excellent' :
+                     (systemStats.averageResponseTime || 0) < 2000 ? 'Good' : 'Needs Attention'}
                   </div>
                 </div>
               </div>
