@@ -13,7 +13,7 @@ export function Leaderboard({ className }: LeaderboardProps) {
   const [metric, setMetric] = useState('tickets')
   const [limit, setLimit] = useState('10')
 
-  const { data: leaderboardData, isLoading } = useQuery(
+  const { data: leaderboardData, isLoading, error } = useQuery(
     ['leaderboard', metric, limit],
     async () => {
       const response = await fetch(`/api/analytics/leaderboard?metric=${metric}&limit=${limit}`)
@@ -23,7 +23,13 @@ export function Leaderboard({ className }: LeaderboardProps) {
       return response.json()
     },
     {
-      select: (response) => response.data,
+      select: (response) => {
+        // Ensure we always return a valid structure
+        if (!response?.data?.leaderboard || !Array.isArray(response.data.leaderboard)) {
+          return { leaderboard: [], metadata: null }
+        }
+        return response.data
+      },
       retry: 3,
       retryDelay: 1000,
     }
@@ -93,7 +99,10 @@ export function Leaderboard({ className }: LeaderboardProps) {
     )
   }
 
-  const leaderboard = leaderboardData?.leaderboard || []
+  // Ensure leaderboard is always an array
+  const leaderboard = Array.isArray(leaderboardData?.leaderboard)
+    ? leaderboardData.leaderboard
+    : []
 
   return (
     <Card className={className}>

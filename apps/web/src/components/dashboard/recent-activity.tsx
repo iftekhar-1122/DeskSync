@@ -15,7 +15,10 @@ interface RecentActivityProps {
 }
 
 export function RecentActivity({ activities }: RecentActivityProps) {
-  if (!activities || activities.length === 0) {
+  // Ensure activities is always an array
+  const safeActivities = Array.isArray(activities) ? activities : []
+
+  if (safeActivities.length === 0) {
     return (
       <div className="flex items-center justify-center h-32 text-muted-foreground">
         <div className="text-center">
@@ -50,7 +53,7 @@ export function RecentActivity({ activities }: RecentActivityProps) {
 
   return (
     <div className="space-y-4">
-      {activities.map((activity) => {
+      {safeActivities.map((activity) => {
         const Icon = getIcon(activity.type)
         
         return (

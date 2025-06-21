@@ -87,7 +87,7 @@ export default function DashboardPage() {
             />
             <StatsCard
               title="Active Users"
-              value={dashboardData?.userPerformance?.length || 0}
+              value={Array.isArray(dashboardData?.userPerformance) ? dashboardData.userPerformance.length : 0}
               description="Team members reporting"
               icon={Users}
               trend={5}
