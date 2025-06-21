@@ -285,12 +285,12 @@ function TemplateForm({
           id="template"
           value={formData.template}
           onChange={(e) => setFormData({ ...formData, template: e.target.value })}
-          placeholder="Enter your template with {{variables}}"
+          placeholder="Enter your template with variables like {{meetingTitle}}"
           rows={6}
           required
         />
         <div className="text-sm text-muted-foreground">
-          Use variables like {{meetingTitle}}, {{clientName}}, {{startTimeFormatted}}, {{meetingId}}
+          Use variables like <code>{`{{meetingTitle}}`}</code>, <code>{`{{clientName}}`}</code>, <code>{`{{startTimeFormatted}}`}</code>, <code>{`{{meetingId}}`}</code>
         </div>
       </div>
 
