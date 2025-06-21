@@ -25,6 +25,7 @@ export function PerformanceChart({ data, isAdmin }: PerformanceChartProps) {
     if (isAdmin) {
       // For admin, show team performance over time
       const timeSeries = data.timeSeries || []
+      if (!Array.isArray(timeSeries)) return []
       return timeSeries.map((item: any) => ({
         date: new Date(item.date).toLocaleDateString('en-US', { 
           month: 'short', 
@@ -37,6 +38,7 @@ export function PerformanceChart({ data, isAdmin }: PerformanceChartProps) {
     } else {
       // For users, show their recent reports
       const recentReports = data.userStats?.dailyReports?.recentReports || []
+      if (!Array.isArray(recentReports)) return []
       return recentReports.slice(-7).map((report: any) => ({
         date: new Date(report.date).toLocaleDateString('en-US', { 
           month: 'short', 

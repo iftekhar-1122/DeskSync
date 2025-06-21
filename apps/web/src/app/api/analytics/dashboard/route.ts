@@ -35,6 +35,13 @@ export async function GET(request: NextRequest) {
         averageScore: 8.7,
         trend: 12
       },
+      timeSeries: [
+        { date: '2024-01-01', tickets: 15, chats: 8, emails: 12, calls: 5, githubIssues: 3 },
+        { date: '2024-01-02', tickets: 18, chats: 10, emails: 14, calls: 7, githubIssues: 2 },
+        { date: '2024-01-03', tickets: 16, chats: 9, emails: 11, calls: 6, githubIssues: 4 },
+        { date: '2024-01-04', tickets: 20, chats: 12, emails: 16, calls: 8, githubIssues: 1 },
+        { date: '2024-01-05', tickets: 14, chats: 7, emails: 10, calls: 4, githubIssues: 5 }
+      ],
       userPerformance: isAdmin ? [
         {
           userId: '1',

@@ -16,11 +16,16 @@ export function Leaderboard({ className }: LeaderboardProps) {
   const { data: leaderboardData, isLoading } = useQuery(
     ['leaderboard', metric, limit],
     async () => {
-      const response = await fetch(`http://localhost:3001/api/analytics/leaderboard?metric=${metric}&limit=${limit}`)
+      const response = await fetch(`/api/analytics/leaderboard?metric=${metric}&limit=${limit}`)
+      if (!response.ok) {
+        throw new Error('Failed to fetch leaderboard data')
+      }
       return response.json()
     },
     {
       select: (response) => response.data,
+      retry: 3,
+      retryDelay: 1000,
     }
   )
 
@@ -37,19 +42,12 @@ export function Leaderboard({ className }: LeaderboardProps) {
     }
   }
 
-  const getMetricValue = (user: any, selectedMetric: string) => {
-    switch (selectedMetric) {
-      case 'chats':
-        return user.totalChats
-      case 'meetings':
-        return user.totalMeetings
-      case 'reports':
-        return user.totalReports
-      case 'success_rate':
-        return `${user.meetingSuccessRate}%`
-      default: // tickets
-        return user.totalTickets
+  const getMetricValue = (item: any, selectedMetric: string) => {
+    // Use the value from the API response
+    if (selectedMetric === 'success_rate' || selectedMetric === 'completion') {
+      return `${item.value}%`
     }
+    return item.value
   }
 
   const getMetricLabel = (selectedMetric: string) => {
@@ -145,28 +143,37 @@ export function Leaderboard({ className }: LeaderboardProps) {
           </div>
         ) : (
           <div className="space-y-4">
-            {leaderboard.map((user: any, index: number) => (
+            {leaderboard.map((item: any, index: number) => (
               <div
-                key={user.userId}
+                key={item.user?.id || index}
                 className={`flex items-center justify-between p-4 rounded-lg border ${
                   index < 3 ? 'bg-muted/50' : 'bg-background'
                 }`}
               >
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center justify-center w-8">
-                    {getRankIcon(index + 1)}
+                    {getRankIcon(item.rank || index + 1)}
                   </div>
                   <div>
-                    <div className="font-medium">{user.userName}</div>
-                    <div className="text-sm text-muted-foreground">{user.role}</div>
+                    <div className="font-medium">{item.user?.name || 'Unknown User'}</div>
+                    <div className="text-sm text-muted-foreground">{item.user?.email || ''}</div>
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="flex items-center space-x-2">
                     {getMetricIcon(metric)}
                     <span className="text-lg font-bold">
-                      {getMetricValue(user, metric)}
+                      {getMetricValue(item, metric)}
                     </span>
+                    {item.trend && (
+                      <span className={`text-xs ${
+                        item.trend === 'up' ? 'text-green-500' :
+                        item.trend === 'down' ? 'text-red-500' :
+                        'text-gray-500'
+                      }`}>
+                        {item.change > 0 ? '+' : ''}{item.change}
+                      </span>
+                    )}
                   </div>
                   <div className="text-xs text-muted-foreground">
                     {getMetricLabel(metric)}

@@ -26,7 +26,7 @@ interface PerformanceChartProps {
 
 export function PerformanceChart({ data, isAdmin }: PerformanceChartProps) {
   const chartData = useMemo(() => {
-    if (!data?.timeSeries) return []
+    if (!data?.timeSeries || !Array.isArray(data.timeSeries)) return []
 
     return data.timeSeries.map((item: any) => ({
       date: new Date(item.date).toLocaleDateString('en-US', { 
