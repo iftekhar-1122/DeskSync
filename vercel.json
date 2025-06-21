@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm --filter @dailysync/database exec prisma generate && pnpm --filter @dailysync/web run build",
+  "buildCommand": "pnpm --filter @dailysync/database exec prisma generate && cd ./apps/web && pnpm run build",
   "installCommand": "pnpm install",
-  "outputDirectory": "apps/web/.next",
+  "outputDirectory": ".next",
   "functions": {
     "apps/api/src/index-simple.ts": {
       "runtime": "nodejs18.x"
