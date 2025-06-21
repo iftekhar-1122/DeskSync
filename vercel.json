@@ -1,0 +1,20 @@
+{
+  "buildCommand": "pnpm turbo run build",
+  "installCommand": "pnpm install && pnpm --filter @dailysync/database exec prisma generate",
+  "outputDirectory": "apps/web/.next",
+  "framework": "nextjs",
+  "functions": {
+    "apps/api/src/index-simple.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

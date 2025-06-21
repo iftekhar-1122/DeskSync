@@ -20,6 +20,17 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
+  // Vercel-specific optimizations
+  output: 'standalone',
+  poweredByHeader: false,
+  compress: true,
+  // Ensure proper TypeScript compilation
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
 };
 
 module.exports = nextConfig;
