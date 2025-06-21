@@ -1,8 +1,7 @@
 {
-  "buildCommand": "pnpm -w run vercel-build",
+  "buildCommand": "pnpm --filter @dailysync/database exec prisma generate && cd apps/web && pnpm run build",
   "installCommand": "pnpm install",
   "outputDirectory": "apps/web/.next",
-  "framework": "nextjs",
   "functions": {
     "apps/api/src/index-simple.ts": {
       "runtime": "nodejs18.x"
