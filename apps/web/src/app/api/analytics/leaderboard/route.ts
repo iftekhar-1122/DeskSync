@@ -29,8 +29,10 @@ const generateMockLeaderboard = (metric: string, limit: number) => {
   ]
 
   const leaderboardData = users.slice(0, limit).map((user, index) => {
-    let value, change, trend
-    
+    let value: number
+    let change: number
+    let trend: 'up' | 'down' | 'stable'
+
     switch (metric) {
       case 'tickets':
         value = Math.floor(Math.random() * 50) + 20 // 20-70 tickets
@@ -41,8 +43,8 @@ const generateMockLeaderboard = (metric: string, limit: number) => {
         change = Math.floor(Math.random() * 10) - 5 // -5 to +5
         break
       case 'score':
-        value = (Math.random() * 2 + 8).toFixed(1) // 8.0-10.0 score
-        change = (Math.random() * 1 - 0.5).toFixed(1) // -0.5 to +0.5
+        value = parseFloat((Math.random() * 2 + 8).toFixed(1)) // 8.0-10.0 score
+        change = parseFloat((Math.random() * 1 - 0.5).toFixed(1)) // -0.5 to +0.5
         break
       case 'completion':
         value = Math.floor(Math.random() * 20) + 80 // 80-100% completion
@@ -63,8 +65,8 @@ const generateMockLeaderboard = (metric: string, limit: number) => {
         email: user.email,
         avatar: user.avatar
       },
-      value: parseFloat(value),
-      change: parseFloat(change),
+      value,
+      change,
       trend,
       metric
     }

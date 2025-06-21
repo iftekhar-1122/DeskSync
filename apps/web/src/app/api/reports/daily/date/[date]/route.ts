@@ -78,7 +78,7 @@ export async function GET(
       createdAt: new Date(reportDate.getTime() + Math.random() * 24 * 60 * 60 * 1000).toISOString(),
       updatedAt: new Date(reportDate.getTime() + Math.random() * 24 * 60 * 60 * 1000).toISOString(),
       status: 'SUBMITTED',
-      score: (Math.random() * 2 + 8).toFixed(1), // 8.0-10.0
+      score: parseFloat((Math.random() * 2 + 8).toFixed(1)), // 8.0-10.0
       completionRate: Math.floor(Math.random() * 20) + 80, // 80-100%
       categories: {
         technical: {
@@ -98,12 +98,12 @@ export async function GET(
         }
       },
       timeTracking: {
-        totalHours: (Math.random() * 2 + 7).toFixed(1), // 7.0-9.0 hours
+        totalHours: parseFloat((Math.random() * 2 + 7).toFixed(1)), // 7.0-9.0 hours
         breakdown: {
-          tickets: (Math.random() * 2 + 3).toFixed(1), // 3.0-5.0 hours
-          support: (Math.random() * 1.5 + 2).toFixed(1), // 2.0-3.5 hours
-          meetings: (Math.random() * 1 + 0.5).toFixed(1), // 0.5-1.5 hours
-          other: (Math.random() * 1 + 0.5).toFixed(1) // 0.5-1.5 hours
+          tickets: parseFloat((Math.random() * 2 + 3).toFixed(1)), // 3.0-5.0 hours
+          support: parseFloat((Math.random() * 1.5 + 2).toFixed(1)), // 2.0-3.5 hours
+          meetings: parseFloat((Math.random() * 1 + 0.5).toFixed(1)), // 0.5-1.5 hours
+          other: parseFloat((Math.random() * 1 + 0.5).toFixed(1)) // 0.5-1.5 hours
         }
       }
     }

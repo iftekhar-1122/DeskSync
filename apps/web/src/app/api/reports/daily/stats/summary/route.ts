@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
     const mockSummary = {
       totalReports: Math.floor(Math.random() * 100) + 50, // 50-150 reports
       completionRate: Math.floor(Math.random() * 20) + 80, // 80-100%
-      averageScore: (Math.random() * 2 + 8).toFixed(1), // 8.0-10.0
+      averageScore: parseFloat((Math.random() * 2 + 8).toFixed(1)), // 8.0-10.0
       totalTickets: Math.floor(Math.random() * 500) + 200, // 200-700 tickets
       totalChats: Math.floor(Math.random() * 300) + 150, // 150-450 chats
       totalEmails: Math.floor(Math.random() * 400) + 100, // 100-500 emails
@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
       trends: {
         reports: Math.floor(Math.random() * 20) - 10, // -10 to +10
         completionRate: Math.floor(Math.random() * 10) - 5, // -5 to +5
-        averageScore: (Math.random() * 1 - 0.5).toFixed(1), // -0.5 to +0.5
+        averageScore: parseFloat((Math.random() * 1 - 0.5).toFixed(1)), // -0.5 to +0.5
         tickets: Math.floor(Math.random() * 50) - 25, // -25 to +25
         chats: Math.floor(Math.random() * 30) - 15, // -15 to +15
         emails: Math.floor(Math.random() * 40) - 20, // -20 to +20
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
           date: date.toISOString().split('T')[0],
           reports: Math.floor(Math.random() * 10) + 1, // 1-10 reports per day
           completionRate: Math.floor(Math.random() * 20) + 80, // 80-100%
-          averageScore: (Math.random() * 2 + 8).toFixed(1), // 8.0-10.0
+          averageScore: parseFloat((Math.random() * 2 + 8).toFixed(1)), // 8.0-10.0
           tickets: Math.floor(Math.random() * 30) + 5, // 5-35 tickets
           chats: Math.floor(Math.random() * 20) + 3, // 3-23 chats
           emails: Math.floor(Math.random() * 25) + 2, // 2-27 emails
