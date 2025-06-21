@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm install && pnpm --filter @dailysync/database exec prisma generate && cd apps/web && pnpm run build",
+  "buildCommand": "pnpm run vercel-build",
   "installCommand": "pnpm install",
   "outputDirectory": "apps/web/.next",
   "framework": "nextjs",
@@ -16,6 +16,7 @@
   ],
   "env": {
     "NODE_ENV": "production",
-    "SKIP_ENV_VALIDATION": "1"
+    "SKIP_ENV_VALIDATION": "1",
+    "DATABASE_URL": "postgresql://dummy:dummy@localhost:5432/dummy"
   }
 }
