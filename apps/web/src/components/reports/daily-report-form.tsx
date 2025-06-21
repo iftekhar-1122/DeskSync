@@ -104,8 +104,8 @@ export function DailyReportForm({ initialData, onSuccess, onCancel }: DailyRepor
     // Process links
     const links = linksInput
       .split('\n')
-      .map(link => link.trim())
-      .filter(link => link.length > 0)
+      .map((link: string) => link.trim())
+      .filter((link: string) => link.length > 0)
 
     const submitData = {
       ...data,

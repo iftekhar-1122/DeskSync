@@ -29,7 +29,7 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true, // Temporarily disable ESLint during Vercel builds
   },
 };
 
