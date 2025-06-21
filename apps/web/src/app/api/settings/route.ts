@@ -137,22 +137,34 @@ export async function GET(request: NextRequest) {
     }
 
     // Filter settings based on user role
+    let filteredSettings = mockSettings
     if (!isAdmin) {
-      // Remove admin-only settings for regular users
-      delete mockSettings.system
-      delete mockSettings.security.passwordPolicy
-      delete mockSettings.security.twoFactorAuth.required
-      mockSettings.application.limits = {
-        maxWebhooks: 10,
-        maxReportsPerDay: 5,
-        maxFileSize: '5MB',
-        apiRateLimit: 100
+      // Create filtered settings for regular users without admin-only properties
+      const { system, ...settingsWithoutSystem } = mockSettings
+      const { passwordPolicy, twoFactorAuth, ...securityWithoutAdminProps } = mockSettings.security
+      const { required, ...twoFactorAuthWithoutRequired } = twoFactorAuth
+
+      filteredSettings = {
+        ...settingsWithoutSystem,
+        security: {
+          ...securityWithoutAdminProps,
+          twoFactorAuth: twoFactorAuthWithoutRequired
+        },
+        application: {
+          ...mockSettings.application,
+          limits: {
+            maxWebhooks: 10,
+            maxReportsPerDay: 5,
+            maxFileSize: '5MB',
+            apiRateLimit: 100
+          }
+        }
       }
     }
 
     return NextResponse.json({
       success: true,
-      data: mockSettings
+      data: filteredSettings
     }, { headers: corsHeaders })
 
   } catch (error) {
