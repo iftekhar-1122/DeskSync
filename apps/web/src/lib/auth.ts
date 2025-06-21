@@ -16,8 +16,8 @@ export const authOptions: NextAuthOptions = {
 
         // Demo credentials for testing
         const demoUsers = [
-          { id: '1', email: 'john.doe@dailysync.com', password: 'agent123456', name: 'John Doe', role: 'SUPPORT_AGENT' },
-          { id: '2', email: 'admin@dailysync.com', password: 'admin123456', name: 'Admin User', role: 'ADMIN' }
+          { id: '1', email: 'john.doe@dailysync.com', password: 'agent123456', name: 'John Doe', role: 'SUPPORT_AGENT' as const },
+          { id: '2', email: 'admin@dailysync.com', password: 'admin123456', name: 'Admin User', role: 'ADMIN' as const }
         ]
 
         const user = demoUsers.find(u => u.email === credentials.email && u.password === credentials.password)
