@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 
+// Add CORS headers
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+}
+
+export async function OPTIONS(request: NextRequest) {
+  return new NextResponse(null, { status: 200, headers: corsHeaders })
+}
+
 export async function GET(request: NextRequest) {
   try {
     // Get session to check authentication
@@ -10,7 +21,7 @@ export async function GET(request: NextRequest) {
     if (!session?.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
-        { status: 401 }
+        { status: 401, headers: corsHeaders }
       )
     }
 
@@ -73,13 +84,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       data: mockData
-    })
+    }, { headers: corsHeaders })
 
   } catch (error) {
     console.error('Dashboard API error:', error)
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }

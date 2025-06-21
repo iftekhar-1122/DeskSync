@@ -5,18 +5,7 @@ const nextConfig = {
   // },
   transpilePackages: ['@dailysync/config'],
   env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3001',
-    NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000',
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/api/proxy/:path*',
-        destination: `${process.env.API_BASE_URL || 'http://localhost:3001'}/api/:path*`,
-      },
-    ];
   },
   images: {
     domains: ['localhost'],

@@ -22,10 +22,13 @@ export interface PaginatedResponse<T = any> extends ApiResponse<T[]> {
 
 // Create axios instance
 const createApiClient = (): AxiosInstance => {
-  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001'
+  // Use relative paths for production to avoid CORS issues
+  const baseURL = process.env.NODE_ENV === 'production'
+    ? '/api'
+    : (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001') + '/api'
 
   const client = axios.create({
-    baseURL: `${baseURL}/api`,
+    baseURL,
     timeout: 30000,
     headers: {
       'Content-Type': 'application/json',
