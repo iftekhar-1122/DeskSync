@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd apps/web && pnpm run build",
+  "buildCommand": "pnpm --filter @dailysync/database exec prisma generate && cd apps/web && pnpm run build",
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
   "functions": {
@@ -16,6 +16,9 @@
   "env": {
     "NODE_ENV": "production",
     "SKIP_ENV_VALIDATION": "1",
-    "DATABASE_URL": "postgresql://dummy:dummy@localhost:5432/dummy"
+    "DATABASE_URL": "postgresql://dummy:dummy@localhost:5432/dummy",
+    "NEXTAUTH_URL": "https://dailysync.vercel.app",
+    "NEXTAUTH_SECRET": "dummy-secret-for-build",
+    "API_BASE_URL": "https://dailysync.vercel.app"
   }
 }

@@ -3,7 +3,7 @@ const nextConfig = {
   // experimental: {
   //   appDir: true, // Removed - no longer needed in Next.js 14+
   // },
-  transpilePackages: ['@dailysync/config', '@dailysync/database'],
+  transpilePackages: ['@dailysync/config'],
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
