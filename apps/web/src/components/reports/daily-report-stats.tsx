@@ -14,72 +14,48 @@ import {
 
 interface DailyReportStatsProps {
   stats: {
+    totalReports: number
+    averageTicketsResolved: number
+    averageChatsHandled: number
+    averageGithubIssues: number
+    averageEmailsProcessed: number
+    averageCallsAttended: number
     period: {
       days: number
       startDate: string
       endDate: string
     }
-    totals: {
-      tickets: number
-      chats: number
-      githubIssues: number
-      emails: number
-      calls: number
+    trends?: {
+      ticketsResolved: string
+      chatsHandled: string
+      githubIssues: string
+      emailsProcessed: string
+      callsAttended: string
     }
-    averages: {
-      tickets: number
-      chats: number
-      githubIssues: number
-      emails: number
-      calls: number
-    }
-    reportCount: number
-    currentStreak: number
-    recentReports: any[]
+    chartData?: any[]
   }
 }
 
 export function DailyReportStats({ stats }: DailyReportStatsProps) {
-  // Defensive programming with default values and data transformation
-  const {
-    totals = {
-      tickets: 0,
-      chats: 0,
-      githubIssues: 0,
-      emails: 0,
-      calls: 0
-    },
-    averages = {
-      tickets: 0,
-      chats: 0,
-      githubIssues: 0,
-      emails: 0,
-      calls: 0
-    },
-    reportCount = 0,
-    currentStreak = 0,
-    period = { days: 30, startDate: '', endDate: '' }
-  } = stats || {}
-
-  // Transform API data if it comes in different format
+  // Transform API response to component format
   const transformedStats = {
-    totals: totals.tickets ? totals : {
-      tickets: Math.round((stats?.averageTicketsResolved || 0) * (period?.days || 30)),
-      chats: Math.round((stats?.averageChatsHandled || 0) * (period?.days || 30)),
-      githubIssues: Math.round((stats?.averageGithubIssues || 0) * (period?.days || 30)),
-      emails: Math.round((stats?.averageEmailsProcessed || 0) * (period?.days || 30)),
-      calls: Math.round((stats?.averageCallsAttended || 0) * (period?.days || 30))
+    totals: {
+      tickets: Math.round((stats?.averageTicketsResolved || 0) * (stats?.period?.days || 30)),
+      chats: Math.round((stats?.averageChatsHandled || 0) * (stats?.period?.days || 30)),
+      githubIssues: Math.round((stats?.averageGithubIssues || 0) * (stats?.period?.days || 30)),
+      emails: Math.round((stats?.averageEmailsProcessed || 0) * (stats?.period?.days || 30)),
+      calls: Math.round((stats?.averageCallsAttended || 0) * (stats?.period?.days || 30))
     },
-    averages: averages.tickets ? averages : {
+    averages: {
       tickets: stats?.averageTicketsResolved || 0,
       chats: stats?.averageChatsHandled || 0,
       githubIssues: stats?.averageGithubIssues || 0,
       emails: stats?.averageEmailsProcessed || 0,
       calls: stats?.averageCallsAttended || 0
     },
-    reportCount: reportCount || stats?.totalReports || 0,
-    currentStreak: currentStreak || 7, // Default streak
-    period: period
+    reportCount: stats?.totalReports || 0,
+    currentStreak: 7, // Default streak
+    period: stats?.period || { days: 30, startDate: '', endDate: '' }
   }
 
   return (
