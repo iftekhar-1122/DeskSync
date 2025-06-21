@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm --filter @dailysync/database exec prisma generate && cd apps/web && pnpm run build",
+  "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
   "outputDirectory": "apps/web/.next",
   "functions": {
