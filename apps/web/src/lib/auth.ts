@@ -1,0 +1,81 @@
+import { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+
+export const authOptions: NextAuthOptions = {
+  providers: [
+    CredentialsProvider({
+      name: 'credentials',
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          return null
+        }
+
+        // Demo credentials for testing
+        const demoUsers = [
+          { id: '1', email: 'john.doe@dailysync.com', password: 'agent123456', name: 'John Doe', role: 'SUPPORT_AGENT' },
+          { id: '2', email: 'admin@dailysync.com', password: 'admin123456', name: 'Admin User', role: 'ADMIN' }
+        ]
+
+        const user = demoUsers.find(u => u.email === credentials.email && u.password === credentials.password)
+
+        if (user) {
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            isActive: true,
+          }
+        }
+
+        return null
+      },
+    }),
+  ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 7 * 24 * 60 * 60, // 7 days
+  },
+  jwt: {
+    maxAge: 7 * 24 * 60 * 60, // 7 days
+  },
+  pages: {
+    signIn: '/login',
+    error: '/login',
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.email = user.email
+        token.name = user.name
+        token.role = (user as any).role
+        token.isActive = (user as any).isActive
+      }
+      return token
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string
+        session.user.email = token.email as string
+        session.user.name = token.name as string
+        ;(session as any).user.role = token.role
+        ;(session as any).user.isActive = token.isActive
+      }
+      return session
+    },
+  },
+  events: {
+    async signIn({ user }) {
+      console.log('User signed in:', user.email)
+    },
+    async signOut({ token }) {
+      console.log('User signed out:', token?.email)
+    },
+  },
+  debug: process.env.NODE_ENV === 'development',
+}
