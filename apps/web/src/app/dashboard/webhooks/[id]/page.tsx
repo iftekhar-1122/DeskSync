@@ -50,7 +50,7 @@ export default function WebhookDetailPage() {
     ['webhook', webhookId],
     () => webhooksApi.getById(webhookId),
     {
-      select: (response) => response.data,
+      select: (response) => response.data?.data,
       enabled: !!webhookId,
     }
   )
