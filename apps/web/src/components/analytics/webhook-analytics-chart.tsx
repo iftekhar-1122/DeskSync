@@ -28,7 +28,9 @@ interface WebhookAnalyticsChartProps {
 }
 
 export function WebhookAnalyticsChart({ data }: WebhookAnalyticsChartProps) {
-  const { webhooks = [], systemStats } = data
+  // Ensure webhooks is always an array
+  const webhooks = Array.isArray(data?.webhooks) ? data.webhooks : []
+  const systemStats = data?.systemStats || {}
 
   // Prepare data for charts
   const deliveryStatusData = systemStats ? [

@@ -32,7 +32,33 @@ export default function WebhooksPage() {
     'webhooks-overview',
     () => webhooksApi.getAll({ page: 1, limit: 5 }),
     {
-      select: (response) => response.data,
+      select: (response) => {
+        // Ensure we always return a valid structure
+        if (!response?.data) {
+          return { webhooks: [], pagination: null }
+        }
+
+        const responseData = response.data
+        if (Array.isArray(responseData)) {
+          return { webhooks: responseData, pagination: null }
+        }
+
+        if (responseData.webhooks && Array.isArray(responseData.webhooks)) {
+          return {
+            webhooks: responseData.webhooks,
+            pagination: responseData.pagination || null
+          }
+        }
+
+        if (responseData.data && Array.isArray(responseData.data)) {
+          return {
+            webhooks: responseData.data,
+            pagination: responseData.pagination || null
+          }
+        }
+
+        return { webhooks: [], pagination: null }
+      },
     }
   )
 

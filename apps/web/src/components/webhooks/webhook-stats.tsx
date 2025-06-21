@@ -18,7 +18,18 @@ export function WebhookStats() {
     'webhook-analytics',
     () => analyticsApi.getWebhookAnalytics(),
     {
-      select: (response) => response.data.data,
+      select: (response) => {
+        // Ensure we always return a valid structure
+        if (!response?.data?.data) {
+          return { webhooks: [], systemStats: {} }
+        }
+
+        const data = response.data.data
+        return {
+          webhooks: Array.isArray(data.webhooks) ? data.webhooks : [],
+          systemStats: data.systemStats || {}
+        }
+      },
       refetchInterval: 30000, // Refresh every 30 seconds
     }
   )

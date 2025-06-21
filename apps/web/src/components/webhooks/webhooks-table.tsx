@@ -57,7 +57,38 @@ export function WebhooksTable({ onEdit }: WebhooksTableProps) {
     ['webhooks', page],
     () => webhooksApi.getAll({ page, limit: 10 }),
     {
-      select: (response) => response.data,
+      select: (response) => {
+        // Ensure we always return a valid structure with array validation
+        if (!response?.data) {
+          return { webhooks: [], pagination: null }
+        }
+
+        // Handle different possible response structures
+        const responseData = response.data
+        if (Array.isArray(responseData)) {
+          // If data is directly an array
+          return { webhooks: responseData, pagination: null }
+        }
+
+        // If data has webhooks property
+        if (responseData.webhooks && Array.isArray(responseData.webhooks)) {
+          return {
+            webhooks: responseData.webhooks,
+            pagination: responseData.pagination || null
+          }
+        }
+
+        // If data has data property (nested structure)
+        if (responseData.data && Array.isArray(responseData.data)) {
+          return {
+            webhooks: responseData.data,
+            pagination: responseData.pagination || null
+          }
+        }
+
+        // Fallback to empty array
+        return { webhooks: [], pagination: null }
+      },
       keepPreviousData: true,
     }
   )
@@ -133,7 +164,8 @@ export function WebhooksTable({ onEdit }: WebhooksTableProps) {
     )
   }
 
-  const webhooks = data?.data || []
+  // Safe array access with validation
+  const webhooks = Array.isArray(data?.webhooks) ? data.webhooks : []
   const pagination = data?.pagination
 
   if (webhooks.length === 0) {
