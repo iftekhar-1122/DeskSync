@@ -19,8 +19,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
               if (error?.response?.status >= 400 && error?.response?.status < 500) {
                 return false
               }
-              return failureCount < 3
+              // Limit retries to prevent infinite loops
+              return failureCount < 2
             },
+            retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // Exponential backoff
+            refetchOnWindowFocus: false, // Prevent excessive refetching
+            refetchOnMount: true,
+            refetchOnReconnect: true,
           },
           mutations: {
             retry: false,
