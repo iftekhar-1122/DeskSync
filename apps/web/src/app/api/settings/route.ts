@@ -141,14 +141,17 @@ export async function GET(request: NextRequest) {
     if (!isAdmin) {
       // Create filtered settings for regular users without admin-only properties
       const { system, ...settingsWithoutSystem } = mockSettings
-      const { passwordPolicy, twoFactorAuth, ...securityWithoutAdminProps } = mockSettings.security
-      const { required, ...twoFactorAuthWithoutRequired } = twoFactorAuth
+      const { passwordPolicy, ...securityWithoutPasswordPolicy } = mockSettings.security
 
       filteredSettings = {
         ...settingsWithoutSystem,
         security: {
-          ...securityWithoutAdminProps,
-          twoFactorAuth: twoFactorAuthWithoutRequired
+          ...securityWithoutPasswordPolicy,
+          twoFactorAuth: {
+            enabled: mockSettings.security.twoFactorAuth.enabled,
+            required: false, // Non-admin users cannot be required to use 2FA
+            methods: mockSettings.security.twoFactorAuth.methods
+          }
         },
         application: {
           ...mockSettings.application,
