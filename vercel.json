@@ -1,11 +1,10 @@
 {
-  "buildCommand": "pnpm install && pnpm --filter @dailysync/database exec prisma generate && pnpm --filter @dailysync/web run build",
+  "buildCommand": "pnpm install && pnpm --filter @dailysync/database exec prisma generate && cd apps/web && pnpm run build",
   "installCommand": "pnpm install",
-  "outputDirectory": ".next",
-  "rootDirectory": "apps/web",
+  "outputDirectory": "apps/web/.next",
   "framework": "nextjs",
   "functions": {
-    "../api/src/index-simple.ts": {
+    "apps/api/src/index-simple.ts": {
       "runtime": "nodejs18.x"
     }
   },
