@@ -63,8 +63,8 @@ export function WebhooksTable({ onEdit }: WebhooksTableProps) {
           return { webhooks: [], pagination: null }
         }
 
-        // Handle different possible response structures
-        const responseData = response.data
+        // Type assertion to handle PaginatedResponse type mismatch
+        const responseData = response.data as any
         if (Array.isArray(responseData)) {
           // If data is directly an array
           return { webhooks: responseData, pagination: null }

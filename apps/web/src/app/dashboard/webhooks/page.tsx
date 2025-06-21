@@ -38,7 +38,8 @@ export default function WebhooksPage() {
           return { webhooks: [], pagination: null }
         }
 
-        const responseData = response.data
+        // Type assertion to handle PaginatedResponse type mismatch
+        const responseData = response.data as any
         if (Array.isArray(responseData)) {
           return { webhooks: responseData, pagination: null }
         }
@@ -125,7 +126,7 @@ export default function WebhooksPage() {
             </div>
             <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
               <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
-                {webhooksData?.data?.length || 0}
+                {Array.isArray(webhooksData?.webhooks) ? webhooksData.webhooks.length : 0}
               </div>
               <div className="text-sm text-muted-foreground">Active Webhooks</div>
             </div>
