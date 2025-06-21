@@ -16,8 +16,10 @@ if (process.env.NODE_ENV !== 'production') {
   globalThis.__prisma = prisma;
 }
 
-// Export Prisma client and core types
+// Export Prisma client and core types (selective imports to avoid declaration emit issues)
 export { PrismaClient } from './generated';
+
+// Re-export types individually to avoid Prisma internal type conflicts
 export type {
   User,
   IncomingWebhook,
@@ -26,13 +28,19 @@ export type {
   PayloadLog,
   DeliveryLog,
   DailyReport,
-  MeetingReport,
+  MeetingReport
+} from './generated';
+
+// Re-export enums individually
+export type {
   UserRole,
   WebhookStatus,
   DeliveryStatus,
-  MeetingOutcome,
-  Prisma
+  MeetingOutcome
 } from './generated';
+
+// Export Prisma namespace types selectively
+export type { Prisma } from './generated';
 
 // Export custom types (explicit named exports to avoid conflicts)
 export type {

@@ -19,8 +19,10 @@
     "db:push": "turbo run db:push",
     "db:migrate": "turbo run db:migrate",
     "db:studio": "turbo run db:studio",
-    "vercel-build": "pnpm install && pnpm --filter @dailysync/database exec prisma generate && pnpm turbo run build",
-    "postinstall": "pnpm --filter @dailysync/database exec prisma generate"
+    "vercel-build": "pnpm install && pnpm --filter @dailysync/database exec prisma generate && pnpm --filter @dailysync/web run build",
+    "postinstall": "pnpm --filter @dailysync/database exec prisma generate",
+    "build:database": "pnpm --filter @dailysync/database exec prisma generate",
+    "build:web": "pnpm --filter @dailysync/web run build"
   },
   "devDependencies": {
     "turbo": "^1.10.16",

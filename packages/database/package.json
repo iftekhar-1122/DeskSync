@@ -12,8 +12,9 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:seed": "tsx src/seed.ts",
-    "build": "tsc",
-    "type-check": "tsc --noEmit"
+    "build": "tsc --skipLibCheck",
+    "build:declarations": "tsc --emitDeclarationOnly --skipLibCheck",
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",

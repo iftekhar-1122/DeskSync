@@ -5,7 +5,12 @@
     "rootDir": "src",
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*"
@@ -13,6 +18,7 @@
   "exclude": [
     "node_modules",
     "dist",
+    "src/generated/**/*",
     "**/*.test.ts",
     "**/*.spec.ts"
   ]
