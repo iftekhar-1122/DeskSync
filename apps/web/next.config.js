@@ -21,7 +21,6 @@ const nextConfig = {
     domains: ['localhost'],
   },
   // Vercel-specific optimizations
-  output: 'standalone',
   poweredByHeader: false,
   compress: true,
   // Ensure proper TypeScript compilation
