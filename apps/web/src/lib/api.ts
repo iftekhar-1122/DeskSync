@@ -23,7 +23,7 @@ export interface PaginatedResponse<T = any> extends ApiResponse<T[]> {
 // Create axios instance
 const createApiClient = (): AxiosInstance => {
   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001'
-  
+
   const client = axios.create({
     baseURL: `${baseURL}/api`,
     timeout: 30000,

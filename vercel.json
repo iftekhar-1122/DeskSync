@@ -18,6 +18,7 @@
     "DATABASE_URL": "postgresql://dummy:dummy@localhost:5432/dummy",
     "NEXTAUTH_URL": "https://dailysync.vercel.app",
     "NEXTAUTH_SECRET": "dummy-secret-for-build",
-    "API_BASE_URL": "https://dailysync.vercel.app"
+    "API_BASE_URL": "https://dailysync.vercel.app",
+    "NEXT_PUBLIC_API_BASE_URL": "https://dailysync.vercel.app"
   }
 }
