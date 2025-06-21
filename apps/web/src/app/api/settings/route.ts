@@ -156,7 +156,7 @@ export async function GET(request: NextRequest) {
 
       filteredSettings = {
         ...settingsWithoutSystem,
-        security: filteredSecurity as any, // Type assertion to bypass strict checking
+        security: filteredSecurity, // Filtered security object without passwordPolicy
         application: {
           ...mockSettings.application,
           limits: {
@@ -166,7 +166,7 @@ export async function GET(request: NextRequest) {
             apiRateLimit: 100
           }
         }
-      }
+      } as any // Type assertion for entire object to bypass strict checking
     }
 
     return NextResponse.json({
