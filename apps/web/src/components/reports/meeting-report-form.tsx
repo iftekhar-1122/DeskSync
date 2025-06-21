@@ -107,14 +107,14 @@ export function MeetingReportForm({ initialData, onSuccess, onCancel }: MeetingR
     // Process attendees
     const attendees = attendeesInput
       .split('\n')
-      .map(attendee => attendee.trim())
-      .filter(attendee => attendee.length > 0)
+      .map((attendee: string) => attendee.trim())
+      .filter((attendee: string) => attendee.length > 0)
 
     // Process action items
     const actionItems = actionItemsInput
       .split('\n')
-      .map(item => item.trim())
-      .filter(item => item.length > 0)
+      .map((item: string) => item.trim())
+      .filter((item: string) => item.length > 0)
 
     const submitData = {
       ...data,
