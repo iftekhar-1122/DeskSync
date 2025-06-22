@@ -12,7 +12,7 @@ datasource db {
 }
 
 enum UserRole {
-  SUPPORT_AGENT
+  USER
   ADMIN
 }
 
@@ -34,7 +34,7 @@ model User {
   email     String   @unique
   name      String
   password  String
-  role      UserRole @default(SUPPORT_AGENT)
+  role      UserRole @default(USER)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

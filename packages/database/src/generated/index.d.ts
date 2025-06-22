@@ -49,7 +49,7 @@ export type DailyReport = $Result.DefaultSelection<Prisma.$DailyReportPayload>
  */
 export namespace $Enums {
   export const UserRole: {
-  SUPPORT_AGENT: 'SUPPORT_AGENT',
+  USER: 'USER',
   ADMIN: 'ADMIN'
 };
 
