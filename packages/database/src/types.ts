@@ -109,4 +109,4 @@ export interface WebhookFilter {
 }
 
 // Export enums for convenience
-export { UserRole, WebhookStatus, DeliveryStatus, MeetingOutcome };
+export { UserRole, WebhookStatus, MeetingOutcome };
