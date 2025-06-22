@@ -77,6 +77,12 @@ export const updateMessageTemplateSchema = z.object({
   description: z.string().optional(),
 });
 
+// Platform report schema for daily reports (moved up to avoid temporal dead zone)
+export const platformReportSchema = z.object({
+  platform: z.string().min(1, 'Platform name is required'),
+  ticketsHandled: z.number().int().min(0, 'Tickets handled must be non-negative'),
+});
+
 // Daily report validation schemas
 export const createDailyReportSchema = z.object({
   date: z.date(),
@@ -153,12 +159,6 @@ export const createSupportPlatformSchema = z.object({
 export const updateSupportPlatformSchema = z.object({
   name: z.string().min(1, 'Platform name is required').max(100, 'Platform name must be less than 100 characters').optional(),
   isActive: z.boolean().optional(),
-});
-
-// Platform report schema for daily reports
-export const platformReportSchema = z.object({
-  platform: z.string().min(1, 'Platform name is required'),
-  ticketsHandled: z.number().int().min(0, 'Tickets handled must be non-negative'),
 });
 
 // Webhook meeting payload schema
