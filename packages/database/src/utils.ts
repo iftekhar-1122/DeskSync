@@ -80,7 +80,7 @@ export const calculateDailyReportAnalytics = async (
   reports.forEach((report) => {
     // Process platformReports JSON field if it exists
     if (report.platformReports && Array.isArray(report.platformReports)) {
-      (report.platformReports as PlatformReport[]).forEach((platformReport) => {
+      (report.platformReports as unknown as PlatformReport[]).forEach((platformReport) => {
         if (platformReport.platform && typeof platformReport.ticketsHandled === 'number') {
           const existing = platformMetrics.get(platformReport.platform) || {
             totalTickets: 0,
