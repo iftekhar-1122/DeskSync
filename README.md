@@ -43,8 +43,10 @@
 
 ### 🚧 Development Status
 - **✅ Core Platform**: Fully functional and production-ready
-- **✅ Authentication**: Complete with role-based access control
+- **✅ Authentication**: NextAuth.js integration with role-based access control
 - **✅ API Endpoints**: All major endpoints implemented and tested
+- **✅ Dashboard Pages**: Analytics, reports, webhooks, settings, health monitoring
+- **✅ Reports System**: Daily and meeting reports with statistics
 - **🚧 Advanced Analytics**: Enhanced reporting features in development
 - **🚧 Mobile Optimization**: Responsive design improvements ongoing
 
@@ -93,8 +95,16 @@ DeskSync/
 │       │   │   │   ├── analytics/ # Analytics and reporting
 │       │   │   │   └── health/    # System health checks
 │       │   │   ├── dashboard/     # Dashboard pages
-│       │   │   ├── settings/      # Settings pages
-│       │   │   └── webhooks/      # Webhook management pages
+│       │   │   │   ├── analytics/ # Analytics dashboard
+│       │   │   │   ├── health/    # System health monitoring
+│       │   │   │   ├── meetings/  # Meeting reports
+│       │   │   │   ├── reports/   # Daily reports
+│       │   │   │   ├── settings/  # Settings pages
+│       │   │   │   ├── users/     # User management
+│       │   │   │   └── webhooks/  # Webhook management
+│       │   │   ├── login/         # Login page
+│       │   │   ├── webhook/       # Public webhook receiver
+│       │   │   └── webhooks/      # Additional webhook pages
 │       │   ├── components/        # Reusable UI components
 │       │   │   ├── ui/           # Base UI components (shadcn/ui)
 │       │   │   ├── dashboard/    # Dashboard-specific components
@@ -113,22 +123,28 @@ DeskSync/
 ### API Architecture
 ```
 /api/
-├── auth/                       # Authentication endpoints
-├── dashboard/                  # Dashboard data and metrics
+├── auth/
+│   └── [...nextauth]/         # NextAuth.js authentication
+├── analytics/
+│   ├── dashboard/             # Dashboard analytics
+│   ├── daily-reports/         # Daily report analytics
+│   ├── user-performance/      # User performance metrics
+│   ├── webhook-analytics/     # Webhook analytics
+│   └── leaderboard/           # Performance leaderboards
+├── reports/
+│   ├── daily/                 # Daily report management
+│   │   └── stats/summary/     # Daily report statistics
+│   └── meeting/               # Meeting report management
+│       └── stats/summary/     # Meeting report statistics
 ├── settings/
 │   ├── profile/               # User profile management
 │   └── /                      # Application settings
-├── webhooks/
-│   ├── [id]/                  # Individual webhook operations
-│   │   ├── endpoints/         # Webhook endpoint management
-│   │   ├── logs/              # Webhook delivery logs
-│   │   └── test/              # Webhook testing
-│   └── /                      # Webhook CRUD operations
-├── analytics/
-│   ├── dashboard/             # Dashboard analytics
-│   ├── webhooks/              # Webhook analytics
-│   └── leaderboard/           # Performance leaderboards
-└── health/                    # System health monitoring
+└── webhooks/
+    ├── [id]/                  # Individual webhook operations
+    │   ├── endpoints/         # Webhook endpoint management
+    │   ├── logs/              # Webhook delivery logs
+    │   └── test/              # Webhook testing
+    └── /                      # Webhook CRUD operations
 ```
 
 ## 🚀 Quick Start
@@ -180,71 +196,84 @@ DeskSync/
 7. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
+### Available Pages
+
+Once the application is running, you can access:
+
+- **Dashboard**: `/dashboard` - Main dashboard with analytics overview
+- **Analytics**: `/dashboard/analytics` - Detailed analytics and reporting
+- **Daily Reports**: `/dashboard/reports` - Daily report management
+- **Meeting Reports**: `/dashboard/meetings` - Meeting report management
+- **Webhooks**: `/dashboard/webhooks` - Webhook management and monitoring
+- **Users**: `/dashboard/users` - User management (admin only)
+- **Settings**: `/dashboard/settings` - Application and user settings
+- **System Health**: `/dashboard/health` - System health monitoring (admin only)
+- **Login**: `/login` - Authentication page
+
 ### Development Commands
 
 ```bash
-# Development
-pnpm dev                    # Start development server
-pnpm build                  # Build for production
-pnpm start                  # Start production server
-pnpm lint                   # Run ESLint
-pnpm type-check            # Run TypeScript checks
+# Development (Monorepo with Turbo)
+turbo run dev              # Start all development servers
+turbo run build            # Build all applications
+turbo run start            # Start all production servers
+turbo run lint             # Run ESLint on all packages
+turbo run type-check       # Run TypeScript checks on all packages
 
-# Database
+# Individual App Commands
+pnpm --filter @dailysync/web dev     # Start web app only
+pnpm --filter @dailysync/web build   # Build web app only
+
+# Database (from web app directory)
+cd apps/web
 pnpm prisma studio         # Open Prisma Studio
 pnpm prisma generate       # Generate Prisma client
 pnpm prisma db push        # Push schema changes
 pnpm prisma migrate dev    # Create and apply migrations
 
+# Monorepo Database Commands
+turbo run db:generate      # Generate Prisma client
+turbo run db:push          # Push schema changes
+turbo run db:studio        # Open Prisma Studio
+
 # Testing
-pnpm test                  # Run tests
-pnpm test:watch           # Run tests in watch mode
+turbo run test             # Run tests on all packages
 ```
 
 ## 📡 API Documentation
 
 ### Authentication Endpoints
 
-#### POST `/api/auth/signin`
-User authentication endpoint.
-
-**Request:**
-```json
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "user": {
-    "id": "user_id",
-    "email": "user@example.com",
-    "role": "USER"
-  }
-}
-```
-
-### Dashboard Endpoints
-
-#### GET `/api/dashboard`
+#### NextAuth.js Integration
 **✅ Status**: Fully functional
-Retrieve dashboard analytics and metrics.
+The application uses NextAuth.js for authentication with the following endpoints:
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "userPerformance": [...],
-    "systemStats": {...},
-    "recentActivity": [...]
-  }
-}
-```
+- **GET/POST** `/api/auth/[...nextauth]` - NextAuth.js dynamic routes
+- **GET** `/api/auth/session` - Get current session
+- **POST** `/api/auth/signin` - Sign in
+- **POST** `/api/auth/signout` - Sign out
+- **GET** `/api/auth/providers` - Get available providers
+
+### Reports Endpoints
+
+#### GET `/api/reports/daily`
+**✅ Status**: Fully functional
+List daily reports with pagination and filtering.
+
+#### GET `/api/reports/daily/stats/summary`
+**✅ Status**: Fully functional
+Get daily report statistics summary.
+
+**Query Parameters:**
+- `days` (number): Number of days to include (default: 30)
+
+#### GET `/api/reports/meeting`
+**✅ Status**: Fully functional
+List meeting reports with pagination.
+
+#### GET `/api/reports/meeting/stats/summary`
+**✅ Status**: Fully functional
+Get meeting report statistics summary.
 
 ### Settings Endpoints
 
@@ -306,9 +335,32 @@ Test webhook delivery.
 
 #### GET `/api/analytics/dashboard`
 **✅ Status**: Fully functional
-Get dashboard analytics data.
+Get comprehensive dashboard analytics data including daily reports, user performance, and system stats.
 
-#### GET `/api/analytics/webhooks`
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "dailyReports": {...},
+    "timeSeries": [...],
+    "userPerformance": [...],
+    "systemDeliveryStats": {...},
+    "recentActivity": [...],
+    "userStats": {...}
+  }
+}
+```
+
+#### GET `/api/analytics/daily-reports`
+**✅ Status**: Fully functional
+Get daily report analytics and trends.
+
+#### GET `/api/analytics/user-performance`
+**✅ Status**: Fully functional
+Get user performance metrics and statistics.
+
+#### GET `/api/analytics/webhook-analytics`
 **✅ Status**: Fully functional
 Get webhook analytics and performance metrics.
 
@@ -316,24 +368,9 @@ Get webhook analytics and performance metrics.
 **✅ Status**: Fully functional
 Get performance leaderboard data.
 
-### Health Check
+### System Health
 
-#### GET `/api/health`
-**✅ Status**: Fully functional
-System health monitoring endpoint.
-
-**Response:**
-```json
-{
-  "status": "healthy",
-  "timestamp": "2024-01-15T10:30:00Z",
-  "services": {
-    "database": "connected",
-    "redis": "connected",
-    "api": "operational"
-  }
-}
-```
+**Note**: Health check endpoints are available in the separate Express API server, not in the Next.js app routes. For production monitoring, use external health check services or the separate API server.
 
 ## 🔧 Environment Setup
 
@@ -476,13 +513,16 @@ The application is optimized for Vercel deployment:
 2. **Configure build settings**
    ```bash
    # Build Command
-   cd apps/web && pnpm build
+   pnpm vercel-build
 
    # Output Directory
    apps/web/.next
 
    # Install Command
    pnpm install
+
+   # Root Directory
+   ./
    ```
 
 3. **Set environment variables**
@@ -500,12 +540,12 @@ For other hosting providers:
 
 1. **Build the application**
    ```bash
-   pnpm build
+   turbo run build
    ```
 
 2. **Start production server**
    ```bash
-   pnpm start
+   turbo run start
    ```
 
 3. **Configure reverse proxy** (nginx example)
@@ -584,7 +624,7 @@ const items = Array.isArray(data?.items) ? data.items : [];
 - Check build logs for specific errors
 - Verify all environment variables are set
 - Ensure database is accessible from Vercel
-- Run `pnpm build` locally to test
+- Run `turbo run build` locally to test
 
 ### Performance Optimization
 
@@ -628,9 +668,9 @@ return JSON.parse(cachedData);
 
 4. **Run quality checks**
    ```bash
-   pnpm lint
-   pnpm type-check
-   pnpm test
+   turbo run lint
+   turbo run type-check
+   turbo run test
    ```
 
 5. **Commit your changes**
