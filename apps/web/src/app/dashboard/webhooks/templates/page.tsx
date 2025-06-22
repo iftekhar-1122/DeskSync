@@ -23,21 +23,21 @@ interface MessageTemplate {
 }
 
 const messageTemplatesApi = {
-  getAll: () => fetch('http://localhost:3001/api/message-templates').then(res => res.json()),
-  create: (data: Partial<MessageTemplate>) => 
-    fetch('http://localhost:3001/api/message-templates', {
+  getAll: () => fetch('/api/message-templates').then(res => res.json()),
+  create: (data: Partial<MessageTemplate>) =>
+    fetch('/api/message-templates', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then(res => res.json()),
   update: (id: string, data: Partial<MessageTemplate>) =>
-    fetch(`http://localhost:3001/api/message-templates/${id}`, {
+    fetch(`/api/message-templates/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then(res => res.json()),
   delete: (id: string) =>
-    fetch(`http://localhost:3001/api/message-templates/${id}`, {
+    fetch(`/api/message-templates/${id}`, {
       method: 'DELETE'
     }).then(res => res.json())
 }
