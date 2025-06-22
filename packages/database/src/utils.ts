@@ -198,88 +198,60 @@ export const getWebhookAnalytics = async (
   filter: DateRangeFilter & WebhookFilter
 ): Promise<WebhookAnalytics[]> => {
   const whereClause: any = {
-    receivedAt: {
+    createdAt: {
       gte: filter.startDate,
       lte: filter.endDate,
     },
   };
 
   if (filter.webhookIds && filter.webhookIds.length > 0) {
-    whereClause.incomingWebhookId = { in: filter.webhookIds };
+    whereClause.id = { in: filter.webhookIds };
   }
 
   if (filter.status && filter.status.length > 0) {
-    whereClause.incomingWebhook = {
-      status: { in: filter.status },
-    };
+    whereClause.status = { in: filter.status };
   }
 
-  const payloadLogs = await prisma.payloadLog.findMany({
+  // Get webhooks and their associated meeting reports for analytics
+  const webhooks = await prisma.incomingWebhook.findMany({
     where: whereClause,
     include: {
-      incomingWebhook: true,
-      deliveryLogs: true,
+      user: {
+        select: {
+          meetingReports: {
+            where: {
+              createdAt: {
+                gte: filter.startDate,
+                lte: filter.endDate,
+              },
+            },
+          },
+        },
+      },
     },
   });
 
-  const webhookMetrics = new Map<string, {
-    webhook: any;
-    totalPayloads: number;
-    successfulDeliveries: number;
-    failedDeliveries: number;
-    responseTimes: number[];
-    lastActivity: Date | null;
-  }>();
+  return webhooks.map((webhook) => {
+    const meetingReports = webhook.user?.meetingReports || [];
+    const totalMeetings = meetingReports.length;
+    const successfulMeetings = meetingReports.filter(m => m.outcome === 'COMPLETED').length;
 
-  payloadLogs.forEach((payloadLog) => {
-    const webhookId = payloadLog.incomingWebhookId;
-    const existing = webhookMetrics.get(webhookId) || {
-      webhook: payloadLog.incomingWebhook,
-      totalPayloads: 0,
-      successfulDeliveries: 0,
-      failedDeliveries: 0,
-      responseTimes: [],
-      lastActivity: null,
+    return {
+      webhookId: webhook.id,
+      webhookName: webhook.name,
+      totalPayloads: totalMeetings,
+      successfulDeliveries: successfulMeetings,
+      failedDeliveries: totalMeetings - successfulMeetings,
+      successRate: totalMeetings > 0 ? (successfulMeetings / totalMeetings) * 100 : 0,
+      averageResponseTime: 0, // Not applicable without delivery logs
+      lastActivity: meetingReports.length > 0
+        ? meetingReports.reduce((latest, report) =>
+            report.createdAt > latest ? report.createdAt : latest,
+            meetingReports[0].createdAt
+          )
+        : null,
     };
-
-    existing.totalPayloads += 1;
-    existing.lastActivity = payloadLog.receivedAt;
-
-    payloadLog.deliveryLogs.forEach((deliveryLog) => {
-      if (deliveryLog.status === 'SUCCESS') {
-        existing.successfulDeliveries += 1;
-      } else if (deliveryLog.status === 'FAILED') {
-        existing.failedDeliveries += 1;
-      }
-
-      if (deliveryLog.deliveredAt) {
-        const responseTime = deliveryLog.deliveredAt.getTime() - payloadLog.receivedAt.getTime();
-        existing.responseTimes.push(responseTime);
-      }
-    });
-
-    webhookMetrics.set(webhookId, existing);
   });
-
-  return Array.from(webhookMetrics.values()).map(({
-    webhook,
-    totalPayloads,
-    successfulDeliveries,
-    failedDeliveries,
-    responseTimes,
-    lastActivity,
-  }) => ({
-    webhookId: webhook.id,
-    webhookName: webhook.name,
-    totalPayloads,
-    successfulDeliveries,
-    failedDeliveries,
-    successRate: totalPayloads > 0 ? (successfulDeliveries / totalPayloads) * 100 : 0,
-    averageResponseTime: responseTimes.length > 0 
-      ? responseTimes.reduce((sum, time) => sum + time, 0) / responseTimes.length 
-      : 0,
-    lastActivity,
-  }));
 };
 
 // Date utilities
