@@ -44,15 +44,20 @@ export type PayloadLog = $Result.DefaultSelection<Prisma.$PayloadLogPayload>
  */
 export type DeliveryLog = $Result.DefaultSelection<Prisma.$DeliveryLogPayload>
 /**
- * Model DailyReport
+ * Model SupportPlatform
  * 
  */
-export type DailyReport = $Result.DefaultSelection<Prisma.$DailyReportPayload>
+export type SupportPlatform = $Result.DefaultSelection<Prisma.$SupportPlatformPayload>
 /**
  * Model MeetingReport
  * 
  */
 export type MeetingReport = $Result.DefaultSelection<Prisma.$MeetingReportPayload>
+/**
+ * Model DailyReport
+ * 
+ */
+export type DailyReport = $Result.DefaultSelection<Prisma.$DailyReportPayload>
 
 /**
  * Enums
@@ -297,14 +302,14 @@ export class PrismaClient<
   get deliveryLog(): Prisma.DeliveryLogDelegate<ExtArgs>;
 
   /**
-   * `prisma.dailyReport`: Exposes CRUD operations for the **DailyReport** model.
+   * `prisma.supportPlatform`: Exposes CRUD operations for the **SupportPlatform** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more DailyReports
-    * const dailyReports = await prisma.dailyReport.findMany()
+    * // Fetch zero or more SupportPlatforms
+    * const supportPlatforms = await prisma.supportPlatform.findMany()
     * ```
     */
-  get dailyReport(): Prisma.DailyReportDelegate<ExtArgs>;
+  get supportPlatform(): Prisma.SupportPlatformDelegate<ExtArgs>;
 
   /**
    * `prisma.meetingReport`: Exposes CRUD operations for the **MeetingReport** model.
@@ -315,6 +320,16 @@ export class PrismaClient<
     * ```
     */
   get meetingReport(): Prisma.MeetingReportDelegate<ExtArgs>;
+
+  /**
+   * `prisma.dailyReport`: Exposes CRUD operations for the **DailyReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DailyReports
+    * const dailyReports = await prisma.dailyReport.findMany()
+    * ```
+    */
+  get dailyReport(): Prisma.DailyReportDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -762,8 +777,9 @@ export namespace Prisma {
     MessageTemplate: 'MessageTemplate',
     PayloadLog: 'PayloadLog',
     DeliveryLog: 'DeliveryLog',
-    DailyReport: 'DailyReport',
-    MeetingReport: 'MeetingReport'
+    SupportPlatform: 'SupportPlatform',
+    MeetingReport: 'MeetingReport',
+    DailyReport: 'DailyReport'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -779,7 +795,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "incomingWebhook" | "outgoingEndpoint" | "messageTemplate" | "payloadLog" | "deliveryLog" | "dailyReport" | "meetingReport"
+      modelProps: "user" | "incomingWebhook" | "outgoingEndpoint" | "messageTemplate" | "payloadLog" | "deliveryLog" | "supportPlatform" | "meetingReport" | "dailyReport"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1203,73 +1219,73 @@ export namespace Prisma {
           }
         }
       }
-      DailyReport: {
-        payload: Prisma.$DailyReportPayload<ExtArgs>
-        fields: Prisma.DailyReportFieldRefs
+      SupportPlatform: {
+        payload: Prisma.$SupportPlatformPayload<ExtArgs>
+        fields: Prisma.SupportPlatformFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.DailyReportFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload> | null
+            args: Prisma.SupportPlatformFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.DailyReportFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+            args: Prisma.SupportPlatformFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>
           }
           findFirst: {
-            args: Prisma.DailyReportFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload> | null
+            args: Prisma.SupportPlatformFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.DailyReportFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+            args: Prisma.SupportPlatformFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>
           }
           findMany: {
-            args: Prisma.DailyReportFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>[]
+            args: Prisma.SupportPlatformFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>[]
           }
           create: {
-            args: Prisma.DailyReportCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+            args: Prisma.SupportPlatformCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>
           }
           createMany: {
-            args: Prisma.DailyReportCreateManyArgs<ExtArgs>
+            args: Prisma.SupportPlatformCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.DailyReportCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>[]
+            args: Prisma.SupportPlatformCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>[]
           }
           delete: {
-            args: Prisma.DailyReportDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+            args: Prisma.SupportPlatformDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>
           }
           update: {
-            args: Prisma.DailyReportUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+            args: Prisma.SupportPlatformUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>
           }
           deleteMany: {
-            args: Prisma.DailyReportDeleteManyArgs<ExtArgs>
+            args: Prisma.SupportPlatformDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.DailyReportUpdateManyArgs<ExtArgs>
+            args: Prisma.SupportPlatformUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.DailyReportUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+            args: Prisma.SupportPlatformUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportPlatformPayload>
           }
           aggregate: {
-            args: Prisma.DailyReportAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDailyReport>
+            args: Prisma.SupportPlatformAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportPlatform>
           }
           groupBy: {
-            args: Prisma.DailyReportGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DailyReportGroupByOutputType>[]
+            args: Prisma.SupportPlatformGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportPlatformGroupByOutputType>[]
           }
           count: {
-            args: Prisma.DailyReportCountArgs<ExtArgs>
-            result: $Utils.Optional<DailyReportCountAggregateOutputType> | number
+            args: Prisma.SupportPlatformCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportPlatformCountAggregateOutputType> | number
           }
         }
       }
@@ -1340,6 +1356,76 @@ export namespace Prisma {
           count: {
             args: Prisma.MeetingReportCountArgs<ExtArgs>
             result: $Utils.Optional<MeetingReportCountAggregateOutputType> | number
+          }
+        }
+      }
+      DailyReport: {
+        payload: Prisma.$DailyReportPayload<ExtArgs>
+        fields: Prisma.DailyReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DailyReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DailyReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+          }
+          findFirst: {
+            args: Prisma.DailyReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DailyReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+          }
+          findMany: {
+            args: Prisma.DailyReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>[]
+          }
+          create: {
+            args: Prisma.DailyReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+          }
+          createMany: {
+            args: Prisma.DailyReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DailyReportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>[]
+          }
+          delete: {
+            args: Prisma.DailyReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+          }
+          update: {
+            args: Prisma.DailyReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.DailyReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DailyReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DailyReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DailyReportPayload>
+          }
+          aggregate: {
+            args: Prisma.DailyReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDailyReport>
+          }
+          groupBy: {
+            args: Prisma.DailyReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DailyReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DailyReportCountArgs<ExtArgs>
+            result: $Utils.Optional<DailyReportCountAggregateOutputType> | number
           }
         }
       }
@@ -7795,6 +7881,1944 @@ export namespace Prisma {
 
 
   /**
+   * Model SupportPlatform
+   */
+
+  export type AggregateSupportPlatform = {
+    _count: SupportPlatformCountAggregateOutputType | null
+    _min: SupportPlatformMinAggregateOutputType | null
+    _max: SupportPlatformMaxAggregateOutputType | null
+  }
+
+  export type SupportPlatformMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportPlatformMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportPlatformCountAggregateOutputType = {
+    id: number
+    name: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SupportPlatformMinAggregateInputType = {
+    id?: true
+    name?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportPlatformMaxAggregateInputType = {
+    id?: true
+    name?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportPlatformCountAggregateInputType = {
+    id?: true
+    name?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SupportPlatformAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportPlatform to aggregate.
+     */
+    where?: SupportPlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportPlatforms to fetch.
+     */
+    orderBy?: SupportPlatformOrderByWithRelationInput | SupportPlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportPlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportPlatforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportPlatforms
+    **/
+    _count?: true | SupportPlatformCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportPlatformMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportPlatformMaxAggregateInputType
+  }
+
+  export type GetSupportPlatformAggregateType<T extends SupportPlatformAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportPlatform]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportPlatform[P]>
+      : GetScalarType<T[P], AggregateSupportPlatform[P]>
+  }
+
+
+
+
+  export type SupportPlatformGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportPlatformWhereInput
+    orderBy?: SupportPlatformOrderByWithAggregationInput | SupportPlatformOrderByWithAggregationInput[]
+    by: SupportPlatformScalarFieldEnum[] | SupportPlatformScalarFieldEnum
+    having?: SupportPlatformScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportPlatformCountAggregateInputType | true
+    _min?: SupportPlatformMinAggregateInputType
+    _max?: SupportPlatformMaxAggregateInputType
+  }
+
+  export type SupportPlatformGroupByOutputType = {
+    id: string
+    name: string
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: SupportPlatformCountAggregateOutputType | null
+    _min: SupportPlatformMinAggregateOutputType | null
+    _max: SupportPlatformMaxAggregateOutputType | null
+  }
+
+  type GetSupportPlatformGroupByPayload<T extends SupportPlatformGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportPlatformGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportPlatformGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportPlatformGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportPlatformGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportPlatformSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["supportPlatform"]>
+
+  export type SupportPlatformSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["supportPlatform"]>
+
+  export type SupportPlatformSelectScalar = {
+    id?: boolean
+    name?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $SupportPlatformPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportPlatform"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["supportPlatform"]>
+    composites: {}
+  }
+
+  type SupportPlatformGetPayload<S extends boolean | null | undefined | SupportPlatformDefaultArgs> = $Result.GetResult<Prisma.$SupportPlatformPayload, S>
+
+  type SupportPlatformCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SupportPlatformFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SupportPlatformCountAggregateInputType | true
+    }
+
+  export interface SupportPlatformDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportPlatform'], meta: { name: 'SupportPlatform' } }
+    /**
+     * Find zero or one SupportPlatform that matches the filter.
+     * @param {SupportPlatformFindUniqueArgs} args - Arguments to find a SupportPlatform
+     * @example
+     * // Get one SupportPlatform
+     * const supportPlatform = await prisma.supportPlatform.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportPlatformFindUniqueArgs>(args: SelectSubset<T, SupportPlatformFindUniqueArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SupportPlatform that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SupportPlatformFindUniqueOrThrowArgs} args - Arguments to find a SupportPlatform
+     * @example
+     * // Get one SupportPlatform
+     * const supportPlatform = await prisma.supportPlatform.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportPlatformFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportPlatformFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SupportPlatform that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformFindFirstArgs} args - Arguments to find a SupportPlatform
+     * @example
+     * // Get one SupportPlatform
+     * const supportPlatform = await prisma.supportPlatform.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportPlatformFindFirstArgs>(args?: SelectSubset<T, SupportPlatformFindFirstArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SupportPlatform that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformFindFirstOrThrowArgs} args - Arguments to find a SupportPlatform
+     * @example
+     * // Get one SupportPlatform
+     * const supportPlatform = await prisma.supportPlatform.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportPlatformFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportPlatformFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SupportPlatforms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportPlatforms
+     * const supportPlatforms = await prisma.supportPlatform.findMany()
+     * 
+     * // Get first 10 SupportPlatforms
+     * const supportPlatforms = await prisma.supportPlatform.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const supportPlatformWithIdOnly = await prisma.supportPlatform.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SupportPlatformFindManyArgs>(args?: SelectSubset<T, SupportPlatformFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SupportPlatform.
+     * @param {SupportPlatformCreateArgs} args - Arguments to create a SupportPlatform.
+     * @example
+     * // Create one SupportPlatform
+     * const SupportPlatform = await prisma.supportPlatform.create({
+     *   data: {
+     *     // ... data to create a SupportPlatform
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportPlatformCreateArgs>(args: SelectSubset<T, SupportPlatformCreateArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SupportPlatforms.
+     * @param {SupportPlatformCreateManyArgs} args - Arguments to create many SupportPlatforms.
+     * @example
+     * // Create many SupportPlatforms
+     * const supportPlatform = await prisma.supportPlatform.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportPlatformCreateManyArgs>(args?: SelectSubset<T, SupportPlatformCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupportPlatforms and returns the data saved in the database.
+     * @param {SupportPlatformCreateManyAndReturnArgs} args - Arguments to create many SupportPlatforms.
+     * @example
+     * // Create many SupportPlatforms
+     * const supportPlatform = await prisma.supportPlatform.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupportPlatforms and only return the `id`
+     * const supportPlatformWithIdOnly = await prisma.supportPlatform.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SupportPlatformCreateManyAndReturnArgs>(args?: SelectSubset<T, SupportPlatformCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SupportPlatform.
+     * @param {SupportPlatformDeleteArgs} args - Arguments to delete one SupportPlatform.
+     * @example
+     * // Delete one SupportPlatform
+     * const SupportPlatform = await prisma.supportPlatform.delete({
+     *   where: {
+     *     // ... filter to delete one SupportPlatform
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportPlatformDeleteArgs>(args: SelectSubset<T, SupportPlatformDeleteArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SupportPlatform.
+     * @param {SupportPlatformUpdateArgs} args - Arguments to update one SupportPlatform.
+     * @example
+     * // Update one SupportPlatform
+     * const supportPlatform = await prisma.supportPlatform.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportPlatformUpdateArgs>(args: SelectSubset<T, SupportPlatformUpdateArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SupportPlatforms.
+     * @param {SupportPlatformDeleteManyArgs} args - Arguments to filter SupportPlatforms to delete.
+     * @example
+     * // Delete a few SupportPlatforms
+     * const { count } = await prisma.supportPlatform.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportPlatformDeleteManyArgs>(args?: SelectSubset<T, SupportPlatformDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportPlatforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportPlatforms
+     * const supportPlatform = await prisma.supportPlatform.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportPlatformUpdateManyArgs>(args: SelectSubset<T, SupportPlatformUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SupportPlatform.
+     * @param {SupportPlatformUpsertArgs} args - Arguments to update or create a SupportPlatform.
+     * @example
+     * // Update or create a SupportPlatform
+     * const supportPlatform = await prisma.supportPlatform.upsert({
+     *   create: {
+     *     // ... data to create a SupportPlatform
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportPlatform we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportPlatformUpsertArgs>(args: SelectSubset<T, SupportPlatformUpsertArgs<ExtArgs>>): Prisma__SupportPlatformClient<$Result.GetResult<Prisma.$SupportPlatformPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SupportPlatforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformCountArgs} args - Arguments to filter SupportPlatforms to count.
+     * @example
+     * // Count the number of SupportPlatforms
+     * const count = await prisma.supportPlatform.count({
+     *   where: {
+     *     // ... the filter for the SupportPlatforms we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportPlatformCountArgs>(
+      args?: Subset<T, SupportPlatformCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportPlatformCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportPlatform.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportPlatformAggregateArgs>(args: Subset<T, SupportPlatformAggregateArgs>): Prisma.PrismaPromise<GetSupportPlatformAggregateType<T>>
+
+    /**
+     * Group by SupportPlatform.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportPlatformGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportPlatformGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportPlatformGroupByArgs['orderBy'] }
+        : { orderBy?: SupportPlatformGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportPlatformGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportPlatformGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportPlatform model
+   */
+  readonly fields: SupportPlatformFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportPlatform.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportPlatformClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportPlatform model
+   */ 
+  interface SupportPlatformFieldRefs {
+    readonly id: FieldRef<"SupportPlatform", 'String'>
+    readonly name: FieldRef<"SupportPlatform", 'String'>
+    readonly isActive: FieldRef<"SupportPlatform", 'Boolean'>
+    readonly createdAt: FieldRef<"SupportPlatform", 'DateTime'>
+    readonly updatedAt: FieldRef<"SupportPlatform", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportPlatform findUnique
+   */
+  export type SupportPlatformFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * Filter, which SupportPlatform to fetch.
+     */
+    where: SupportPlatformWhereUniqueInput
+  }
+
+  /**
+   * SupportPlatform findUniqueOrThrow
+   */
+  export type SupportPlatformFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * Filter, which SupportPlatform to fetch.
+     */
+    where: SupportPlatformWhereUniqueInput
+  }
+
+  /**
+   * SupportPlatform findFirst
+   */
+  export type SupportPlatformFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * Filter, which SupportPlatform to fetch.
+     */
+    where?: SupportPlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportPlatforms to fetch.
+     */
+    orderBy?: SupportPlatformOrderByWithRelationInput | SupportPlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportPlatforms.
+     */
+    cursor?: SupportPlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportPlatforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportPlatforms.
+     */
+    distinct?: SupportPlatformScalarFieldEnum | SupportPlatformScalarFieldEnum[]
+  }
+
+  /**
+   * SupportPlatform findFirstOrThrow
+   */
+  export type SupportPlatformFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * Filter, which SupportPlatform to fetch.
+     */
+    where?: SupportPlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportPlatforms to fetch.
+     */
+    orderBy?: SupportPlatformOrderByWithRelationInput | SupportPlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportPlatforms.
+     */
+    cursor?: SupportPlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportPlatforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportPlatforms.
+     */
+    distinct?: SupportPlatformScalarFieldEnum | SupportPlatformScalarFieldEnum[]
+  }
+
+  /**
+   * SupportPlatform findMany
+   */
+  export type SupportPlatformFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * Filter, which SupportPlatforms to fetch.
+     */
+    where?: SupportPlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportPlatforms to fetch.
+     */
+    orderBy?: SupportPlatformOrderByWithRelationInput | SupportPlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportPlatforms.
+     */
+    cursor?: SupportPlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportPlatforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportPlatforms.
+     */
+    skip?: number
+    distinct?: SupportPlatformScalarFieldEnum | SupportPlatformScalarFieldEnum[]
+  }
+
+  /**
+   * SupportPlatform create
+   */
+  export type SupportPlatformCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * The data needed to create a SupportPlatform.
+     */
+    data: XOR<SupportPlatformCreateInput, SupportPlatformUncheckedCreateInput>
+  }
+
+  /**
+   * SupportPlatform createMany
+   */
+  export type SupportPlatformCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportPlatforms.
+     */
+    data: SupportPlatformCreateManyInput | SupportPlatformCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportPlatform createManyAndReturn
+   */
+  export type SupportPlatformCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SupportPlatforms.
+     */
+    data: SupportPlatformCreateManyInput | SupportPlatformCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportPlatform update
+   */
+  export type SupportPlatformUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * The data needed to update a SupportPlatform.
+     */
+    data: XOR<SupportPlatformUpdateInput, SupportPlatformUncheckedUpdateInput>
+    /**
+     * Choose, which SupportPlatform to update.
+     */
+    where: SupportPlatformWhereUniqueInput
+  }
+
+  /**
+   * SupportPlatform updateMany
+   */
+  export type SupportPlatformUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportPlatforms.
+     */
+    data: XOR<SupportPlatformUpdateManyMutationInput, SupportPlatformUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportPlatforms to update
+     */
+    where?: SupportPlatformWhereInput
+  }
+
+  /**
+   * SupportPlatform upsert
+   */
+  export type SupportPlatformUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * The filter to search for the SupportPlatform to update in case it exists.
+     */
+    where: SupportPlatformWhereUniqueInput
+    /**
+     * In case the SupportPlatform found by the `where` argument doesn't exist, create a new SupportPlatform with this data.
+     */
+    create: XOR<SupportPlatformCreateInput, SupportPlatformUncheckedCreateInput>
+    /**
+     * In case the SupportPlatform was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportPlatformUpdateInput, SupportPlatformUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportPlatform delete
+   */
+  export type SupportPlatformDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+    /**
+     * Filter which SupportPlatform to delete.
+     */
+    where: SupportPlatformWhereUniqueInput
+  }
+
+  /**
+   * SupportPlatform deleteMany
+   */
+  export type SupportPlatformDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportPlatforms to delete
+     */
+    where?: SupportPlatformWhereInput
+  }
+
+  /**
+   * SupportPlatform without action
+   */
+  export type SupportPlatformDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportPlatform
+     */
+    select?: SupportPlatformSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MeetingReport
+   */
+
+  export type AggregateMeetingReport = {
+    _count: MeetingReportCountAggregateOutputType | null
+    _min: MeetingReportMinAggregateOutputType | null
+    _max: MeetingReportMaxAggregateOutputType | null
+  }
+
+  export type MeetingReportMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    startTime: Date | null
+    endTime: Date | null
+    outcome: $Enums.MeetingOutcome | null
+    notes: string | null
+    customerName: string | null
+    customerEmail: string | null
+    hostId: string | null
+    isAssigned: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type MeetingReportMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    startTime: Date | null
+    endTime: Date | null
+    outcome: $Enums.MeetingOutcome | null
+    notes: string | null
+    customerName: string | null
+    customerEmail: string | null
+    hostId: string | null
+    isAssigned: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type MeetingReportCountAggregateOutputType = {
+    id: number
+    title: number
+    startTime: number
+    endTime: number
+    outcome: number
+    notes: number
+    attendees: number
+    actionItems: number
+    customerName: number
+    customerEmail: number
+    hostId: number
+    isAssigned: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type MeetingReportMinAggregateInputType = {
+    id?: true
+    title?: true
+    startTime?: true
+    endTime?: true
+    outcome?: true
+    notes?: true
+    customerName?: true
+    customerEmail?: true
+    hostId?: true
+    isAssigned?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type MeetingReportMaxAggregateInputType = {
+    id?: true
+    title?: true
+    startTime?: true
+    endTime?: true
+    outcome?: true
+    notes?: true
+    customerName?: true
+    customerEmail?: true
+    hostId?: true
+    isAssigned?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type MeetingReportCountAggregateInputType = {
+    id?: true
+    title?: true
+    startTime?: true
+    endTime?: true
+    outcome?: true
+    notes?: true
+    attendees?: true
+    actionItems?: true
+    customerName?: true
+    customerEmail?: true
+    hostId?: true
+    isAssigned?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type MeetingReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MeetingReport to aggregate.
+     */
+    where?: MeetingReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MeetingReports to fetch.
+     */
+    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MeetingReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MeetingReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MeetingReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MeetingReports
+    **/
+    _count?: true | MeetingReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MeetingReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MeetingReportMaxAggregateInputType
+  }
+
+  export type GetMeetingReportAggregateType<T extends MeetingReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateMeetingReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMeetingReport[P]>
+      : GetScalarType<T[P], AggregateMeetingReport[P]>
+  }
+
+
+
+
+  export type MeetingReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MeetingReportWhereInput
+    orderBy?: MeetingReportOrderByWithAggregationInput | MeetingReportOrderByWithAggregationInput[]
+    by: MeetingReportScalarFieldEnum[] | MeetingReportScalarFieldEnum
+    having?: MeetingReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MeetingReportCountAggregateInputType | true
+    _min?: MeetingReportMinAggregateInputType
+    _max?: MeetingReportMaxAggregateInputType
+  }
+
+  export type MeetingReportGroupByOutputType = {
+    id: string
+    title: string
+    startTime: Date
+    endTime: Date | null
+    outcome: $Enums.MeetingOutcome
+    notes: string | null
+    attendees: string[]
+    actionItems: string[]
+    customerName: string | null
+    customerEmail: string | null
+    hostId: string | null
+    isAssigned: boolean
+    createdAt: Date
+    updatedAt: Date
+    userId: string | null
+    _count: MeetingReportCountAggregateOutputType | null
+    _min: MeetingReportMinAggregateOutputType | null
+    _max: MeetingReportMaxAggregateOutputType | null
+  }
+
+  type GetMeetingReportGroupByPayload<T extends MeetingReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MeetingReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MeetingReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MeetingReportGroupByOutputType[P]>
+            : GetScalarType<T[P], MeetingReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MeetingReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    outcome?: boolean
+    notes?: boolean
+    attendees?: boolean
+    actionItems?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    hostId?: boolean
+    isAssigned?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | MeetingReport$userArgs<ExtArgs>
+  }, ExtArgs["result"]["meetingReport"]>
+
+  export type MeetingReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    outcome?: boolean
+    notes?: boolean
+    attendees?: boolean
+    actionItems?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    hostId?: boolean
+    isAssigned?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | MeetingReport$userArgs<ExtArgs>
+  }, ExtArgs["result"]["meetingReport"]>
+
+  export type MeetingReportSelectScalar = {
+    id?: boolean
+    title?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    outcome?: boolean
+    notes?: boolean
+    attendees?: boolean
+    actionItems?: boolean
+    customerName?: boolean
+    customerEmail?: boolean
+    hostId?: boolean
+    isAssigned?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+  }
+
+  export type MeetingReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | MeetingReport$userArgs<ExtArgs>
+  }
+  export type MeetingReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | MeetingReport$userArgs<ExtArgs>
+  }
+
+  export type $MeetingReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MeetingReport"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      startTime: Date
+      endTime: Date | null
+      outcome: $Enums.MeetingOutcome
+      notes: string | null
+      attendees: string[]
+      actionItems: string[]
+      customerName: string | null
+      customerEmail: string | null
+      hostId: string | null
+      isAssigned: boolean
+      createdAt: Date
+      updatedAt: Date
+      userId: string | null
+    }, ExtArgs["result"]["meetingReport"]>
+    composites: {}
+  }
+
+  type MeetingReportGetPayload<S extends boolean | null | undefined | MeetingReportDefaultArgs> = $Result.GetResult<Prisma.$MeetingReportPayload, S>
+
+  type MeetingReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MeetingReportFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MeetingReportCountAggregateInputType | true
+    }
+
+  export interface MeetingReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MeetingReport'], meta: { name: 'MeetingReport' } }
+    /**
+     * Find zero or one MeetingReport that matches the filter.
+     * @param {MeetingReportFindUniqueArgs} args - Arguments to find a MeetingReport
+     * @example
+     * // Get one MeetingReport
+     * const meetingReport = await prisma.meetingReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MeetingReportFindUniqueArgs>(args: SelectSubset<T, MeetingReportFindUniqueArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one MeetingReport that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {MeetingReportFindUniqueOrThrowArgs} args - Arguments to find a MeetingReport
+     * @example
+     * // Get one MeetingReport
+     * const meetingReport = await prisma.meetingReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MeetingReportFindUniqueOrThrowArgs>(args: SelectSubset<T, MeetingReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first MeetingReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportFindFirstArgs} args - Arguments to find a MeetingReport
+     * @example
+     * // Get one MeetingReport
+     * const meetingReport = await prisma.meetingReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MeetingReportFindFirstArgs>(args?: SelectSubset<T, MeetingReportFindFirstArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first MeetingReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportFindFirstOrThrowArgs} args - Arguments to find a MeetingReport
+     * @example
+     * // Get one MeetingReport
+     * const meetingReport = await prisma.meetingReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MeetingReportFindFirstOrThrowArgs>(args?: SelectSubset<T, MeetingReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more MeetingReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MeetingReports
+     * const meetingReports = await prisma.meetingReport.findMany()
+     * 
+     * // Get first 10 MeetingReports
+     * const meetingReports = await prisma.meetingReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const meetingReportWithIdOnly = await prisma.meetingReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MeetingReportFindManyArgs>(args?: SelectSubset<T, MeetingReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a MeetingReport.
+     * @param {MeetingReportCreateArgs} args - Arguments to create a MeetingReport.
+     * @example
+     * // Create one MeetingReport
+     * const MeetingReport = await prisma.meetingReport.create({
+     *   data: {
+     *     // ... data to create a MeetingReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends MeetingReportCreateArgs>(args: SelectSubset<T, MeetingReportCreateArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many MeetingReports.
+     * @param {MeetingReportCreateManyArgs} args - Arguments to create many MeetingReports.
+     * @example
+     * // Create many MeetingReports
+     * const meetingReport = await prisma.meetingReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MeetingReportCreateManyArgs>(args?: SelectSubset<T, MeetingReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MeetingReports and returns the data saved in the database.
+     * @param {MeetingReportCreateManyAndReturnArgs} args - Arguments to create many MeetingReports.
+     * @example
+     * // Create many MeetingReports
+     * const meetingReport = await prisma.meetingReport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MeetingReports and only return the `id`
+     * const meetingReportWithIdOnly = await prisma.meetingReport.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MeetingReportCreateManyAndReturnArgs>(args?: SelectSubset<T, MeetingReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a MeetingReport.
+     * @param {MeetingReportDeleteArgs} args - Arguments to delete one MeetingReport.
+     * @example
+     * // Delete one MeetingReport
+     * const MeetingReport = await prisma.meetingReport.delete({
+     *   where: {
+     *     // ... filter to delete one MeetingReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MeetingReportDeleteArgs>(args: SelectSubset<T, MeetingReportDeleteArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one MeetingReport.
+     * @param {MeetingReportUpdateArgs} args - Arguments to update one MeetingReport.
+     * @example
+     * // Update one MeetingReport
+     * const meetingReport = await prisma.meetingReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MeetingReportUpdateArgs>(args: SelectSubset<T, MeetingReportUpdateArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more MeetingReports.
+     * @param {MeetingReportDeleteManyArgs} args - Arguments to filter MeetingReports to delete.
+     * @example
+     * // Delete a few MeetingReports
+     * const { count } = await prisma.meetingReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MeetingReportDeleteManyArgs>(args?: SelectSubset<T, MeetingReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MeetingReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MeetingReports
+     * const meetingReport = await prisma.meetingReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MeetingReportUpdateManyArgs>(args: SelectSubset<T, MeetingReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MeetingReport.
+     * @param {MeetingReportUpsertArgs} args - Arguments to update or create a MeetingReport.
+     * @example
+     * // Update or create a MeetingReport
+     * const meetingReport = await prisma.meetingReport.upsert({
+     *   create: {
+     *     // ... data to create a MeetingReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MeetingReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MeetingReportUpsertArgs>(args: SelectSubset<T, MeetingReportUpsertArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of MeetingReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportCountArgs} args - Arguments to filter MeetingReports to count.
+     * @example
+     * // Count the number of MeetingReports
+     * const count = await prisma.meetingReport.count({
+     *   where: {
+     *     // ... the filter for the MeetingReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends MeetingReportCountArgs>(
+      args?: Subset<T, MeetingReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MeetingReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MeetingReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MeetingReportAggregateArgs>(args: Subset<T, MeetingReportAggregateArgs>): Prisma.PrismaPromise<GetMeetingReportAggregateType<T>>
+
+    /**
+     * Group by MeetingReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MeetingReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MeetingReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MeetingReportGroupByArgs['orderBy'] }
+        : { orderBy?: MeetingReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MeetingReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMeetingReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MeetingReport model
+   */
+  readonly fields: MeetingReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MeetingReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MeetingReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends MeetingReport$userArgs<ExtArgs> = {}>(args?: Subset<T, MeetingReport$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MeetingReport model
+   */ 
+  interface MeetingReportFieldRefs {
+    readonly id: FieldRef<"MeetingReport", 'String'>
+    readonly title: FieldRef<"MeetingReport", 'String'>
+    readonly startTime: FieldRef<"MeetingReport", 'DateTime'>
+    readonly endTime: FieldRef<"MeetingReport", 'DateTime'>
+    readonly outcome: FieldRef<"MeetingReport", 'MeetingOutcome'>
+    readonly notes: FieldRef<"MeetingReport", 'String'>
+    readonly attendees: FieldRef<"MeetingReport", 'String[]'>
+    readonly actionItems: FieldRef<"MeetingReport", 'String[]'>
+    readonly customerName: FieldRef<"MeetingReport", 'String'>
+    readonly customerEmail: FieldRef<"MeetingReport", 'String'>
+    readonly hostId: FieldRef<"MeetingReport", 'String'>
+    readonly isAssigned: FieldRef<"MeetingReport", 'Boolean'>
+    readonly createdAt: FieldRef<"MeetingReport", 'DateTime'>
+    readonly updatedAt: FieldRef<"MeetingReport", 'DateTime'>
+    readonly userId: FieldRef<"MeetingReport", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MeetingReport findUnique
+   */
+  export type MeetingReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * Filter, which MeetingReport to fetch.
+     */
+    where: MeetingReportWhereUniqueInput
+  }
+
+  /**
+   * MeetingReport findUniqueOrThrow
+   */
+  export type MeetingReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * Filter, which MeetingReport to fetch.
+     */
+    where: MeetingReportWhereUniqueInput
+  }
+
+  /**
+   * MeetingReport findFirst
+   */
+  export type MeetingReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * Filter, which MeetingReport to fetch.
+     */
+    where?: MeetingReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MeetingReports to fetch.
+     */
+    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MeetingReports.
+     */
+    cursor?: MeetingReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MeetingReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MeetingReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MeetingReports.
+     */
+    distinct?: MeetingReportScalarFieldEnum | MeetingReportScalarFieldEnum[]
+  }
+
+  /**
+   * MeetingReport findFirstOrThrow
+   */
+  export type MeetingReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * Filter, which MeetingReport to fetch.
+     */
+    where?: MeetingReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MeetingReports to fetch.
+     */
+    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MeetingReports.
+     */
+    cursor?: MeetingReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MeetingReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MeetingReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MeetingReports.
+     */
+    distinct?: MeetingReportScalarFieldEnum | MeetingReportScalarFieldEnum[]
+  }
+
+  /**
+   * MeetingReport findMany
+   */
+  export type MeetingReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * Filter, which MeetingReports to fetch.
+     */
+    where?: MeetingReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MeetingReports to fetch.
+     */
+    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MeetingReports.
+     */
+    cursor?: MeetingReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MeetingReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MeetingReports.
+     */
+    skip?: number
+    distinct?: MeetingReportScalarFieldEnum | MeetingReportScalarFieldEnum[]
+  }
+
+  /**
+   * MeetingReport create
+   */
+  export type MeetingReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MeetingReport.
+     */
+    data: XOR<MeetingReportCreateInput, MeetingReportUncheckedCreateInput>
+  }
+
+  /**
+   * MeetingReport createMany
+   */
+  export type MeetingReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MeetingReports.
+     */
+    data: MeetingReportCreateManyInput | MeetingReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MeetingReport createManyAndReturn
+   */
+  export type MeetingReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many MeetingReports.
+     */
+    data: MeetingReportCreateManyInput | MeetingReportCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MeetingReport update
+   */
+  export type MeetingReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MeetingReport.
+     */
+    data: XOR<MeetingReportUpdateInput, MeetingReportUncheckedUpdateInput>
+    /**
+     * Choose, which MeetingReport to update.
+     */
+    where: MeetingReportWhereUniqueInput
+  }
+
+  /**
+   * MeetingReport updateMany
+   */
+  export type MeetingReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MeetingReports.
+     */
+    data: XOR<MeetingReportUpdateManyMutationInput, MeetingReportUncheckedUpdateManyInput>
+    /**
+     * Filter which MeetingReports to update
+     */
+    where?: MeetingReportWhereInput
+  }
+
+  /**
+   * MeetingReport upsert
+   */
+  export type MeetingReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MeetingReport to update in case it exists.
+     */
+    where: MeetingReportWhereUniqueInput
+    /**
+     * In case the MeetingReport found by the `where` argument doesn't exist, create a new MeetingReport with this data.
+     */
+    create: XOR<MeetingReportCreateInput, MeetingReportUncheckedCreateInput>
+    /**
+     * In case the MeetingReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MeetingReportUpdateInput, MeetingReportUncheckedUpdateInput>
+  }
+
+  /**
+   * MeetingReport delete
+   */
+  export type MeetingReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+    /**
+     * Filter which MeetingReport to delete.
+     */
+    where: MeetingReportWhereUniqueInput
+  }
+
+  /**
+   * MeetingReport deleteMany
+   */
+  export type MeetingReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MeetingReports to delete
+     */
+    where?: MeetingReportWhereInput
+  }
+
+  /**
+   * MeetingReport.user
+   */
+  export type MeetingReport$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * MeetingReport without action
+   */
+  export type MeetingReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MeetingReport
+     */
+    select?: MeetingReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MeetingReportInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model DailyReport
    */
 
@@ -7858,6 +9882,7 @@ export namespace Prisma {
     githubIssues: number
     emailsProcessed: number
     callsAttended: number
+    platformReports: number
     notes: number
     links: number
     createdAt: number
@@ -7919,6 +9944,7 @@ export namespace Prisma {
     githubIssues?: true
     emailsProcessed?: true
     callsAttended?: true
+    platformReports?: true
     notes?: true
     links?: true
     createdAt?: true
@@ -8021,6 +10047,7 @@ export namespace Prisma {
     githubIssues: number
     emailsProcessed: number
     callsAttended: number
+    platformReports: JsonValue | null
     notes: string | null
     links: string[]
     createdAt: Date
@@ -8055,6 +10082,7 @@ export namespace Prisma {
     githubIssues?: boolean
     emailsProcessed?: boolean
     callsAttended?: boolean
+    platformReports?: boolean
     notes?: boolean
     links?: boolean
     createdAt?: boolean
@@ -8071,6 +10099,7 @@ export namespace Prisma {
     githubIssues?: boolean
     emailsProcessed?: boolean
     callsAttended?: boolean
+    platformReports?: boolean
     notes?: boolean
     links?: boolean
     createdAt?: boolean
@@ -8087,6 +10116,7 @@ export namespace Prisma {
     githubIssues?: boolean
     emailsProcessed?: boolean
     callsAttended?: boolean
+    platformReports?: boolean
     notes?: boolean
     links?: boolean
     createdAt?: boolean
@@ -8114,6 +10144,7 @@ export namespace Prisma {
       githubIssues: number
       emailsProcessed: number
       callsAttended: number
+      platformReports: Prisma.JsonValue | null
       notes: string | null
       links: string[]
       createdAt: Date
@@ -8520,6 +10551,7 @@ export namespace Prisma {
     readonly githubIssues: FieldRef<"DailyReport", 'Int'>
     readonly emailsProcessed: FieldRef<"DailyReport", 'Int'>
     readonly callsAttended: FieldRef<"DailyReport", 'Int'>
+    readonly platformReports: FieldRef<"DailyReport", 'Json'>
     readonly notes: FieldRef<"DailyReport", 'String'>
     readonly links: FieldRef<"DailyReport", 'String[]'>
     readonly createdAt: FieldRef<"DailyReport", 'DateTime'>
@@ -8858,1003 +10890,6 @@ export namespace Prisma {
 
 
   /**
-   * Model MeetingReport
-   */
-
-  export type AggregateMeetingReport = {
-    _count: MeetingReportCountAggregateOutputType | null
-    _min: MeetingReportMinAggregateOutputType | null
-    _max: MeetingReportMaxAggregateOutputType | null
-  }
-
-  export type MeetingReportMinAggregateOutputType = {
-    id: string | null
-    title: string | null
-    startTime: Date | null
-    endTime: Date | null
-    outcome: $Enums.MeetingOutcome | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    userId: string | null
-  }
-
-  export type MeetingReportMaxAggregateOutputType = {
-    id: string | null
-    title: string | null
-    startTime: Date | null
-    endTime: Date | null
-    outcome: $Enums.MeetingOutcome | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    userId: string | null
-  }
-
-  export type MeetingReportCountAggregateOutputType = {
-    id: number
-    title: number
-    startTime: number
-    endTime: number
-    outcome: number
-    notes: number
-    attendees: number
-    actionItems: number
-    createdAt: number
-    updatedAt: number
-    userId: number
-    _all: number
-  }
-
-
-  export type MeetingReportMinAggregateInputType = {
-    id?: true
-    title?: true
-    startTime?: true
-    endTime?: true
-    outcome?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    userId?: true
-  }
-
-  export type MeetingReportMaxAggregateInputType = {
-    id?: true
-    title?: true
-    startTime?: true
-    endTime?: true
-    outcome?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    userId?: true
-  }
-
-  export type MeetingReportCountAggregateInputType = {
-    id?: true
-    title?: true
-    startTime?: true
-    endTime?: true
-    outcome?: true
-    notes?: true
-    attendees?: true
-    actionItems?: true
-    createdAt?: true
-    updatedAt?: true
-    userId?: true
-    _all?: true
-  }
-
-  export type MeetingReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MeetingReport to aggregate.
-     */
-    where?: MeetingReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MeetingReports to fetch.
-     */
-    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MeetingReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MeetingReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MeetingReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MeetingReports
-    **/
-    _count?: true | MeetingReportCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MeetingReportMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MeetingReportMaxAggregateInputType
-  }
-
-  export type GetMeetingReportAggregateType<T extends MeetingReportAggregateArgs> = {
-        [P in keyof T & keyof AggregateMeetingReport]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMeetingReport[P]>
-      : GetScalarType<T[P], AggregateMeetingReport[P]>
-  }
-
-
-
-
-  export type MeetingReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MeetingReportWhereInput
-    orderBy?: MeetingReportOrderByWithAggregationInput | MeetingReportOrderByWithAggregationInput[]
-    by: MeetingReportScalarFieldEnum[] | MeetingReportScalarFieldEnum
-    having?: MeetingReportScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MeetingReportCountAggregateInputType | true
-    _min?: MeetingReportMinAggregateInputType
-    _max?: MeetingReportMaxAggregateInputType
-  }
-
-  export type MeetingReportGroupByOutputType = {
-    id: string
-    title: string
-    startTime: Date
-    endTime: Date | null
-    outcome: $Enums.MeetingOutcome
-    notes: string | null
-    attendees: string[]
-    actionItems: string[]
-    createdAt: Date
-    updatedAt: Date
-    userId: string
-    _count: MeetingReportCountAggregateOutputType | null
-    _min: MeetingReportMinAggregateOutputType | null
-    _max: MeetingReportMaxAggregateOutputType | null
-  }
-
-  type GetMeetingReportGroupByPayload<T extends MeetingReportGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MeetingReportGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MeetingReportGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MeetingReportGroupByOutputType[P]>
-            : GetScalarType<T[P], MeetingReportGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MeetingReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    startTime?: boolean
-    endTime?: boolean
-    outcome?: boolean
-    notes?: boolean
-    attendees?: boolean
-    actionItems?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["meetingReport"]>
-
-  export type MeetingReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    startTime?: boolean
-    endTime?: boolean
-    outcome?: boolean
-    notes?: boolean
-    attendees?: boolean
-    actionItems?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["meetingReport"]>
-
-  export type MeetingReportSelectScalar = {
-    id?: boolean
-    title?: boolean
-    startTime?: boolean
-    endTime?: boolean
-    outcome?: boolean
-    notes?: boolean
-    attendees?: boolean
-    actionItems?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-  }
-
-  export type MeetingReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type MeetingReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $MeetingReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MeetingReport"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      title: string
-      startTime: Date
-      endTime: Date | null
-      outcome: $Enums.MeetingOutcome
-      notes: string | null
-      attendees: string[]
-      actionItems: string[]
-      createdAt: Date
-      updatedAt: Date
-      userId: string
-    }, ExtArgs["result"]["meetingReport"]>
-    composites: {}
-  }
-
-  type MeetingReportGetPayload<S extends boolean | null | undefined | MeetingReportDefaultArgs> = $Result.GetResult<Prisma.$MeetingReportPayload, S>
-
-  type MeetingReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<MeetingReportFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: MeetingReportCountAggregateInputType | true
-    }
-
-  export interface MeetingReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MeetingReport'], meta: { name: 'MeetingReport' } }
-    /**
-     * Find zero or one MeetingReport that matches the filter.
-     * @param {MeetingReportFindUniqueArgs} args - Arguments to find a MeetingReport
-     * @example
-     * // Get one MeetingReport
-     * const meetingReport = await prisma.meetingReport.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MeetingReportFindUniqueArgs>(args: SelectSubset<T, MeetingReportFindUniqueArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one MeetingReport that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {MeetingReportFindUniqueOrThrowArgs} args - Arguments to find a MeetingReport
-     * @example
-     * // Get one MeetingReport
-     * const meetingReport = await prisma.meetingReport.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MeetingReportFindUniqueOrThrowArgs>(args: SelectSubset<T, MeetingReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first MeetingReport that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportFindFirstArgs} args - Arguments to find a MeetingReport
-     * @example
-     * // Get one MeetingReport
-     * const meetingReport = await prisma.meetingReport.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MeetingReportFindFirstArgs>(args?: SelectSubset<T, MeetingReportFindFirstArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first MeetingReport that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportFindFirstOrThrowArgs} args - Arguments to find a MeetingReport
-     * @example
-     * // Get one MeetingReport
-     * const meetingReport = await prisma.meetingReport.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MeetingReportFindFirstOrThrowArgs>(args?: SelectSubset<T, MeetingReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more MeetingReports that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MeetingReports
-     * const meetingReports = await prisma.meetingReport.findMany()
-     * 
-     * // Get first 10 MeetingReports
-     * const meetingReports = await prisma.meetingReport.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const meetingReportWithIdOnly = await prisma.meetingReport.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MeetingReportFindManyArgs>(args?: SelectSubset<T, MeetingReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a MeetingReport.
-     * @param {MeetingReportCreateArgs} args - Arguments to create a MeetingReport.
-     * @example
-     * // Create one MeetingReport
-     * const MeetingReport = await prisma.meetingReport.create({
-     *   data: {
-     *     // ... data to create a MeetingReport
-     *   }
-     * })
-     * 
-     */
-    create<T extends MeetingReportCreateArgs>(args: SelectSubset<T, MeetingReportCreateArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many MeetingReports.
-     * @param {MeetingReportCreateManyArgs} args - Arguments to create many MeetingReports.
-     * @example
-     * // Create many MeetingReports
-     * const meetingReport = await prisma.meetingReport.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MeetingReportCreateManyArgs>(args?: SelectSubset<T, MeetingReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MeetingReports and returns the data saved in the database.
-     * @param {MeetingReportCreateManyAndReturnArgs} args - Arguments to create many MeetingReports.
-     * @example
-     * // Create many MeetingReports
-     * const meetingReport = await prisma.meetingReport.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MeetingReports and only return the `id`
-     * const meetingReportWithIdOnly = await prisma.meetingReport.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MeetingReportCreateManyAndReturnArgs>(args?: SelectSubset<T, MeetingReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a MeetingReport.
-     * @param {MeetingReportDeleteArgs} args - Arguments to delete one MeetingReport.
-     * @example
-     * // Delete one MeetingReport
-     * const MeetingReport = await prisma.meetingReport.delete({
-     *   where: {
-     *     // ... filter to delete one MeetingReport
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MeetingReportDeleteArgs>(args: SelectSubset<T, MeetingReportDeleteArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one MeetingReport.
-     * @param {MeetingReportUpdateArgs} args - Arguments to update one MeetingReport.
-     * @example
-     * // Update one MeetingReport
-     * const meetingReport = await prisma.meetingReport.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MeetingReportUpdateArgs>(args: SelectSubset<T, MeetingReportUpdateArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more MeetingReports.
-     * @param {MeetingReportDeleteManyArgs} args - Arguments to filter MeetingReports to delete.
-     * @example
-     * // Delete a few MeetingReports
-     * const { count } = await prisma.meetingReport.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MeetingReportDeleteManyArgs>(args?: SelectSubset<T, MeetingReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MeetingReports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MeetingReports
-     * const meetingReport = await prisma.meetingReport.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MeetingReportUpdateManyArgs>(args: SelectSubset<T, MeetingReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one MeetingReport.
-     * @param {MeetingReportUpsertArgs} args - Arguments to update or create a MeetingReport.
-     * @example
-     * // Update or create a MeetingReport
-     * const meetingReport = await prisma.meetingReport.upsert({
-     *   create: {
-     *     // ... data to create a MeetingReport
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MeetingReport we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MeetingReportUpsertArgs>(args: SelectSubset<T, MeetingReportUpsertArgs<ExtArgs>>): Prisma__MeetingReportClient<$Result.GetResult<Prisma.$MeetingReportPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-
-    /**
-     * Count the number of MeetingReports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportCountArgs} args - Arguments to filter MeetingReports to count.
-     * @example
-     * // Count the number of MeetingReports
-     * const count = await prisma.meetingReport.count({
-     *   where: {
-     *     // ... the filter for the MeetingReports we want to count
-     *   }
-     * })
-    **/
-    count<T extends MeetingReportCountArgs>(
-      args?: Subset<T, MeetingReportCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MeetingReportCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MeetingReport.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MeetingReportAggregateArgs>(args: Subset<T, MeetingReportAggregateArgs>): Prisma.PrismaPromise<GetMeetingReportAggregateType<T>>
-
-    /**
-     * Group by MeetingReport.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MeetingReportGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MeetingReportGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MeetingReportGroupByArgs['orderBy'] }
-        : { orderBy?: MeetingReportGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MeetingReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMeetingReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MeetingReport model
-   */
-  readonly fields: MeetingReportFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MeetingReport.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MeetingReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MeetingReport model
-   */ 
-  interface MeetingReportFieldRefs {
-    readonly id: FieldRef<"MeetingReport", 'String'>
-    readonly title: FieldRef<"MeetingReport", 'String'>
-    readonly startTime: FieldRef<"MeetingReport", 'DateTime'>
-    readonly endTime: FieldRef<"MeetingReport", 'DateTime'>
-    readonly outcome: FieldRef<"MeetingReport", 'MeetingOutcome'>
-    readonly notes: FieldRef<"MeetingReport", 'String'>
-    readonly attendees: FieldRef<"MeetingReport", 'String[]'>
-    readonly actionItems: FieldRef<"MeetingReport", 'String[]'>
-    readonly createdAt: FieldRef<"MeetingReport", 'DateTime'>
-    readonly updatedAt: FieldRef<"MeetingReport", 'DateTime'>
-    readonly userId: FieldRef<"MeetingReport", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MeetingReport findUnique
-   */
-  export type MeetingReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * Filter, which MeetingReport to fetch.
-     */
-    where: MeetingReportWhereUniqueInput
-  }
-
-  /**
-   * MeetingReport findUniqueOrThrow
-   */
-  export type MeetingReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * Filter, which MeetingReport to fetch.
-     */
-    where: MeetingReportWhereUniqueInput
-  }
-
-  /**
-   * MeetingReport findFirst
-   */
-  export type MeetingReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * Filter, which MeetingReport to fetch.
-     */
-    where?: MeetingReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MeetingReports to fetch.
-     */
-    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MeetingReports.
-     */
-    cursor?: MeetingReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MeetingReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MeetingReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MeetingReports.
-     */
-    distinct?: MeetingReportScalarFieldEnum | MeetingReportScalarFieldEnum[]
-  }
-
-  /**
-   * MeetingReport findFirstOrThrow
-   */
-  export type MeetingReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * Filter, which MeetingReport to fetch.
-     */
-    where?: MeetingReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MeetingReports to fetch.
-     */
-    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MeetingReports.
-     */
-    cursor?: MeetingReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MeetingReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MeetingReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MeetingReports.
-     */
-    distinct?: MeetingReportScalarFieldEnum | MeetingReportScalarFieldEnum[]
-  }
-
-  /**
-   * MeetingReport findMany
-   */
-  export type MeetingReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * Filter, which MeetingReports to fetch.
-     */
-    where?: MeetingReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MeetingReports to fetch.
-     */
-    orderBy?: MeetingReportOrderByWithRelationInput | MeetingReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MeetingReports.
-     */
-    cursor?: MeetingReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MeetingReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MeetingReports.
-     */
-    skip?: number
-    distinct?: MeetingReportScalarFieldEnum | MeetingReportScalarFieldEnum[]
-  }
-
-  /**
-   * MeetingReport create
-   */
-  export type MeetingReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MeetingReport.
-     */
-    data: XOR<MeetingReportCreateInput, MeetingReportUncheckedCreateInput>
-  }
-
-  /**
-   * MeetingReport createMany
-   */
-  export type MeetingReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MeetingReports.
-     */
-    data: MeetingReportCreateManyInput | MeetingReportCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MeetingReport createManyAndReturn
-   */
-  export type MeetingReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many MeetingReports.
-     */
-    data: MeetingReportCreateManyInput | MeetingReportCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MeetingReport update
-   */
-  export type MeetingReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MeetingReport.
-     */
-    data: XOR<MeetingReportUpdateInput, MeetingReportUncheckedUpdateInput>
-    /**
-     * Choose, which MeetingReport to update.
-     */
-    where: MeetingReportWhereUniqueInput
-  }
-
-  /**
-   * MeetingReport updateMany
-   */
-  export type MeetingReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MeetingReports.
-     */
-    data: XOR<MeetingReportUpdateManyMutationInput, MeetingReportUncheckedUpdateManyInput>
-    /**
-     * Filter which MeetingReports to update
-     */
-    where?: MeetingReportWhereInput
-  }
-
-  /**
-   * MeetingReport upsert
-   */
-  export type MeetingReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MeetingReport to update in case it exists.
-     */
-    where: MeetingReportWhereUniqueInput
-    /**
-     * In case the MeetingReport found by the `where` argument doesn't exist, create a new MeetingReport with this data.
-     */
-    create: XOR<MeetingReportCreateInput, MeetingReportUncheckedCreateInput>
-    /**
-     * In case the MeetingReport was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MeetingReportUpdateInput, MeetingReportUncheckedUpdateInput>
-  }
-
-  /**
-   * MeetingReport delete
-   */
-  export type MeetingReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-    /**
-     * Filter which MeetingReport to delete.
-     */
-    where: MeetingReportWhereUniqueInput
-  }
-
-  /**
-   * MeetingReport deleteMany
-   */
-  export type MeetingReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MeetingReports to delete
-     */
-    where?: MeetingReportWhereInput
-  }
-
-  /**
-   * MeetingReport without action
-   */
-  export type MeetingReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MeetingReport
-     */
-    select?: MeetingReportSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MeetingReportInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -9958,22 +10993,15 @@ export namespace Prisma {
   export type DeliveryLogScalarFieldEnum = (typeof DeliveryLogScalarFieldEnum)[keyof typeof DeliveryLogScalarFieldEnum]
 
 
-  export const DailyReportScalarFieldEnum: {
+  export const SupportPlatformScalarFieldEnum: {
     id: 'id',
-    date: 'date',
-    ticketsResolved: 'ticketsResolved',
-    chatsHandled: 'chatsHandled',
-    githubIssues: 'githubIssues',
-    emailsProcessed: 'emailsProcessed',
-    callsAttended: 'callsAttended',
-    notes: 'notes',
-    links: 'links',
+    name: 'name',
+    isActive: 'isActive',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    userId: 'userId'
+    updatedAt: 'updatedAt'
   };
 
-  export type DailyReportScalarFieldEnum = (typeof DailyReportScalarFieldEnum)[keyof typeof DailyReportScalarFieldEnum]
+  export type SupportPlatformScalarFieldEnum = (typeof SupportPlatformScalarFieldEnum)[keyof typeof SupportPlatformScalarFieldEnum]
 
 
   export const MeetingReportScalarFieldEnum: {
@@ -9985,12 +11013,35 @@ export namespace Prisma {
     notes: 'notes',
     attendees: 'attendees',
     actionItems: 'actionItems',
+    customerName: 'customerName',
+    customerEmail: 'customerEmail',
+    hostId: 'hostId',
+    isAssigned: 'isAssigned',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
   };
 
   export type MeetingReportScalarFieldEnum = (typeof MeetingReportScalarFieldEnum)[keyof typeof MeetingReportScalarFieldEnum]
+
+
+  export const DailyReportScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    ticketsResolved: 'ticketsResolved',
+    chatsHandled: 'chatsHandled',
+    githubIssues: 'githubIssues',
+    emailsProcessed: 'emailsProcessed',
+    callsAttended: 'callsAttended',
+    platformReports: 'platformReports',
+    notes: 'notes',
+    links: 'links',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
+  };
+
+  export type DailyReportScalarFieldEnum = (typeof DailyReportScalarFieldEnum)[keyof typeof DailyReportScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10653,6 +11704,163 @@ export namespace Prisma {
     outgoingEndpointId?: StringWithAggregatesFilter<"DeliveryLog"> | string
   }
 
+  export type SupportPlatformWhereInput = {
+    AND?: SupportPlatformWhereInput | SupportPlatformWhereInput[]
+    OR?: SupportPlatformWhereInput[]
+    NOT?: SupportPlatformWhereInput | SupportPlatformWhereInput[]
+    id?: StringFilter<"SupportPlatform"> | string
+    name?: StringFilter<"SupportPlatform"> | string
+    isActive?: BoolFilter<"SupportPlatform"> | boolean
+    createdAt?: DateTimeFilter<"SupportPlatform"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportPlatform"> | Date | string
+  }
+
+  export type SupportPlatformOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportPlatformWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: SupportPlatformWhereInput | SupportPlatformWhereInput[]
+    OR?: SupportPlatformWhereInput[]
+    NOT?: SupportPlatformWhereInput | SupportPlatformWhereInput[]
+    isActive?: BoolFilter<"SupportPlatform"> | boolean
+    createdAt?: DateTimeFilter<"SupportPlatform"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportPlatform"> | Date | string
+  }, "id" | "name">
+
+  export type SupportPlatformOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SupportPlatformCountOrderByAggregateInput
+    _max?: SupportPlatformMaxOrderByAggregateInput
+    _min?: SupportPlatformMinOrderByAggregateInput
+  }
+
+  export type SupportPlatformScalarWhereWithAggregatesInput = {
+    AND?: SupportPlatformScalarWhereWithAggregatesInput | SupportPlatformScalarWhereWithAggregatesInput[]
+    OR?: SupportPlatformScalarWhereWithAggregatesInput[]
+    NOT?: SupportPlatformScalarWhereWithAggregatesInput | SupportPlatformScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SupportPlatform"> | string
+    name?: StringWithAggregatesFilter<"SupportPlatform"> | string
+    isActive?: BoolWithAggregatesFilter<"SupportPlatform"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"SupportPlatform"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SupportPlatform"> | Date | string
+  }
+
+  export type MeetingReportWhereInput = {
+    AND?: MeetingReportWhereInput | MeetingReportWhereInput[]
+    OR?: MeetingReportWhereInput[]
+    NOT?: MeetingReportWhereInput | MeetingReportWhereInput[]
+    id?: StringFilter<"MeetingReport"> | string
+    title?: StringFilter<"MeetingReport"> | string
+    startTime?: DateTimeFilter<"MeetingReport"> | Date | string
+    endTime?: DateTimeNullableFilter<"MeetingReport"> | Date | string | null
+    outcome?: EnumMeetingOutcomeFilter<"MeetingReport"> | $Enums.MeetingOutcome
+    notes?: StringNullableFilter<"MeetingReport"> | string | null
+    attendees?: StringNullableListFilter<"MeetingReport">
+    actionItems?: StringNullableListFilter<"MeetingReport">
+    customerName?: StringNullableFilter<"MeetingReport"> | string | null
+    customerEmail?: StringNullableFilter<"MeetingReport"> | string | null
+    hostId?: StringNullableFilter<"MeetingReport"> | string | null
+    isAssigned?: BoolFilter<"MeetingReport"> | boolean
+    createdAt?: DateTimeFilter<"MeetingReport"> | Date | string
+    updatedAt?: DateTimeFilter<"MeetingReport"> | Date | string
+    userId?: StringNullableFilter<"MeetingReport"> | string | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }
+
+  export type MeetingReportOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrderInput | SortOrder
+    outcome?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    attendees?: SortOrder
+    actionItems?: SortOrder
+    customerName?: SortOrderInput | SortOrder
+    customerEmail?: SortOrderInput | SortOrder
+    hostId?: SortOrderInput | SortOrder
+    isAssigned?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MeetingReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MeetingReportWhereInput | MeetingReportWhereInput[]
+    OR?: MeetingReportWhereInput[]
+    NOT?: MeetingReportWhereInput | MeetingReportWhereInput[]
+    title?: StringFilter<"MeetingReport"> | string
+    startTime?: DateTimeFilter<"MeetingReport"> | Date | string
+    endTime?: DateTimeNullableFilter<"MeetingReport"> | Date | string | null
+    outcome?: EnumMeetingOutcomeFilter<"MeetingReport"> | $Enums.MeetingOutcome
+    notes?: StringNullableFilter<"MeetingReport"> | string | null
+    attendees?: StringNullableListFilter<"MeetingReport">
+    actionItems?: StringNullableListFilter<"MeetingReport">
+    customerName?: StringNullableFilter<"MeetingReport"> | string | null
+    customerEmail?: StringNullableFilter<"MeetingReport"> | string | null
+    hostId?: StringNullableFilter<"MeetingReport"> | string | null
+    isAssigned?: BoolFilter<"MeetingReport"> | boolean
+    createdAt?: DateTimeFilter<"MeetingReport"> | Date | string
+    updatedAt?: DateTimeFilter<"MeetingReport"> | Date | string
+    userId?: StringNullableFilter<"MeetingReport"> | string | null
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type MeetingReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrderInput | SortOrder
+    outcome?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    attendees?: SortOrder
+    actionItems?: SortOrder
+    customerName?: SortOrderInput | SortOrder
+    customerEmail?: SortOrderInput | SortOrder
+    hostId?: SortOrderInput | SortOrder
+    isAssigned?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    _count?: MeetingReportCountOrderByAggregateInput
+    _max?: MeetingReportMaxOrderByAggregateInput
+    _min?: MeetingReportMinOrderByAggregateInput
+  }
+
+  export type MeetingReportScalarWhereWithAggregatesInput = {
+    AND?: MeetingReportScalarWhereWithAggregatesInput | MeetingReportScalarWhereWithAggregatesInput[]
+    OR?: MeetingReportScalarWhereWithAggregatesInput[]
+    NOT?: MeetingReportScalarWhereWithAggregatesInput | MeetingReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MeetingReport"> | string
+    title?: StringWithAggregatesFilter<"MeetingReport"> | string
+    startTime?: DateTimeWithAggregatesFilter<"MeetingReport"> | Date | string
+    endTime?: DateTimeNullableWithAggregatesFilter<"MeetingReport"> | Date | string | null
+    outcome?: EnumMeetingOutcomeWithAggregatesFilter<"MeetingReport"> | $Enums.MeetingOutcome
+    notes?: StringNullableWithAggregatesFilter<"MeetingReport"> | string | null
+    attendees?: StringNullableListFilter<"MeetingReport">
+    actionItems?: StringNullableListFilter<"MeetingReport">
+    customerName?: StringNullableWithAggregatesFilter<"MeetingReport"> | string | null
+    customerEmail?: StringNullableWithAggregatesFilter<"MeetingReport"> | string | null
+    hostId?: StringNullableWithAggregatesFilter<"MeetingReport"> | string | null
+    isAssigned?: BoolWithAggregatesFilter<"MeetingReport"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"MeetingReport"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MeetingReport"> | Date | string
+    userId?: StringNullableWithAggregatesFilter<"MeetingReport"> | string | null
+  }
+
   export type DailyReportWhereInput = {
     AND?: DailyReportWhereInput | DailyReportWhereInput[]
     OR?: DailyReportWhereInput[]
@@ -10664,6 +11872,7 @@ export namespace Prisma {
     githubIssues?: IntFilter<"DailyReport"> | number
     emailsProcessed?: IntFilter<"DailyReport"> | number
     callsAttended?: IntFilter<"DailyReport"> | number
+    platformReports?: JsonNullableFilter<"DailyReport">
     notes?: StringNullableFilter<"DailyReport"> | string | null
     links?: StringNullableListFilter<"DailyReport">
     createdAt?: DateTimeFilter<"DailyReport"> | Date | string
@@ -10680,6 +11889,7 @@ export namespace Prisma {
     githubIssues?: SortOrder
     emailsProcessed?: SortOrder
     callsAttended?: SortOrder
+    platformReports?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     links?: SortOrder
     createdAt?: SortOrder
@@ -10700,6 +11910,7 @@ export namespace Prisma {
     githubIssues?: IntFilter<"DailyReport"> | number
     emailsProcessed?: IntFilter<"DailyReport"> | number
     callsAttended?: IntFilter<"DailyReport"> | number
+    platformReports?: JsonNullableFilter<"DailyReport">
     notes?: StringNullableFilter<"DailyReport"> | string | null
     links?: StringNullableListFilter<"DailyReport">
     createdAt?: DateTimeFilter<"DailyReport"> | Date | string
@@ -10716,6 +11927,7 @@ export namespace Prisma {
     githubIssues?: SortOrder
     emailsProcessed?: SortOrder
     callsAttended?: SortOrder
+    platformReports?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     links?: SortOrder
     createdAt?: SortOrder
@@ -10739,96 +11951,12 @@ export namespace Prisma {
     githubIssues?: IntWithAggregatesFilter<"DailyReport"> | number
     emailsProcessed?: IntWithAggregatesFilter<"DailyReport"> | number
     callsAttended?: IntWithAggregatesFilter<"DailyReport"> | number
+    platformReports?: JsonNullableWithAggregatesFilter<"DailyReport">
     notes?: StringNullableWithAggregatesFilter<"DailyReport"> | string | null
     links?: StringNullableListFilter<"DailyReport">
     createdAt?: DateTimeWithAggregatesFilter<"DailyReport"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"DailyReport"> | Date | string
     userId?: StringWithAggregatesFilter<"DailyReport"> | string
-  }
-
-  export type MeetingReportWhereInput = {
-    AND?: MeetingReportWhereInput | MeetingReportWhereInput[]
-    OR?: MeetingReportWhereInput[]
-    NOT?: MeetingReportWhereInput | MeetingReportWhereInput[]
-    id?: StringFilter<"MeetingReport"> | string
-    title?: StringFilter<"MeetingReport"> | string
-    startTime?: DateTimeFilter<"MeetingReport"> | Date | string
-    endTime?: DateTimeNullableFilter<"MeetingReport"> | Date | string | null
-    outcome?: EnumMeetingOutcomeFilter<"MeetingReport"> | $Enums.MeetingOutcome
-    notes?: StringNullableFilter<"MeetingReport"> | string | null
-    attendees?: StringNullableListFilter<"MeetingReport">
-    actionItems?: StringNullableListFilter<"MeetingReport">
-    createdAt?: DateTimeFilter<"MeetingReport"> | Date | string
-    updatedAt?: DateTimeFilter<"MeetingReport"> | Date | string
-    userId?: StringFilter<"MeetingReport"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-  }
-
-  export type MeetingReportOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    startTime?: SortOrder
-    endTime?: SortOrderInput | SortOrder
-    outcome?: SortOrder
-    notes?: SortOrderInput | SortOrder
-    attendees?: SortOrder
-    actionItems?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type MeetingReportWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MeetingReportWhereInput | MeetingReportWhereInput[]
-    OR?: MeetingReportWhereInput[]
-    NOT?: MeetingReportWhereInput | MeetingReportWhereInput[]
-    title?: StringFilter<"MeetingReport"> | string
-    startTime?: DateTimeFilter<"MeetingReport"> | Date | string
-    endTime?: DateTimeNullableFilter<"MeetingReport"> | Date | string | null
-    outcome?: EnumMeetingOutcomeFilter<"MeetingReport"> | $Enums.MeetingOutcome
-    notes?: StringNullableFilter<"MeetingReport"> | string | null
-    attendees?: StringNullableListFilter<"MeetingReport">
-    actionItems?: StringNullableListFilter<"MeetingReport">
-    createdAt?: DateTimeFilter<"MeetingReport"> | Date | string
-    updatedAt?: DateTimeFilter<"MeetingReport"> | Date | string
-    userId?: StringFilter<"MeetingReport"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type MeetingReportOrderByWithAggregationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    startTime?: SortOrder
-    endTime?: SortOrderInput | SortOrder
-    outcome?: SortOrder
-    notes?: SortOrderInput | SortOrder
-    attendees?: SortOrder
-    actionItems?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-    _count?: MeetingReportCountOrderByAggregateInput
-    _max?: MeetingReportMaxOrderByAggregateInput
-    _min?: MeetingReportMinOrderByAggregateInput
-  }
-
-  export type MeetingReportScalarWhereWithAggregatesInput = {
-    AND?: MeetingReportScalarWhereWithAggregatesInput | MeetingReportScalarWhereWithAggregatesInput[]
-    OR?: MeetingReportScalarWhereWithAggregatesInput[]
-    NOT?: MeetingReportScalarWhereWithAggregatesInput | MeetingReportScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MeetingReport"> | string
-    title?: StringWithAggregatesFilter<"MeetingReport"> | string
-    startTime?: DateTimeWithAggregatesFilter<"MeetingReport"> | Date | string
-    endTime?: DateTimeNullableWithAggregatesFilter<"MeetingReport"> | Date | string | null
-    outcome?: EnumMeetingOutcomeWithAggregatesFilter<"MeetingReport"> | $Enums.MeetingOutcome
-    notes?: StringNullableWithAggregatesFilter<"MeetingReport"> | string | null
-    attendees?: StringNullableListFilter<"MeetingReport">
-    actionItems?: StringNullableListFilter<"MeetingReport">
-    createdAt?: DateTimeWithAggregatesFilter<"MeetingReport"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"MeetingReport"> | Date | string
-    userId?: StringWithAggregatesFilter<"MeetingReport"> | string
   }
 
   export type UserCreateInput = {
@@ -11361,6 +12489,187 @@ export namespace Prisma {
     outgoingEndpointId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type SupportPlatformCreateInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportPlatformUncheckedCreateInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportPlatformUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportPlatformUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportPlatformCreateManyInput = {
+    id?: string
+    name: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SupportPlatformUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportPlatformUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeetingReportCreateInput = {
+    id?: string
+    title: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    outcome: $Enums.MeetingOutcome
+    notes?: string | null
+    attendees?: MeetingReportCreateattendeesInput | string[]
+    actionItems?: MeetingReportCreateactionItemsInput | string[]
+    customerName?: string | null
+    customerEmail?: string | null
+    hostId?: string | null
+    isAssigned?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutMeetingReportsInput
+  }
+
+  export type MeetingReportUncheckedCreateInput = {
+    id?: string
+    title: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    outcome: $Enums.MeetingOutcome
+    notes?: string | null
+    attendees?: MeetingReportCreateattendeesInput | string[]
+    actionItems?: MeetingReportCreateactionItemsInput | string[]
+    customerName?: string | null
+    customerEmail?: string | null
+    hostId?: string | null
+    isAssigned?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+  }
+
+  export type MeetingReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    attendees?: MeetingReportUpdateattendeesInput | string[]
+    actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutMeetingReportsNestedInput
+  }
+
+  export type MeetingReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    attendees?: MeetingReportUpdateattendeesInput | string[]
+    actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MeetingReportCreateManyInput = {
+    id?: string
+    title: string
+    startTime: Date | string
+    endTime?: Date | string | null
+    outcome: $Enums.MeetingOutcome
+    notes?: string | null
+    attendees?: MeetingReportCreateattendeesInput | string[]
+    actionItems?: MeetingReportCreateactionItemsInput | string[]
+    customerName?: string | null
+    customerEmail?: string | null
+    hostId?: string | null
+    isAssigned?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+  }
+
+  export type MeetingReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    attendees?: MeetingReportUpdateattendeesInput | string[]
+    actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MeetingReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    attendees?: MeetingReportUpdateattendeesInput | string[]
+    actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type DailyReportCreateInput = {
     id?: string
     date: Date | string
@@ -11369,6 +12678,7 @@ export namespace Prisma {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     links?: DailyReportCreatelinksInput | string[]
     createdAt?: Date | string
@@ -11384,6 +12694,7 @@ export namespace Prisma {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     links?: DailyReportCreatelinksInput | string[]
     createdAt?: Date | string
@@ -11399,6 +12710,7 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11414,6 +12726,7 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11429,6 +12742,7 @@ export namespace Prisma {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     links?: DailyReportCreatelinksInput | string[]
     createdAt?: Date | string
@@ -11444,6 +12758,7 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11458,105 +12773,9 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MeetingReportCreateInput = {
-    id?: string
-    title: string
-    startTime: Date | string
-    endTime?: Date | string | null
-    outcome: $Enums.MeetingOutcome
-    notes?: string | null
-    attendees?: MeetingReportCreateattendeesInput | string[]
-    actionItems?: MeetingReportCreateactionItemsInput | string[]
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutMeetingReportsInput
-  }
-
-  export type MeetingReportUncheckedCreateInput = {
-    id?: string
-    title: string
-    startTime: Date | string
-    endTime?: Date | string | null
-    outcome: $Enums.MeetingOutcome
-    notes?: string | null
-    attendees?: MeetingReportCreateattendeesInput | string[]
-    actionItems?: MeetingReportCreateactionItemsInput | string[]
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId: string
-  }
-
-  export type MeetingReportUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    attendees?: MeetingReportUpdateattendeesInput | string[]
-    actionItems?: MeetingReportUpdateactionItemsInput | string[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutMeetingReportsNestedInput
-  }
-
-  export type MeetingReportUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    attendees?: MeetingReportUpdateattendeesInput | string[]
-    actionItems?: MeetingReportUpdateactionItemsInput | string[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MeetingReportCreateManyInput = {
-    id?: string
-    title: string
-    startTime: Date | string
-    endTime?: Date | string | null
-    outcome: $Enums.MeetingOutcome
-    notes?: string | null
-    attendees?: MeetingReportCreateattendeesInput | string[]
-    actionItems?: MeetingReportCreateactionItemsInput | string[]
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId: string
-  }
-
-  export type MeetingReportUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    attendees?: MeetingReportUpdateattendeesInput | string[]
-    actionItems?: MeetingReportUpdateactionItemsInput | string[]
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MeetingReportUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    outcome?: EnumMeetingOutcomeFieldUpdateOperationsInput | $Enums.MeetingOutcome
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    attendees?: MeetingReportUpdateattendeesInput | string[]
-    actionItems?: MeetingReportUpdateactionItemsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -12210,12 +13429,108 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type SupportPlatformCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportPlatformMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportPlatformMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumMeetingOutcomeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMeetingOutcomeFilter<$PrismaModel> | $Enums.MeetingOutcome
+  }
+
   export type StringNullableListFilter<$PrismaModel = never> = {
     equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     has?: string | StringFieldRefInput<$PrismaModel> | null
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
+  }
+
+  export type UserNullableRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type MeetingReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    outcome?: SortOrder
+    notes?: SortOrder
+    attendees?: SortOrder
+    actionItems?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrder
+    hostId?: SortOrder
+    isAssigned?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MeetingReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    outcome?: SortOrder
+    notes?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrder
+    hostId?: SortOrder
+    isAssigned?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type MeetingReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    outcome?: SortOrder
+    notes?: SortOrder
+    customerName?: SortOrder
+    customerEmail?: SortOrder
+    hostId?: SortOrder
+    isAssigned?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type EnumMeetingOutcomeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMeetingOutcomeWithAggregatesFilter<$PrismaModel> | $Enums.MeetingOutcome
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
+    _max?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
   }
 
   export type DailyReportUserIdDateCompoundUniqueInput = {
@@ -12231,6 +13546,7 @@ export namespace Prisma {
     githubIssues?: SortOrder
     emailsProcessed?: SortOrder
     callsAttended?: SortOrder
+    platformReports?: SortOrder
     notes?: SortOrder
     links?: SortOrder
     createdAt?: SortOrder
@@ -12280,61 +13596,6 @@ export namespace Prisma {
     githubIssues?: SortOrder
     emailsProcessed?: SortOrder
     callsAttended?: SortOrder
-  }
-
-  export type EnumMeetingOutcomeFilter<$PrismaModel = never> = {
-    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    not?: NestedEnumMeetingOutcomeFilter<$PrismaModel> | $Enums.MeetingOutcome
-  }
-
-  export type MeetingReportCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    startTime?: SortOrder
-    endTime?: SortOrder
-    outcome?: SortOrder
-    notes?: SortOrder
-    attendees?: SortOrder
-    actionItems?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type MeetingReportMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    startTime?: SortOrder
-    endTime?: SortOrder
-    outcome?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type MeetingReportMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    startTime?: SortOrder
-    endTime?: SortOrder
-    outcome?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type EnumMeetingOutcomeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    not?: NestedEnumMeetingOutcomeWithAggregatesFilter<$PrismaModel> | $Enums.MeetingOutcome
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
-    _max?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
   }
 
   export type DailyReportCreateNestedManyWithoutUserInput = {
@@ -12795,29 +14056,6 @@ export namespace Prisma {
     update?: XOR<XOR<OutgoingEndpointUpdateToOneWithWhereWithoutDeliveryLogsInput, OutgoingEndpointUpdateWithoutDeliveryLogsInput>, OutgoingEndpointUncheckedUpdateWithoutDeliveryLogsInput>
   }
 
-  export type DailyReportCreatelinksInput = {
-    set: string[]
-  }
-
-  export type UserCreateNestedOneWithoutDailyReportsInput = {
-    create?: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDailyReportsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type DailyReportUpdatelinksInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type UserUpdateOneRequiredWithoutDailyReportsNestedInput = {
-    create?: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDailyReportsInput
-    upsert?: UserUpsertWithoutDailyReportsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDailyReportsInput, UserUpdateWithoutDailyReportsInput>, UserUncheckedUpdateWithoutDailyReportsInput>
-  }
-
   export type MeetingReportCreateattendeesInput = {
     set: string[]
   }
@@ -12846,12 +14084,37 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type UserUpdateOneRequiredWithoutMeetingReportsNestedInput = {
+  export type UserUpdateOneWithoutMeetingReportsNestedInput = {
     create?: XOR<UserCreateWithoutMeetingReportsInput, UserUncheckedCreateWithoutMeetingReportsInput>
     connectOrCreate?: UserCreateOrConnectWithoutMeetingReportsInput
     upsert?: UserUpsertWithoutMeetingReportsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMeetingReportsInput, UserUpdateWithoutMeetingReportsInput>, UserUncheckedUpdateWithoutMeetingReportsInput>
+  }
+
+  export type DailyReportCreatelinksInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutDailyReportsInput = {
+    create?: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyReportsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DailyReportUpdatelinksInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateOneRequiredWithoutDailyReportsNestedInput = {
+    create?: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyReportsInput
+    upsert?: UserUpsertWithoutDailyReportsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDailyReportsInput, UserUpdateWithoutDailyReportsInput>, UserUncheckedUpdateWithoutDailyReportsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13175,6 +14438,7 @@ export namespace Prisma {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     links?: DailyReportCreatelinksInput | string[]
     createdAt?: Date | string
@@ -13189,6 +14453,7 @@ export namespace Prisma {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     links?: DailyReportCreatelinksInput | string[]
     createdAt?: Date | string
@@ -13214,6 +14479,10 @@ export namespace Prisma {
     notes?: string | null
     attendees?: MeetingReportCreateattendeesInput | string[]
     actionItems?: MeetingReportCreateactionItemsInput | string[]
+    customerName?: string | null
+    customerEmail?: string | null
+    hostId?: string | null
+    isAssigned?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13227,6 +14496,10 @@ export namespace Prisma {
     notes?: string | null
     attendees?: MeetingReportCreateattendeesInput | string[]
     actionItems?: MeetingReportCreateactionItemsInput | string[]
+    customerName?: string | null
+    customerEmail?: string | null
+    hostId?: string | null
+    isAssigned?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13304,6 +14577,7 @@ export namespace Prisma {
     githubIssues?: IntFilter<"DailyReport"> | number
     emailsProcessed?: IntFilter<"DailyReport"> | number
     callsAttended?: IntFilter<"DailyReport"> | number
+    platformReports?: JsonNullableFilter<"DailyReport">
     notes?: StringNullableFilter<"DailyReport"> | string | null
     links?: StringNullableListFilter<"DailyReport">
     createdAt?: DateTimeFilter<"DailyReport"> | Date | string
@@ -13339,9 +14613,13 @@ export namespace Prisma {
     notes?: StringNullableFilter<"MeetingReport"> | string | null
     attendees?: StringNullableListFilter<"MeetingReport">
     actionItems?: StringNullableListFilter<"MeetingReport">
+    customerName?: StringNullableFilter<"MeetingReport"> | string | null
+    customerEmail?: StringNullableFilter<"MeetingReport"> | string | null
+    hostId?: StringNullableFilter<"MeetingReport"> | string | null
+    isAssigned?: BoolFilter<"MeetingReport"> | boolean
     createdAt?: DateTimeFilter<"MeetingReport"> | Date | string
     updatedAt?: DateTimeFilter<"MeetingReport"> | Date | string
-    userId?: StringFilter<"MeetingReport"> | string
+    userId?: StringNullableFilter<"MeetingReport"> | string | null
   }
 
   export type IncomingWebhookUpsertWithWhereUniqueWithoutCreatorInput = {
@@ -14103,74 +15381,6 @@ export namespace Prisma {
     messageTemplate?: MessageTemplateUncheckedUpdateOneWithoutOutgoingEndpointNestedInput
   }
 
-  export type UserCreateWithoutDailyReportsInput = {
-    id?: string
-    email: string
-    name: string
-    password: string
-    role?: $Enums.UserRole
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    meetingReports?: MeetingReportCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookCreateNestedManyWithoutCreatorInput
-  }
-
-  export type UserUncheckedCreateWithoutDailyReportsInput = {
-    id?: string
-    email: string
-    name: string
-    password: string
-    role?: $Enums.UserRole
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    meetingReports?: MeetingReportUncheckedCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutCreatorInput
-  }
-
-  export type UserCreateOrConnectWithoutDailyReportsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
-  }
-
-  export type UserUpsertWithoutDailyReportsInput = {
-    update: XOR<UserUpdateWithoutDailyReportsInput, UserUncheckedUpdateWithoutDailyReportsInput>
-    create: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDailyReportsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDailyReportsInput, UserUncheckedUpdateWithoutDailyReportsInput>
-  }
-
-  export type UserUpdateWithoutDailyReportsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    meetingReports?: MeetingReportUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUpdateManyWithoutCreatorNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDailyReportsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    meetingReports?: MeetingReportUncheckedUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput
-  }
-
   export type UserCreateWithoutMeetingReportsInput = {
     id?: string
     email: string
@@ -14239,6 +15449,74 @@ export namespace Prisma {
     webhooks?: IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
+  export type UserCreateWithoutDailyReportsInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    role?: $Enums.UserRole
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    meetingReports?: MeetingReportCreateNestedManyWithoutUserInput
+    webhooks?: IncomingWebhookCreateNestedManyWithoutCreatorInput
+  }
+
+  export type UserUncheckedCreateWithoutDailyReportsInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    role?: $Enums.UserRole
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    meetingReports?: MeetingReportUncheckedCreateNestedManyWithoutUserInput
+    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutCreatorInput
+  }
+
+  export type UserCreateOrConnectWithoutDailyReportsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
+  }
+
+  export type UserUpsertWithoutDailyReportsInput = {
+    update: XOR<UserUpdateWithoutDailyReportsInput, UserUncheckedUpdateWithoutDailyReportsInput>
+    create: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDailyReportsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDailyReportsInput, UserUncheckedUpdateWithoutDailyReportsInput>
+  }
+
+  export type UserUpdateWithoutDailyReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    meetingReports?: MeetingReportUpdateManyWithoutUserNestedInput
+    webhooks?: IncomingWebhookUpdateManyWithoutCreatorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDailyReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    meetingReports?: MeetingReportUncheckedUpdateManyWithoutUserNestedInput
+    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput
+  }
+
   export type DailyReportCreateManyUserInput = {
     id?: string
     date: Date | string
@@ -14247,6 +15525,7 @@ export namespace Prisma {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: string | null
     links?: DailyReportCreatelinksInput | string[]
     createdAt?: Date | string
@@ -14262,6 +15541,10 @@ export namespace Prisma {
     notes?: string | null
     attendees?: MeetingReportCreateattendeesInput | string[]
     actionItems?: MeetingReportCreateactionItemsInput | string[]
+    customerName?: string | null
+    customerEmail?: string | null
+    hostId?: string | null
+    isAssigned?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14285,6 +15568,7 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14299,6 +15583,7 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14313,6 +15598,7 @@ export namespace Prisma {
     githubIssues?: IntFieldUpdateOperationsInput | number
     emailsProcessed?: IntFieldUpdateOperationsInput | number
     callsAttended?: IntFieldUpdateOperationsInput | number
+    platformReports?: NullableJsonNullValueInput | InputJsonValue
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     links?: DailyReportUpdatelinksInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14328,6 +15614,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     attendees?: MeetingReportUpdateattendeesInput | string[]
     actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14341,6 +15631,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     attendees?: MeetingReportUpdateattendeesInput | string[]
     actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14354,6 +15648,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     attendees?: MeetingReportUpdateattendeesInput | string[]
     actionItems?: MeetingReportUpdateactionItemsInput | string[]
+    customerName?: NullableStringFieldUpdateOperationsInput | string | null
+    customerEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    hostId?: NullableStringFieldUpdateOperationsInput | string | null
+    isAssigned?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14643,13 +15941,17 @@ export namespace Prisma {
      */
     export type DeliveryLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DeliveryLogDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use DailyReportDefaultArgs instead
+     * @deprecated Use SupportPlatformDefaultArgs instead
      */
-    export type DailyReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DailyReportDefaultArgs<ExtArgs>
+    export type SupportPlatformArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SupportPlatformDefaultArgs<ExtArgs>
     /**
      * @deprecated Use MeetingReportDefaultArgs instead
      */
     export type MeetingReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MeetingReportDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DailyReportDefaultArgs instead
+     */
+    export type DailyReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DailyReportDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

@@ -194,19 +194,12 @@ exports.Prisma.DeliveryLogScalarFieldEnum = {
   outgoingEndpointId: 'outgoingEndpointId'
 };
 
-exports.Prisma.DailyReportScalarFieldEnum = {
+exports.Prisma.SupportPlatformScalarFieldEnum = {
   id: 'id',
-  date: 'date',
-  ticketsResolved: 'ticketsResolved',
-  chatsHandled: 'chatsHandled',
-  githubIssues: 'githubIssues',
-  emailsProcessed: 'emailsProcessed',
-  callsAttended: 'callsAttended',
-  notes: 'notes',
-  links: 'links',
+  name: 'name',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.MeetingReportScalarFieldEnum = {
@@ -218,6 +211,26 @@ exports.Prisma.MeetingReportScalarFieldEnum = {
   notes: 'notes',
   attendees: 'attendees',
   actionItems: 'actionItems',
+  customerName: 'customerName',
+  customerEmail: 'customerEmail',
+  hostId: 'hostId',
+  isAssigned: 'isAssigned',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.DailyReportScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  ticketsResolved: 'ticketsResolved',
+  chatsHandled: 'chatsHandled',
+  githubIssues: 'githubIssues',
+  emailsProcessed: 'emailsProcessed',
+  callsAttended: 'callsAttended',
+  platformReports: 'platformReports',
+  notes: 'notes',
+  links: 'links',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -285,8 +298,9 @@ exports.Prisma.ModelName = {
   MessageTemplate: 'MessageTemplate',
   PayloadLog: 'PayloadLog',
   DeliveryLog: 'DeliveryLog',
-  DailyReport: 'DailyReport',
-  MeetingReport: 'MeetingReport'
+  SupportPlatform: 'SupportPlatform',
+  MeetingReport: 'MeetingReport',
+  DailyReport: 'DailyReport'
 };
 
 /**
