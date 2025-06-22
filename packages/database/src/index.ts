@@ -23,10 +23,7 @@ export { PrismaClient } from './generated';
 export type {
   User,
   IncomingWebhook,
-  OutgoingEndpoint,
   MessageTemplate,
-  PayloadLog,
-  DeliveryLog,
   DailyReport,
   MeetingReport,
   SupportPlatform
@@ -36,7 +33,6 @@ export type {
 export type {
   UserRole,
   WebhookStatus,
-  DeliveryStatus,
   MeetingOutcome
 } from './generated';
 
@@ -48,11 +44,8 @@ export type {
   UserWithoutPassword,
   CreateUserInput,
   UpdateUserInput,
-  WebhookWithEndpoints,
   CreateWebhookInput,
   UpdateWebhookInput,
-  CreateEndpointInput,
-  UpdateEndpointInput,
   CreateDailyReportInput,
   UpdateDailyReportInput,
   CreateMeetingReportInput,
@@ -64,8 +57,6 @@ export type {
   DailyReportAnalytics,
   UserPerformanceMetrics,
   WebhookAnalytics,
-  ProcessedPayload,
-  DeliveryResult,
   DateRangeFilter,
   UserFilter,
   WebhookFilter

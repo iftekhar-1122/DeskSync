@@ -1,16 +1,12 @@
 import {
   User,
   IncomingWebhook,
-  OutgoingEndpoint,
-  PayloadLog,
-  DeliveryLog,
   DailyReport,
   MeetingReport,
   SupportPlatform,
   MessageTemplate,
   UserRole,
   WebhookStatus,
-  DeliveryStatus,
   MeetingOutcome
 } from './generated';
 
@@ -20,16 +16,8 @@ export type CreateUserInput = Omit<User, 'id' | 'createdAt' | 'updatedAt'>;
 export type UpdateUserInput = Partial<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>;
 
 // Webhook types
-export type WebhookWithEndpoints = IncomingWebhook & {
-  outgoingEndpoints: OutgoingEndpoint[];
-};
-
 export type CreateWebhookInput = Omit<IncomingWebhook, 'id' | 'createdAt' | 'updatedAt' | 'url'>;
-export type UpdateWebhookInput = Partial<Omit<IncomingWebhook, 'id' | 'createdAt' | 'updatedAt' | 'url' | 'createdBy'>>;
-
-// Endpoint types
-export type CreateEndpointInput = Omit<OutgoingEndpoint, 'id' | 'createdAt' | 'updatedAt'>;
-export type UpdateEndpointInput = Partial<Omit<OutgoingEndpoint, 'id' | 'createdAt' | 'updatedAt' | 'incomingWebhookId'>>;
+export type UpdateWebhookInput = Partial<Omit<IncomingWebhook, 'id' | 'createdAt' | 'updatedAt' | 'url' | 'userId'>>;
 
 // Report types
 export type CreateDailyReportInput = Omit<DailyReport, 'id' | 'createdAt' | 'updatedAt'>;
@@ -102,20 +90,7 @@ export interface WebhookAnalytics {
   lastActivity: Date | null;
 }
 
-// Payload processing types
-export interface ProcessedPayload {
-  original: any;
-  transformed: any;
-  template?: string;
-}
 
-export interface DeliveryResult {
-  success: boolean;
-  status?: number;
-  response?: string;
-  error?: string;
-  duration: number;
-}
 
 // Filter types for analytics
 export interface DateRangeFilter {
