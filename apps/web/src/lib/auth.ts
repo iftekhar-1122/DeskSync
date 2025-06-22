@@ -1,4 +1,4 @@
-import { NextAuthOptions } from 'next-auth'
+import { NextAuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: NextAuthOptions = {
@@ -9,7 +9,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials, req): Promise<User | null> {
         if (!credentials?.email || !credentials?.password) {
           return null
         }
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
             name: user.name,
             role: user.role,
             isActive: true,
-          }
+          } as User
         }
 
         return null
@@ -51,20 +51,20 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.email = user.email
-        token.name = user.name
-        token.role = user.role
-        token.isActive = user.isActive
+        token.email = user.email || ''
+        token.name = user.name || ''
+        token.role = (user as any).role
+        token.isActive = (user as any).isActive
       }
       return token
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id
+        (session.user as any).id = token.id
         session.user.email = token.email || ''
         session.user.name = token.name || ''
-        session.user.role = token.role
-        session.user.isActive = token.isActive
+        ;(session.user as any).role = token.role
+        ;(session.user as any).isActive = token.isActive
       }
       return session
     },

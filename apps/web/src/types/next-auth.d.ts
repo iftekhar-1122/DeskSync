@@ -10,7 +10,7 @@ declare module "next-auth" {
       /** The user's unique id. */
       id: string
       /** The user's role. */
-      role: 'SUPPORT_AGENT' | 'ADMIN'
+      role: 'USER' | 'ADMIN'
       /** Whether the user account is active. */
       isActive: boolean
     } & DefaultSession["user"]
@@ -24,7 +24,7 @@ declare module "next-auth" {
     /** The user's unique id. */
     id: string
     /** The user's role. */
-    role: 'SUPPORT_AGENT' | 'ADMIN'
+    role: 'USER' | 'ADMIN'
     /** Whether the user account is active. */
     isActive: boolean
   }
@@ -36,7 +36,7 @@ declare module "next-auth/jwt" {
     /** The user's unique id. */
     id: string
     /** The user's role. */
-    role: 'SUPPORT_AGENT' | 'ADMIN'
+    role: 'USER' | 'ADMIN'
     /** Whether the user account is active. */
     isActive: boolean
   }
