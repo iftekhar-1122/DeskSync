@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { prisma } from '@dailysync/database'
+import { prisma, UserRole } from '@dailysync/database'
 import { z } from 'zod'
 
 // Add CORS headers
@@ -25,13 +25,13 @@ const createUserSchema = z.object({
   email: z.string().email('Invalid email format'),
   name: z.string().min(1, 'Name is required'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  role: z.enum(['USER', 'ADMIN']).default('USER'),
+  role: z.nativeEnum(UserRole).default(UserRole.USER),
   isActive: z.boolean().default(true),
 })
 
 const updateUserSchema = z.object({
   name: z.string().min(1, 'Name is required').optional(),
-  role: z.enum(['USER', 'ADMIN']).optional(),
+  role: z.nativeEnum(UserRole).optional(),
   isActive: z.boolean().optional(),
 })
 
@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Only ADMIN users can access user management
-    const isAdmin = (session as any)?.user?.role === 'ADMIN'
+    const isAdmin = (session as any)?.user?.role === UserRole.ADMIN
     if (!isAdmin) {
       return NextResponse.json(
         { success: false, error: 'Forbidden - Admin access required' },
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Only ADMIN users can create users
-    const isAdmin = (session as any)?.user?.role === 'ADMIN'
+    const isAdmin = (session as any)?.user?.role === UserRole.ADMIN
     if (!isAdmin) {
       return NextResponse.json(
         { success: false, error: 'Forbidden - Admin access required' },

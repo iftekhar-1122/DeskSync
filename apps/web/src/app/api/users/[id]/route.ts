@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { prisma } from '@dailysync/database'
+import { prisma, UserRole } from '@dailysync/database'
 import { z } from 'zod'
 
 // Add CORS headers
@@ -18,7 +18,7 @@ export async function OPTIONS(request: NextRequest) {
 // Validation schemas
 const updateUserSchema = z.object({
   name: z.string().min(1, 'Name is required').optional(),
-  role: z.enum(['USER', 'ADMIN']).optional(),
+  role: z.nativeEnum(UserRole).optional(),
   isActive: z.boolean().optional(),
 })
 
@@ -40,7 +40,7 @@ export async function GET(
     const { id } = params
 
     // Users can view their own profile, admins can view any profile
-    const isAdmin = (session as any)?.user?.role === 'ADMIN'
+    const isAdmin = (session as any)?.user?.role === UserRole.ADMIN
     const isOwnProfile = (session as any)?.user?.id === id
 
     if (!isAdmin && !isOwnProfile) {
@@ -111,7 +111,7 @@ export async function PUT(
     const body = await request.json()
 
     // Users can update their own profile (limited fields), admins can update any profile
-    const isAdmin = (session as any)?.user?.role === 'ADMIN'
+    const isAdmin = (session as any)?.user?.role === UserRole.ADMIN
     const isOwnProfile = (session as any)?.user?.id === id
 
     if (!isAdmin && !isOwnProfile) {
@@ -209,7 +209,7 @@ export async function DELETE(
     }
 
     // Only ADMIN users can delete users
-    const isAdmin = (session as any)?.user?.role === 'ADMIN'
+    const isAdmin = (session as any)?.user?.role === UserRole.ADMIN
     if (!isAdmin) {
       return NextResponse.json(
         { success: false, error: 'Forbidden - Admin access required' },
