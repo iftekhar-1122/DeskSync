@@ -1,10 +1,11 @@
 import bcrypt from 'bcryptjs';
 import { prisma } from './index';
-import { 
-  UserWithoutPassword, 
-  DailyReportAnalytics, 
+import {
+  UserWithoutPassword,
+  DailyReportAnalytics,
   UserPerformanceMetrics,
   WebhookAnalytics,
+  PlatformReport,
   DateRangeFilter,
   UserFilter,
   WebhookFilter
@@ -73,6 +74,35 @@ export const calculateDailyReportAnalytics = async (
 
   const reportCount = reports.length;
 
+  // Calculate platform-specific statistics
+  const platformMetrics = new Map<string, { totalTickets: number; reportCount: number }>();
+
+  reports.forEach((report) => {
+    // Process platformReports JSON field if it exists
+    if (report.platformReports && Array.isArray(report.platformReports)) {
+      (report.platformReports as PlatformReport[]).forEach((platformReport) => {
+        if (platformReport.platform && typeof platformReport.ticketsHandled === 'number') {
+          const existing = platformMetrics.get(platformReport.platform) || {
+            totalTickets: 0,
+            reportCount: 0,
+          };
+
+          existing.totalTickets += platformReport.ticketsHandled;
+          existing.reportCount += 1;
+
+          platformMetrics.set(platformReport.platform, existing);
+        }
+      });
+    }
+  });
+
+  // Convert platform metrics to the required format
+  const platformStats = Array.from(platformMetrics.entries()).map(([platform, metrics]) => ({
+    platform,
+    totalTickets: metrics.totalTickets,
+    averageTickets: metrics.reportCount > 0 ? metrics.totalTickets / metrics.reportCount : 0,
+  }));
+
   return {
     totalTickets: totals.tickets,
     totalChats: totals.chats,
@@ -85,6 +115,7 @@ export const calculateDailyReportAnalytics = async (
     averageEmails: reportCount > 0 ? totals.emails / reportCount : 0,
     averageCalls: reportCount > 0 ? totals.calls / reportCount : 0,
     reportCount,
+    platformStats,
   };
 };
 
