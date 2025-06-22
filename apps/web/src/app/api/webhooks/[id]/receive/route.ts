@@ -116,28 +116,24 @@ export async function POST(
                      request.headers.get('x-real-ip') || 
                      'unknown'
 
-    // Log the payload first
-    const payloadLog = await prisma.payloadLog.create({
-      data: {
-        payload: body,
-        headers,
-        userAgent,
-        ipAddress,
-        incomingWebhookId: webhook.id
-      }
+    // Log the payload for debugging (simplified logging)
+    console.log('Webhook payload received:', {
+      webhookId: webhook.id,
+      payload: body,
+      userAgent,
+      ipAddress
     })
 
     // Validate the payload for meeting creation
     const validation = webhookMeetingPayloadSchema.safeParse(body)
     if (!validation.success) {
       console.warn('Invalid meeting payload received:', validation.error.errors)
-      
+
       // Still log as successful reception but note validation failure
       return NextResponse.json({
         success: true,
         message: 'Payload received and logged',
-        warning: 'Payload validation failed - not processed as meeting',
-        payloadLogId: payloadLog.id
+        warning: 'Payload validation failed - not processed as meeting'
       }, { headers: corsHeaders })
     }
 
@@ -164,7 +160,7 @@ export async function POST(
         title: meetingData.meeting_title,
         startTime: new Date(meetingData.start_time),
         endTime: meetingData.end_time ? new Date(meetingData.end_time) : undefined,
-        outcome: 'SUCCESSFUL', // Default outcome
+        outcome: 'COMPLETED', // Default outcome
         customerName: meetingData.customer_name,
         customerEmail: meetingData.customer_email,
         hostId: meetingData.host_id,
@@ -187,74 +183,6 @@ export async function POST(
     // Send Slack notification
     await sendSlackNotification(meeting, assignedUser)
 
-    // Get webhook endpoints for delivery
-    const endpoints = await prisma.outgoingEndpoint.findMany({
-      where: {
-        incomingWebhookId: webhook.id,
-        isActive: true
-      },
-      include: {
-        messageTemplate: true
-      }
-    })
-
-    // Process deliveries to endpoints (if any)
-    const deliveryPromises = endpoints.map(async (endpoint) => {
-      try {
-        let transformedPayload = body
-
-        // Apply message template if available
-        if (endpoint.messageTemplate) {
-          const template = JSON.parse(endpoint.messageTemplate.template)
-          // Simple template variable replacement
-          const templateStr = JSON.stringify(template)
-          const processedTemplate = templateStr
-            .replace(/\{\{meeting_title\}\}/g, meetingData.meeting_title)
-            .replace(/\{\{customer_name\}\}/g, meetingData.customer_name || 'N/A')
-            .replace(/\{\{start_time\}\}/g, meetingData.start_time)
-            .replace(/\{\{assigned_user\}\}/g, assignedUser?.name || 'Unassigned')
-          
-          transformedPayload = JSON.parse(processedTemplate)
-        }
-
-        // Create delivery log
-        const deliveryLog = await prisma.deliveryLog.create({
-          data: {
-            status: 'PENDING',
-            transformedPayload,
-            payloadLogId: payloadLog.id,
-            outgoingEndpointId: endpoint.id
-          }
-        })
-
-        // Attempt delivery
-        const response = await fetch(endpoint.url, {
-          method: endpoint.method,
-          headers: {
-            'Content-Type': 'application/json',
-            ...(endpoint.headers as any || {})
-          },
-          body: JSON.stringify(transformedPayload)
-        })
-
-        // Update delivery log
-        await prisma.deliveryLog.update({
-          where: { id: deliveryLog.id },
-          data: {
-            status: response.ok ? 'SUCCESS' : 'FAILED',
-            responseStatus: response.status,
-            responseBody: await response.text(),
-            deliveredAt: response.ok ? new Date() : undefined
-          }
-        })
-
-      } catch (error) {
-        console.error(`Delivery failed for endpoint ${endpoint.id}:`, error)
-      }
-    })
-
-    await Promise.all(deliveryPromises)
-
     return NextResponse.json({
       success: true,
       message: 'Meeting created successfully',
@@ -269,9 +197,7 @@ export async function POST(
             name: assignedUser.name,
             email: assignedUser.email
           } : null
-        },
-        payloadLogId: payloadLog.id,
-        deliveriesProcessed: endpoints.length
+        }
       }
     }, { headers: corsHeaders })
 
