@@ -6,7 +6,7 @@ export const createUserSchema = z.object({
   email: z.string().email('Invalid email address'),
   name: z.string().min(2, 'Name must be at least 2 characters'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-  role: z.nativeEnum(UserRole).default(UserRole.SUPPORT_AGENT),
+  role: z.nativeEnum(UserRole).default(UserRole.USER),
   isActive: z.boolean().default(true),
 });
 

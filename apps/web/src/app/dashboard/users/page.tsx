@@ -91,7 +91,7 @@ export default function UsersPage() {
     switch (role) {
       case 'ADMIN':
         return 'destructive'
-      case 'SUPPORT_AGENT':
+      case 'USER':
         return 'default'
       default:
         return 'secondary'
@@ -195,7 +195,7 @@ export default function UsersPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {users.filter((u: any) => u.role === 'SUPPORT_AGENT').length}
+              {users.filter((u: any) => u.role === 'USER').length}
             </div>
             <p className="text-xs text-muted-foreground">
               Support team members
