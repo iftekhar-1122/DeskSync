@@ -19,22 +19,14 @@ enum UserRole {
 enum WebhookStatus {
   ACTIVE
   INACTIVE
-  DELETED
-}
-
-enum DeliveryStatus {
-  PENDING
-  SUCCESS
-  FAILED
-  RETRYING
+  PAUSED
 }
 
 enum MeetingOutcome {
-  SUCCESSFUL
-  CLIENT_ABSENT
-  TECHNICAL_ISSUES
-  RESCHEDULED
+  COMPLETED
   CANCELLED
+  NO_SHOW
+  RESCHEDULED
 }
 
 model User {
@@ -56,95 +48,34 @@ model User {
 }
 
 model IncomingWebhook {
-  id          String        @id @default(cuid())
-  name        String
-  description String?
-  url         String        @unique // Generated webhook URL path
-  secret      String? // Optional webhook secret for validation
-  status      WebhookStatus @default(ACTIVE)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  createdBy   String
+  id        String        @id @default(cuid())
+  name      String
+  url       String        @unique // Generated webhook URL path
+  status    WebhookStatus @default(ACTIVE)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  userId    String
 
   // Relations
-  creator           User               @relation(fields: [createdBy], references: [id])
-  outgoingEndpoints OutgoingEndpoint[]
-  payloadLogs       PayloadLog[]
+  user             User              @relation(fields: [userId], references: [id])
+  messageTemplates MessageTemplate[]
 
   @@map("incoming_webhooks")
 }
 
-model OutgoingEndpoint {
+model MessageTemplate {
   id                String   @id @default(cuid())
   name              String
-  url               String
-  method            String   @default("POST")
-  headers           Json? // JSON object for custom headers
-  isActive          Boolean  @default(true)
-  retryAttempts     Int      @default(3)
-  retryDelayMs      Int      @default(1000)
-  timeoutMs         Int      @default(30000)
+  template          String // Template string with placeholders
+  variables         String[] // Array of template variables
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   incomingWebhookId String
 
   // Relations
-  incomingWebhook IncomingWebhook  @relation(fields: [incomingWebhookId], references: [id], onDelete: Cascade)
-  deliveryLogs    DeliveryLog[]
-  messageTemplate MessageTemplate?
-
-  @@map("outgoing_endpoints")
-}
-
-model MessageTemplate {
-  id                 String   @id @default(cuid())
-  name               String
-  template           String // Template string with placeholders
-  description        String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  outgoingEndpointId String   @unique
-
-  // Relations
-  outgoingEndpoint OutgoingEndpoint @relation(fields: [outgoingEndpointId], references: [id], onDelete: Cascade)
+  incomingWebhook IncomingWebhook @relation(fields: [incomingWebhookId], references: [id], onDelete: Cascade)
 
   @@map("message_templates")
-}
-
-model PayloadLog {
-  id                String   @id @default(cuid())
-  payload           Json // Original incoming payload
-  headers           Json? // Request headers
-  userAgent         String?
-  ipAddress         String?
-  receivedAt        DateTime @default(now())
-  incomingWebhookId String
-
-  // Relations
-  incomingWebhook IncomingWebhook @relation(fields: [incomingWebhookId], references: [id], onDelete: Cascade)
-  deliveryLogs    DeliveryLog[]
-
-  @@map("payload_logs")
-}
-
-model DeliveryLog {
-  id                 String         @id @default(cuid())
-  status             DeliveryStatus @default(PENDING)
-  transformedPayload Json? // Payload after template transformation
-  responseStatus     Int? // HTTP response status
-  responseBody       String? // Response body (truncated if too long)
-  errorMessage       String?
-  attemptNumber      Int            @default(1)
-  deliveredAt        DateTime?
-  createdAt          DateTime       @default(now())
-  payloadLogId       String
-  outgoingEndpointId String
-
-  // Relations
-  payloadLog       PayloadLog       @relation(fields: [payloadLogId], references: [id], onDelete: Cascade)
-  outgoingEndpoint OutgoingEndpoint @relation(fields: [outgoingEndpointId], references: [id], onDelete: Cascade)
-
-  @@map("delivery_logs")
 }
 
 model SupportPlatform {

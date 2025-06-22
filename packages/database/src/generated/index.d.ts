@@ -24,25 +24,10 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type IncomingWebhook = $Result.DefaultSelection<Prisma.$IncomingWebhookPayload>
 /**
- * Model OutgoingEndpoint
- * 
- */
-export type OutgoingEndpoint = $Result.DefaultSelection<Prisma.$OutgoingEndpointPayload>
-/**
  * Model MessageTemplate
  * 
  */
 export type MessageTemplate = $Result.DefaultSelection<Prisma.$MessageTemplatePayload>
-/**
- * Model PayloadLog
- * 
- */
-export type PayloadLog = $Result.DefaultSelection<Prisma.$PayloadLogPayload>
-/**
- * Model DeliveryLog
- * 
- */
-export type DeliveryLog = $Result.DefaultSelection<Prisma.$DeliveryLogPayload>
 /**
  * Model SupportPlatform
  * 
@@ -74,28 +59,17 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 export const WebhookStatus: {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
-  DELETED: 'DELETED'
+  PAUSED: 'PAUSED'
 };
 
 export type WebhookStatus = (typeof WebhookStatus)[keyof typeof WebhookStatus]
 
 
-export const DeliveryStatus: {
-  PENDING: 'PENDING',
-  SUCCESS: 'SUCCESS',
-  FAILED: 'FAILED',
-  RETRYING: 'RETRYING'
-};
-
-export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus]
-
-
 export const MeetingOutcome: {
-  SUCCESSFUL: 'SUCCESSFUL',
-  CLIENT_ABSENT: 'CLIENT_ABSENT',
-  TECHNICAL_ISSUES: 'TECHNICAL_ISSUES',
-  RESCHEDULED: 'RESCHEDULED',
-  CANCELLED: 'CANCELLED'
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  NO_SHOW: 'NO_SHOW',
+  RESCHEDULED: 'RESCHEDULED'
 };
 
 export type MeetingOutcome = (typeof MeetingOutcome)[keyof typeof MeetingOutcome]
@@ -109,10 +83,6 @@ export const UserRole: typeof $Enums.UserRole
 export type WebhookStatus = $Enums.WebhookStatus
 
 export const WebhookStatus: typeof $Enums.WebhookStatus
-
-export type DeliveryStatus = $Enums.DeliveryStatus
-
-export const DeliveryStatus: typeof $Enums.DeliveryStatus
 
 export type MeetingOutcome = $Enums.MeetingOutcome
 
@@ -262,16 +232,6 @@ export class PrismaClient<
   get incomingWebhook(): Prisma.IncomingWebhookDelegate<ExtArgs>;
 
   /**
-   * `prisma.outgoingEndpoint`: Exposes CRUD operations for the **OutgoingEndpoint** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more OutgoingEndpoints
-    * const outgoingEndpoints = await prisma.outgoingEndpoint.findMany()
-    * ```
-    */
-  get outgoingEndpoint(): Prisma.OutgoingEndpointDelegate<ExtArgs>;
-
-  /**
    * `prisma.messageTemplate`: Exposes CRUD operations for the **MessageTemplate** model.
     * Example usage:
     * ```ts
@@ -280,26 +240,6 @@ export class PrismaClient<
     * ```
     */
   get messageTemplate(): Prisma.MessageTemplateDelegate<ExtArgs>;
-
-  /**
-   * `prisma.payloadLog`: Exposes CRUD operations for the **PayloadLog** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PayloadLogs
-    * const payloadLogs = await prisma.payloadLog.findMany()
-    * ```
-    */
-  get payloadLog(): Prisma.PayloadLogDelegate<ExtArgs>;
-
-  /**
-   * `prisma.deliveryLog`: Exposes CRUD operations for the **DeliveryLog** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more DeliveryLogs
-    * const deliveryLogs = await prisma.deliveryLog.findMany()
-    * ```
-    */
-  get deliveryLog(): Prisma.DeliveryLogDelegate<ExtArgs>;
 
   /**
    * `prisma.supportPlatform`: Exposes CRUD operations for the **SupportPlatform** model.
@@ -773,10 +713,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     IncomingWebhook: 'IncomingWebhook',
-    OutgoingEndpoint: 'OutgoingEndpoint',
     MessageTemplate: 'MessageTemplate',
-    PayloadLog: 'PayloadLog',
-    DeliveryLog: 'DeliveryLog',
     SupportPlatform: 'SupportPlatform',
     MeetingReport: 'MeetingReport',
     DailyReport: 'DailyReport'
@@ -795,7 +732,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "incomingWebhook" | "outgoingEndpoint" | "messageTemplate" | "payloadLog" | "deliveryLog" | "supportPlatform" | "meetingReport" | "dailyReport"
+      modelProps: "user" | "incomingWebhook" | "messageTemplate" | "supportPlatform" | "meetingReport" | "dailyReport"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -939,76 +876,6 @@ export namespace Prisma {
           }
         }
       }
-      OutgoingEndpoint: {
-        payload: Prisma.$OutgoingEndpointPayload<ExtArgs>
-        fields: Prisma.OutgoingEndpointFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.OutgoingEndpointFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.OutgoingEndpointFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>
-          }
-          findFirst: {
-            args: Prisma.OutgoingEndpointFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.OutgoingEndpointFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>
-          }
-          findMany: {
-            args: Prisma.OutgoingEndpointFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>[]
-          }
-          create: {
-            args: Prisma.OutgoingEndpointCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>
-          }
-          createMany: {
-            args: Prisma.OutgoingEndpointCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.OutgoingEndpointCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>[]
-          }
-          delete: {
-            args: Prisma.OutgoingEndpointDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>
-          }
-          update: {
-            args: Prisma.OutgoingEndpointUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>
-          }
-          deleteMany: {
-            args: Prisma.OutgoingEndpointDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.OutgoingEndpointUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.OutgoingEndpointUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OutgoingEndpointPayload>
-          }
-          aggregate: {
-            args: Prisma.OutgoingEndpointAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateOutgoingEndpoint>
-          }
-          groupBy: {
-            args: Prisma.OutgoingEndpointGroupByArgs<ExtArgs>
-            result: $Utils.Optional<OutgoingEndpointGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.OutgoingEndpointCountArgs<ExtArgs>
-            result: $Utils.Optional<OutgoingEndpointCountAggregateOutputType> | number
-          }
-        }
-      }
       MessageTemplate: {
         payload: Prisma.$MessageTemplatePayload<ExtArgs>
         fields: Prisma.MessageTemplateFieldRefs
@@ -1076,146 +943,6 @@ export namespace Prisma {
           count: {
             args: Prisma.MessageTemplateCountArgs<ExtArgs>
             result: $Utils.Optional<MessageTemplateCountAggregateOutputType> | number
-          }
-        }
-      }
-      PayloadLog: {
-        payload: Prisma.$PayloadLogPayload<ExtArgs>
-        fields: Prisma.PayloadLogFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PayloadLogFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PayloadLogFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>
-          }
-          findFirst: {
-            args: Prisma.PayloadLogFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PayloadLogFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>
-          }
-          findMany: {
-            args: Prisma.PayloadLogFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>[]
-          }
-          create: {
-            args: Prisma.PayloadLogCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>
-          }
-          createMany: {
-            args: Prisma.PayloadLogCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PayloadLogCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>[]
-          }
-          delete: {
-            args: Prisma.PayloadLogDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>
-          }
-          update: {
-            args: Prisma.PayloadLogUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>
-          }
-          deleteMany: {
-            args: Prisma.PayloadLogDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PayloadLogUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.PayloadLogUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PayloadLogPayload>
-          }
-          aggregate: {
-            args: Prisma.PayloadLogAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePayloadLog>
-          }
-          groupBy: {
-            args: Prisma.PayloadLogGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PayloadLogGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PayloadLogCountArgs<ExtArgs>
-            result: $Utils.Optional<PayloadLogCountAggregateOutputType> | number
-          }
-        }
-      }
-      DeliveryLog: {
-        payload: Prisma.$DeliveryLogPayload<ExtArgs>
-        fields: Prisma.DeliveryLogFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DeliveryLogFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DeliveryLogFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>
-          }
-          findFirst: {
-            args: Prisma.DeliveryLogFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DeliveryLogFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>
-          }
-          findMany: {
-            args: Prisma.DeliveryLogFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>[]
-          }
-          create: {
-            args: Prisma.DeliveryLogCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>
-          }
-          createMany: {
-            args: Prisma.DeliveryLogCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DeliveryLogCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>[]
-          }
-          delete: {
-            args: Prisma.DeliveryLogDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>
-          }
-          update: {
-            args: Prisma.DeliveryLogUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>
-          }
-          deleteMany: {
-            args: Prisma.DeliveryLogDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DeliveryLogUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.DeliveryLogUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DeliveryLogPayload>
-          }
-          aggregate: {
-            args: Prisma.DeliveryLogAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDeliveryLog>
-          }
-          groupBy: {
-            args: Prisma.DeliveryLogGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DeliveryLogGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DeliveryLogCountArgs<ExtArgs>
-            result: $Utils.Optional<DeliveryLogCountAggregateOutputType> | number
           }
         }
       }
@@ -1639,13 +1366,11 @@ export namespace Prisma {
    */
 
   export type IncomingWebhookCountOutputType = {
-    outgoingEndpoints: number
-    payloadLogs: number
+    messageTemplates: number
   }
 
   export type IncomingWebhookCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    outgoingEndpoints?: boolean | IncomingWebhookCountOutputTypeCountOutgoingEndpointsArgs
-    payloadLogs?: boolean | IncomingWebhookCountOutputTypeCountPayloadLogsArgs
+    messageTemplates?: boolean | IncomingWebhookCountOutputTypeCountMessageTemplatesArgs
   }
 
   // Custom InputTypes
@@ -1662,77 +1387,8 @@ export namespace Prisma {
   /**
    * IncomingWebhookCountOutputType without action
    */
-  export type IncomingWebhookCountOutputTypeCountOutgoingEndpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OutgoingEndpointWhereInput
-  }
-
-  /**
-   * IncomingWebhookCountOutputType without action
-   */
-  export type IncomingWebhookCountOutputTypeCountPayloadLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PayloadLogWhereInput
-  }
-
-
-  /**
-   * Count Type OutgoingEndpointCountOutputType
-   */
-
-  export type OutgoingEndpointCountOutputType = {
-    deliveryLogs: number
-  }
-
-  export type OutgoingEndpointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    deliveryLogs?: boolean | OutgoingEndpointCountOutputTypeCountDeliveryLogsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * OutgoingEndpointCountOutputType without action
-   */
-  export type OutgoingEndpointCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpointCountOutputType
-     */
-    select?: OutgoingEndpointCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * OutgoingEndpointCountOutputType without action
-   */
-  export type OutgoingEndpointCountOutputTypeCountDeliveryLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DeliveryLogWhereInput
-  }
-
-
-  /**
-   * Count Type PayloadLogCountOutputType
-   */
-
-  export type PayloadLogCountOutputType = {
-    deliveryLogs: number
-  }
-
-  export type PayloadLogCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    deliveryLogs?: boolean | PayloadLogCountOutputTypeCountDeliveryLogsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * PayloadLogCountOutputType without action
-   */
-  export type PayloadLogCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLogCountOutputType
-     */
-    select?: PayloadLogCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * PayloadLogCountOutputType without action
-   */
-  export type PayloadLogCountOutputTypeCountDeliveryLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DeliveryLogWhereInput
+  export type IncomingWebhookCountOutputTypeCountMessageTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageTemplateWhereInput
   }
 
 
@@ -2785,37 +2441,31 @@ export namespace Prisma {
   export type IncomingWebhookMinAggregateOutputType = {
     id: string | null
     name: string | null
-    description: string | null
     url: string | null
-    secret: string | null
     status: $Enums.WebhookStatus | null
     createdAt: Date | null
     updatedAt: Date | null
-    createdBy: string | null
+    userId: string | null
   }
 
   export type IncomingWebhookMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    description: string | null
     url: string | null
-    secret: string | null
     status: $Enums.WebhookStatus | null
     createdAt: Date | null
     updatedAt: Date | null
-    createdBy: string | null
+    userId: string | null
   }
 
   export type IncomingWebhookCountAggregateOutputType = {
     id: number
     name: number
-    description: number
     url: number
-    secret: number
     status: number
     createdAt: number
     updatedAt: number
-    createdBy: number
+    userId: number
     _all: number
   }
 
@@ -2823,37 +2473,31 @@ export namespace Prisma {
   export type IncomingWebhookMinAggregateInputType = {
     id?: true
     name?: true
-    description?: true
     url?: true
-    secret?: true
     status?: true
     createdAt?: true
     updatedAt?: true
-    createdBy?: true
+    userId?: true
   }
 
   export type IncomingWebhookMaxAggregateInputType = {
     id?: true
     name?: true
-    description?: true
     url?: true
-    secret?: true
     status?: true
     createdAt?: true
     updatedAt?: true
-    createdBy?: true
+    userId?: true
   }
 
   export type IncomingWebhookCountAggregateInputType = {
     id?: true
     name?: true
-    description?: true
     url?: true
-    secret?: true
     status?: true
     createdAt?: true
     updatedAt?: true
-    createdBy?: true
+    userId?: true
     _all?: true
   }
 
@@ -2932,13 +2576,11 @@ export namespace Prisma {
   export type IncomingWebhookGroupByOutputType = {
     id: string
     name: string
-    description: string | null
     url: string
-    secret: string | null
     status: $Enums.WebhookStatus
     createdAt: Date
     updatedAt: Date
-    createdBy: string
+    userId: string
     _count: IncomingWebhookCountAggregateOutputType | null
     _min: IncomingWebhookMinAggregateOutputType | null
     _max: IncomingWebhookMaxAggregateOutputType | null
@@ -2961,71 +2603,60 @@ export namespace Prisma {
   export type IncomingWebhookSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
     url?: boolean
-    secret?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdBy?: boolean
-    creator?: boolean | UserDefaultArgs<ExtArgs>
-    outgoingEndpoints?: boolean | IncomingWebhook$outgoingEndpointsArgs<ExtArgs>
-    payloadLogs?: boolean | IncomingWebhook$payloadLogsArgs<ExtArgs>
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    messageTemplates?: boolean | IncomingWebhook$messageTemplatesArgs<ExtArgs>
     _count?: boolean | IncomingWebhookCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["incomingWebhook"]>
 
   export type IncomingWebhookSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    description?: boolean
     url?: boolean
-    secret?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdBy?: boolean
-    creator?: boolean | UserDefaultArgs<ExtArgs>
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["incomingWebhook"]>
 
   export type IncomingWebhookSelectScalar = {
     id?: boolean
     name?: boolean
-    description?: boolean
     url?: boolean
-    secret?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    createdBy?: boolean
+    userId?: boolean
   }
 
   export type IncomingWebhookInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | UserDefaultArgs<ExtArgs>
-    outgoingEndpoints?: boolean | IncomingWebhook$outgoingEndpointsArgs<ExtArgs>
-    payloadLogs?: boolean | IncomingWebhook$payloadLogsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    messageTemplates?: boolean | IncomingWebhook$messageTemplatesArgs<ExtArgs>
     _count?: boolean | IncomingWebhookCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type IncomingWebhookIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $IncomingWebhookPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "IncomingWebhook"
     objects: {
-      creator: Prisma.$UserPayload<ExtArgs>
-      outgoingEndpoints: Prisma.$OutgoingEndpointPayload<ExtArgs>[]
-      payloadLogs: Prisma.$PayloadLogPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
+      messageTemplates: Prisma.$MessageTemplatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      description: string | null
       url: string
-      secret: string | null
       status: $Enums.WebhookStatus
       createdAt: Date
       updatedAt: Date
-      createdBy: string
+      userId: string
     }, ExtArgs["result"]["incomingWebhook"]>
     composites: {}
   }
@@ -3390,9 +3021,8 @@ export namespace Prisma {
    */
   export interface Prisma__IncomingWebhookClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creator<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    outgoingEndpoints<T extends IncomingWebhook$outgoingEndpointsArgs<ExtArgs> = {}>(args?: Subset<T, IncomingWebhook$outgoingEndpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findMany"> | Null>
-    payloadLogs<T extends IncomingWebhook$payloadLogsArgs<ExtArgs> = {}>(args?: Subset<T, IncomingWebhook$payloadLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findMany"> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    messageTemplates<T extends IncomingWebhook$messageTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, IncomingWebhook$messageTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3424,13 +3054,11 @@ export namespace Prisma {
   interface IncomingWebhookFieldRefs {
     readonly id: FieldRef<"IncomingWebhook", 'String'>
     readonly name: FieldRef<"IncomingWebhook", 'String'>
-    readonly description: FieldRef<"IncomingWebhook", 'String'>
     readonly url: FieldRef<"IncomingWebhook", 'String'>
-    readonly secret: FieldRef<"IncomingWebhook", 'String'>
     readonly status: FieldRef<"IncomingWebhook", 'WebhookStatus'>
     readonly createdAt: FieldRef<"IncomingWebhook", 'DateTime'>
     readonly updatedAt: FieldRef<"IncomingWebhook", 'DateTime'>
-    readonly createdBy: FieldRef<"IncomingWebhook", 'String'>
+    readonly userId: FieldRef<"IncomingWebhook", 'String'>
   }
     
 
@@ -3749,43 +3377,23 @@ export namespace Prisma {
   }
 
   /**
-   * IncomingWebhook.outgoingEndpoints
+   * IncomingWebhook.messageTemplates
    */
-  export type IncomingWebhook$outgoingEndpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IncomingWebhook$messageTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OutgoingEndpoint
+     * Select specific fields to fetch from the MessageTemplate
      */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
+    select?: MessageTemplateSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    where?: OutgoingEndpointWhereInput
-    orderBy?: OutgoingEndpointOrderByWithRelationInput | OutgoingEndpointOrderByWithRelationInput[]
-    cursor?: OutgoingEndpointWhereUniqueInput
+    include?: MessageTemplateInclude<ExtArgs> | null
+    where?: MessageTemplateWhereInput
+    orderBy?: MessageTemplateOrderByWithRelationInput | MessageTemplateOrderByWithRelationInput[]
+    cursor?: MessageTemplateWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: OutgoingEndpointScalarFieldEnum | OutgoingEndpointScalarFieldEnum[]
-  }
-
-  /**
-   * IncomingWebhook.payloadLogs
-   */
-  export type IncomingWebhook$payloadLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    where?: PayloadLogWhereInput
-    orderBy?: PayloadLogOrderByWithRelationInput | PayloadLogOrderByWithRelationInput[]
-    cursor?: PayloadLogWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PayloadLogScalarFieldEnum | PayloadLogScalarFieldEnum[]
+    distinct?: MessageTemplateScalarFieldEnum | MessageTemplateScalarFieldEnum[]
   }
 
   /**
@@ -3804,1106 +3412,6 @@ export namespace Prisma {
 
 
   /**
-   * Model OutgoingEndpoint
-   */
-
-  export type AggregateOutgoingEndpoint = {
-    _count: OutgoingEndpointCountAggregateOutputType | null
-    _avg: OutgoingEndpointAvgAggregateOutputType | null
-    _sum: OutgoingEndpointSumAggregateOutputType | null
-    _min: OutgoingEndpointMinAggregateOutputType | null
-    _max: OutgoingEndpointMaxAggregateOutputType | null
-  }
-
-  export type OutgoingEndpointAvgAggregateOutputType = {
-    retryAttempts: number | null
-    retryDelayMs: number | null
-    timeoutMs: number | null
-  }
-
-  export type OutgoingEndpointSumAggregateOutputType = {
-    retryAttempts: number | null
-    retryDelayMs: number | null
-    timeoutMs: number | null
-  }
-
-  export type OutgoingEndpointMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    url: string | null
-    method: string | null
-    isActive: boolean | null
-    retryAttempts: number | null
-    retryDelayMs: number | null
-    timeoutMs: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    incomingWebhookId: string | null
-  }
-
-  export type OutgoingEndpointMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    url: string | null
-    method: string | null
-    isActive: boolean | null
-    retryAttempts: number | null
-    retryDelayMs: number | null
-    timeoutMs: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    incomingWebhookId: string | null
-  }
-
-  export type OutgoingEndpointCountAggregateOutputType = {
-    id: number
-    name: number
-    url: number
-    method: number
-    headers: number
-    isActive: number
-    retryAttempts: number
-    retryDelayMs: number
-    timeoutMs: number
-    createdAt: number
-    updatedAt: number
-    incomingWebhookId: number
-    _all: number
-  }
-
-
-  export type OutgoingEndpointAvgAggregateInputType = {
-    retryAttempts?: true
-    retryDelayMs?: true
-    timeoutMs?: true
-  }
-
-  export type OutgoingEndpointSumAggregateInputType = {
-    retryAttempts?: true
-    retryDelayMs?: true
-    timeoutMs?: true
-  }
-
-  export type OutgoingEndpointMinAggregateInputType = {
-    id?: true
-    name?: true
-    url?: true
-    method?: true
-    isActive?: true
-    retryAttempts?: true
-    retryDelayMs?: true
-    timeoutMs?: true
-    createdAt?: true
-    updatedAt?: true
-    incomingWebhookId?: true
-  }
-
-  export type OutgoingEndpointMaxAggregateInputType = {
-    id?: true
-    name?: true
-    url?: true
-    method?: true
-    isActive?: true
-    retryAttempts?: true
-    retryDelayMs?: true
-    timeoutMs?: true
-    createdAt?: true
-    updatedAt?: true
-    incomingWebhookId?: true
-  }
-
-  export type OutgoingEndpointCountAggregateInputType = {
-    id?: true
-    name?: true
-    url?: true
-    method?: true
-    headers?: true
-    isActive?: true
-    retryAttempts?: true
-    retryDelayMs?: true
-    timeoutMs?: true
-    createdAt?: true
-    updatedAt?: true
-    incomingWebhookId?: true
-    _all?: true
-  }
-
-  export type OutgoingEndpointAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OutgoingEndpoint to aggregate.
-     */
-    where?: OutgoingEndpointWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OutgoingEndpoints to fetch.
-     */
-    orderBy?: OutgoingEndpointOrderByWithRelationInput | OutgoingEndpointOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: OutgoingEndpointWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OutgoingEndpoints from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OutgoingEndpoints.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned OutgoingEndpoints
-    **/
-    _count?: true | OutgoingEndpointCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: OutgoingEndpointAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: OutgoingEndpointSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: OutgoingEndpointMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: OutgoingEndpointMaxAggregateInputType
-  }
-
-  export type GetOutgoingEndpointAggregateType<T extends OutgoingEndpointAggregateArgs> = {
-        [P in keyof T & keyof AggregateOutgoingEndpoint]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateOutgoingEndpoint[P]>
-      : GetScalarType<T[P], AggregateOutgoingEndpoint[P]>
-  }
-
-
-
-
-  export type OutgoingEndpointGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OutgoingEndpointWhereInput
-    orderBy?: OutgoingEndpointOrderByWithAggregationInput | OutgoingEndpointOrderByWithAggregationInput[]
-    by: OutgoingEndpointScalarFieldEnum[] | OutgoingEndpointScalarFieldEnum
-    having?: OutgoingEndpointScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: OutgoingEndpointCountAggregateInputType | true
-    _avg?: OutgoingEndpointAvgAggregateInputType
-    _sum?: OutgoingEndpointSumAggregateInputType
-    _min?: OutgoingEndpointMinAggregateInputType
-    _max?: OutgoingEndpointMaxAggregateInputType
-  }
-
-  export type OutgoingEndpointGroupByOutputType = {
-    id: string
-    name: string
-    url: string
-    method: string
-    headers: JsonValue | null
-    isActive: boolean
-    retryAttempts: number
-    retryDelayMs: number
-    timeoutMs: number
-    createdAt: Date
-    updatedAt: Date
-    incomingWebhookId: string
-    _count: OutgoingEndpointCountAggregateOutputType | null
-    _avg: OutgoingEndpointAvgAggregateOutputType | null
-    _sum: OutgoingEndpointSumAggregateOutputType | null
-    _min: OutgoingEndpointMinAggregateOutputType | null
-    _max: OutgoingEndpointMaxAggregateOutputType | null
-  }
-
-  type GetOutgoingEndpointGroupByPayload<T extends OutgoingEndpointGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<OutgoingEndpointGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof OutgoingEndpointGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], OutgoingEndpointGroupByOutputType[P]>
-            : GetScalarType<T[P], OutgoingEndpointGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type OutgoingEndpointSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    url?: boolean
-    method?: boolean
-    headers?: boolean
-    isActive?: boolean
-    retryAttempts?: boolean
-    retryDelayMs?: boolean
-    timeoutMs?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    incomingWebhookId?: boolean
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-    deliveryLogs?: boolean | OutgoingEndpoint$deliveryLogsArgs<ExtArgs>
-    messageTemplate?: boolean | OutgoingEndpoint$messageTemplateArgs<ExtArgs>
-    _count?: boolean | OutgoingEndpointCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["outgoingEndpoint"]>
-
-  export type OutgoingEndpointSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    url?: boolean
-    method?: boolean
-    headers?: boolean
-    isActive?: boolean
-    retryAttempts?: boolean
-    retryDelayMs?: boolean
-    timeoutMs?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    incomingWebhookId?: boolean
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["outgoingEndpoint"]>
-
-  export type OutgoingEndpointSelectScalar = {
-    id?: boolean
-    name?: boolean
-    url?: boolean
-    method?: boolean
-    headers?: boolean
-    isActive?: boolean
-    retryAttempts?: boolean
-    retryDelayMs?: boolean
-    timeoutMs?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    incomingWebhookId?: boolean
-  }
-
-  export type OutgoingEndpointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-    deliveryLogs?: boolean | OutgoingEndpoint$deliveryLogsArgs<ExtArgs>
-    messageTemplate?: boolean | OutgoingEndpoint$messageTemplateArgs<ExtArgs>
-    _count?: boolean | OutgoingEndpointCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type OutgoingEndpointIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-  }
-
-  export type $OutgoingEndpointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "OutgoingEndpoint"
-    objects: {
-      incomingWebhook: Prisma.$IncomingWebhookPayload<ExtArgs>
-      deliveryLogs: Prisma.$DeliveryLogPayload<ExtArgs>[]
-      messageTemplate: Prisma.$MessageTemplatePayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      url: string
-      method: string
-      headers: Prisma.JsonValue | null
-      isActive: boolean
-      retryAttempts: number
-      retryDelayMs: number
-      timeoutMs: number
-      createdAt: Date
-      updatedAt: Date
-      incomingWebhookId: string
-    }, ExtArgs["result"]["outgoingEndpoint"]>
-    composites: {}
-  }
-
-  type OutgoingEndpointGetPayload<S extends boolean | null | undefined | OutgoingEndpointDefaultArgs> = $Result.GetResult<Prisma.$OutgoingEndpointPayload, S>
-
-  type OutgoingEndpointCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<OutgoingEndpointFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: OutgoingEndpointCountAggregateInputType | true
-    }
-
-  export interface OutgoingEndpointDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OutgoingEndpoint'], meta: { name: 'OutgoingEndpoint' } }
-    /**
-     * Find zero or one OutgoingEndpoint that matches the filter.
-     * @param {OutgoingEndpointFindUniqueArgs} args - Arguments to find a OutgoingEndpoint
-     * @example
-     * // Get one OutgoingEndpoint
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends OutgoingEndpointFindUniqueArgs>(args: SelectSubset<T, OutgoingEndpointFindUniqueArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one OutgoingEndpoint that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {OutgoingEndpointFindUniqueOrThrowArgs} args - Arguments to find a OutgoingEndpoint
-     * @example
-     * // Get one OutgoingEndpoint
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends OutgoingEndpointFindUniqueOrThrowArgs>(args: SelectSubset<T, OutgoingEndpointFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first OutgoingEndpoint that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointFindFirstArgs} args - Arguments to find a OutgoingEndpoint
-     * @example
-     * // Get one OutgoingEndpoint
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends OutgoingEndpointFindFirstArgs>(args?: SelectSubset<T, OutgoingEndpointFindFirstArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first OutgoingEndpoint that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointFindFirstOrThrowArgs} args - Arguments to find a OutgoingEndpoint
-     * @example
-     * // Get one OutgoingEndpoint
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends OutgoingEndpointFindFirstOrThrowArgs>(args?: SelectSubset<T, OutgoingEndpointFindFirstOrThrowArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more OutgoingEndpoints that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all OutgoingEndpoints
-     * const outgoingEndpoints = await prisma.outgoingEndpoint.findMany()
-     * 
-     * // Get first 10 OutgoingEndpoints
-     * const outgoingEndpoints = await prisma.outgoingEndpoint.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const outgoingEndpointWithIdOnly = await prisma.outgoingEndpoint.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends OutgoingEndpointFindManyArgs>(args?: SelectSubset<T, OutgoingEndpointFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a OutgoingEndpoint.
-     * @param {OutgoingEndpointCreateArgs} args - Arguments to create a OutgoingEndpoint.
-     * @example
-     * // Create one OutgoingEndpoint
-     * const OutgoingEndpoint = await prisma.outgoingEndpoint.create({
-     *   data: {
-     *     // ... data to create a OutgoingEndpoint
-     *   }
-     * })
-     * 
-     */
-    create<T extends OutgoingEndpointCreateArgs>(args: SelectSubset<T, OutgoingEndpointCreateArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many OutgoingEndpoints.
-     * @param {OutgoingEndpointCreateManyArgs} args - Arguments to create many OutgoingEndpoints.
-     * @example
-     * // Create many OutgoingEndpoints
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends OutgoingEndpointCreateManyArgs>(args?: SelectSubset<T, OutgoingEndpointCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many OutgoingEndpoints and returns the data saved in the database.
-     * @param {OutgoingEndpointCreateManyAndReturnArgs} args - Arguments to create many OutgoingEndpoints.
-     * @example
-     * // Create many OutgoingEndpoints
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many OutgoingEndpoints and only return the `id`
-     * const outgoingEndpointWithIdOnly = await prisma.outgoingEndpoint.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends OutgoingEndpointCreateManyAndReturnArgs>(args?: SelectSubset<T, OutgoingEndpointCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a OutgoingEndpoint.
-     * @param {OutgoingEndpointDeleteArgs} args - Arguments to delete one OutgoingEndpoint.
-     * @example
-     * // Delete one OutgoingEndpoint
-     * const OutgoingEndpoint = await prisma.outgoingEndpoint.delete({
-     *   where: {
-     *     // ... filter to delete one OutgoingEndpoint
-     *   }
-     * })
-     * 
-     */
-    delete<T extends OutgoingEndpointDeleteArgs>(args: SelectSubset<T, OutgoingEndpointDeleteArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one OutgoingEndpoint.
-     * @param {OutgoingEndpointUpdateArgs} args - Arguments to update one OutgoingEndpoint.
-     * @example
-     * // Update one OutgoingEndpoint
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends OutgoingEndpointUpdateArgs>(args: SelectSubset<T, OutgoingEndpointUpdateArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more OutgoingEndpoints.
-     * @param {OutgoingEndpointDeleteManyArgs} args - Arguments to filter OutgoingEndpoints to delete.
-     * @example
-     * // Delete a few OutgoingEndpoints
-     * const { count } = await prisma.outgoingEndpoint.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends OutgoingEndpointDeleteManyArgs>(args?: SelectSubset<T, OutgoingEndpointDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more OutgoingEndpoints.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many OutgoingEndpoints
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends OutgoingEndpointUpdateManyArgs>(args: SelectSubset<T, OutgoingEndpointUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one OutgoingEndpoint.
-     * @param {OutgoingEndpointUpsertArgs} args - Arguments to update or create a OutgoingEndpoint.
-     * @example
-     * // Update or create a OutgoingEndpoint
-     * const outgoingEndpoint = await prisma.outgoingEndpoint.upsert({
-     *   create: {
-     *     // ... data to create a OutgoingEndpoint
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the OutgoingEndpoint we want to update
-     *   }
-     * })
-     */
-    upsert<T extends OutgoingEndpointUpsertArgs>(args: SelectSubset<T, OutgoingEndpointUpsertArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-
-    /**
-     * Count the number of OutgoingEndpoints.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointCountArgs} args - Arguments to filter OutgoingEndpoints to count.
-     * @example
-     * // Count the number of OutgoingEndpoints
-     * const count = await prisma.outgoingEndpoint.count({
-     *   where: {
-     *     // ... the filter for the OutgoingEndpoints we want to count
-     *   }
-     * })
-    **/
-    count<T extends OutgoingEndpointCountArgs>(
-      args?: Subset<T, OutgoingEndpointCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], OutgoingEndpointCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a OutgoingEndpoint.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends OutgoingEndpointAggregateArgs>(args: Subset<T, OutgoingEndpointAggregateArgs>): Prisma.PrismaPromise<GetOutgoingEndpointAggregateType<T>>
-
-    /**
-     * Group by OutgoingEndpoint.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {OutgoingEndpointGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends OutgoingEndpointGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OutgoingEndpointGroupByArgs['orderBy'] }
-        : { orderBy?: OutgoingEndpointGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, OutgoingEndpointGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOutgoingEndpointGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the OutgoingEndpoint model
-   */
-  readonly fields: OutgoingEndpointFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for OutgoingEndpoint.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__OutgoingEndpointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    incomingWebhook<T extends IncomingWebhookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IncomingWebhookDefaultArgs<ExtArgs>>): Prisma__IncomingWebhookClient<$Result.GetResult<Prisma.$IncomingWebhookPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    deliveryLogs<T extends OutgoingEndpoint$deliveryLogsArgs<ExtArgs> = {}>(args?: Subset<T, OutgoingEndpoint$deliveryLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findMany"> | Null>
-    messageTemplate<T extends OutgoingEndpoint$messageTemplateArgs<ExtArgs> = {}>(args?: Subset<T, OutgoingEndpoint$messageTemplateArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the OutgoingEndpoint model
-   */ 
-  interface OutgoingEndpointFieldRefs {
-    readonly id: FieldRef<"OutgoingEndpoint", 'String'>
-    readonly name: FieldRef<"OutgoingEndpoint", 'String'>
-    readonly url: FieldRef<"OutgoingEndpoint", 'String'>
-    readonly method: FieldRef<"OutgoingEndpoint", 'String'>
-    readonly headers: FieldRef<"OutgoingEndpoint", 'Json'>
-    readonly isActive: FieldRef<"OutgoingEndpoint", 'Boolean'>
-    readonly retryAttempts: FieldRef<"OutgoingEndpoint", 'Int'>
-    readonly retryDelayMs: FieldRef<"OutgoingEndpoint", 'Int'>
-    readonly timeoutMs: FieldRef<"OutgoingEndpoint", 'Int'>
-    readonly createdAt: FieldRef<"OutgoingEndpoint", 'DateTime'>
-    readonly updatedAt: FieldRef<"OutgoingEndpoint", 'DateTime'>
-    readonly incomingWebhookId: FieldRef<"OutgoingEndpoint", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * OutgoingEndpoint findUnique
-   */
-  export type OutgoingEndpointFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * Filter, which OutgoingEndpoint to fetch.
-     */
-    where: OutgoingEndpointWhereUniqueInput
-  }
-
-  /**
-   * OutgoingEndpoint findUniqueOrThrow
-   */
-  export type OutgoingEndpointFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * Filter, which OutgoingEndpoint to fetch.
-     */
-    where: OutgoingEndpointWhereUniqueInput
-  }
-
-  /**
-   * OutgoingEndpoint findFirst
-   */
-  export type OutgoingEndpointFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * Filter, which OutgoingEndpoint to fetch.
-     */
-    where?: OutgoingEndpointWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OutgoingEndpoints to fetch.
-     */
-    orderBy?: OutgoingEndpointOrderByWithRelationInput | OutgoingEndpointOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for OutgoingEndpoints.
-     */
-    cursor?: OutgoingEndpointWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OutgoingEndpoints from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OutgoingEndpoints.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OutgoingEndpoints.
-     */
-    distinct?: OutgoingEndpointScalarFieldEnum | OutgoingEndpointScalarFieldEnum[]
-  }
-
-  /**
-   * OutgoingEndpoint findFirstOrThrow
-   */
-  export type OutgoingEndpointFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * Filter, which OutgoingEndpoint to fetch.
-     */
-    where?: OutgoingEndpointWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OutgoingEndpoints to fetch.
-     */
-    orderBy?: OutgoingEndpointOrderByWithRelationInput | OutgoingEndpointOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for OutgoingEndpoints.
-     */
-    cursor?: OutgoingEndpointWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OutgoingEndpoints from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OutgoingEndpoints.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of OutgoingEndpoints.
-     */
-    distinct?: OutgoingEndpointScalarFieldEnum | OutgoingEndpointScalarFieldEnum[]
-  }
-
-  /**
-   * OutgoingEndpoint findMany
-   */
-  export type OutgoingEndpointFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * Filter, which OutgoingEndpoints to fetch.
-     */
-    where?: OutgoingEndpointWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of OutgoingEndpoints to fetch.
-     */
-    orderBy?: OutgoingEndpointOrderByWithRelationInput | OutgoingEndpointOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing OutgoingEndpoints.
-     */
-    cursor?: OutgoingEndpointWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` OutgoingEndpoints from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` OutgoingEndpoints.
-     */
-    skip?: number
-    distinct?: OutgoingEndpointScalarFieldEnum | OutgoingEndpointScalarFieldEnum[]
-  }
-
-  /**
-   * OutgoingEndpoint create
-   */
-  export type OutgoingEndpointCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * The data needed to create a OutgoingEndpoint.
-     */
-    data: XOR<OutgoingEndpointCreateInput, OutgoingEndpointUncheckedCreateInput>
-  }
-
-  /**
-   * OutgoingEndpoint createMany
-   */
-  export type OutgoingEndpointCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many OutgoingEndpoints.
-     */
-    data: OutgoingEndpointCreateManyInput | OutgoingEndpointCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * OutgoingEndpoint createManyAndReturn
-   */
-  export type OutgoingEndpointCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many OutgoingEndpoints.
-     */
-    data: OutgoingEndpointCreateManyInput | OutgoingEndpointCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * OutgoingEndpoint update
-   */
-  export type OutgoingEndpointUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * The data needed to update a OutgoingEndpoint.
-     */
-    data: XOR<OutgoingEndpointUpdateInput, OutgoingEndpointUncheckedUpdateInput>
-    /**
-     * Choose, which OutgoingEndpoint to update.
-     */
-    where: OutgoingEndpointWhereUniqueInput
-  }
-
-  /**
-   * OutgoingEndpoint updateMany
-   */
-  export type OutgoingEndpointUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update OutgoingEndpoints.
-     */
-    data: XOR<OutgoingEndpointUpdateManyMutationInput, OutgoingEndpointUncheckedUpdateManyInput>
-    /**
-     * Filter which OutgoingEndpoints to update
-     */
-    where?: OutgoingEndpointWhereInput
-  }
-
-  /**
-   * OutgoingEndpoint upsert
-   */
-  export type OutgoingEndpointUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * The filter to search for the OutgoingEndpoint to update in case it exists.
-     */
-    where: OutgoingEndpointWhereUniqueInput
-    /**
-     * In case the OutgoingEndpoint found by the `where` argument doesn't exist, create a new OutgoingEndpoint with this data.
-     */
-    create: XOR<OutgoingEndpointCreateInput, OutgoingEndpointUncheckedCreateInput>
-    /**
-     * In case the OutgoingEndpoint was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<OutgoingEndpointUpdateInput, OutgoingEndpointUncheckedUpdateInput>
-  }
-
-  /**
-   * OutgoingEndpoint delete
-   */
-  export type OutgoingEndpointDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-    /**
-     * Filter which OutgoingEndpoint to delete.
-     */
-    where: OutgoingEndpointWhereUniqueInput
-  }
-
-  /**
-   * OutgoingEndpoint deleteMany
-   */
-  export type OutgoingEndpointDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OutgoingEndpoints to delete
-     */
-    where?: OutgoingEndpointWhereInput
-  }
-
-  /**
-   * OutgoingEndpoint.deliveryLogs
-   */
-  export type OutgoingEndpoint$deliveryLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    where?: DeliveryLogWhereInput
-    orderBy?: DeliveryLogOrderByWithRelationInput | DeliveryLogOrderByWithRelationInput[]
-    cursor?: DeliveryLogWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DeliveryLogScalarFieldEnum | DeliveryLogScalarFieldEnum[]
-  }
-
-  /**
-   * OutgoingEndpoint.messageTemplate
-   */
-  export type OutgoingEndpoint$messageTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MessageTemplate
-     */
-    select?: MessageTemplateSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageTemplateInclude<ExtArgs> | null
-    where?: MessageTemplateWhereInput
-  }
-
-  /**
-   * OutgoingEndpoint without action
-   */
-  export type OutgoingEndpointDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OutgoingEndpoint
-     */
-    select?: OutgoingEndpointSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OutgoingEndpointInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model MessageTemplate
    */
 
@@ -4917,30 +3425,28 @@ export namespace Prisma {
     id: string | null
     name: string | null
     template: string | null
-    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    outgoingEndpointId: string | null
+    incomingWebhookId: string | null
   }
 
   export type MessageTemplateMaxAggregateOutputType = {
     id: string | null
     name: string | null
     template: string | null
-    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    outgoingEndpointId: string | null
+    incomingWebhookId: string | null
   }
 
   export type MessageTemplateCountAggregateOutputType = {
     id: number
     name: number
     template: number
-    description: number
+    variables: number
     createdAt: number
     updatedAt: number
-    outgoingEndpointId: number
+    incomingWebhookId: number
     _all: number
   }
 
@@ -4949,30 +3455,28 @@ export namespace Prisma {
     id?: true
     name?: true
     template?: true
-    description?: true
     createdAt?: true
     updatedAt?: true
-    outgoingEndpointId?: true
+    incomingWebhookId?: true
   }
 
   export type MessageTemplateMaxAggregateInputType = {
     id?: true
     name?: true
     template?: true
-    description?: true
     createdAt?: true
     updatedAt?: true
-    outgoingEndpointId?: true
+    incomingWebhookId?: true
   }
 
   export type MessageTemplateCountAggregateInputType = {
     id?: true
     name?: true
     template?: true
-    description?: true
+    variables?: true
     createdAt?: true
     updatedAt?: true
-    outgoingEndpointId?: true
+    incomingWebhookId?: true
     _all?: true
   }
 
@@ -5052,10 +3556,10 @@ export namespace Prisma {
     id: string
     name: string
     template: string
-    description: string | null
+    variables: string[]
     createdAt: Date
     updatedAt: Date
-    outgoingEndpointId: string
+    incomingWebhookId: string
     _count: MessageTemplateCountAggregateOutputType | null
     _min: MessageTemplateMinAggregateOutputType | null
     _max: MessageTemplateMaxAggregateOutputType | null
@@ -5079,54 +3583,54 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     template?: boolean
-    description?: boolean
+    variables?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    outgoingEndpointId?: boolean
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
+    incomingWebhookId?: boolean
+    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["messageTemplate"]>
 
   export type MessageTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     template?: boolean
-    description?: boolean
+    variables?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    outgoingEndpointId?: boolean
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
+    incomingWebhookId?: boolean
+    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["messageTemplate"]>
 
   export type MessageTemplateSelectScalar = {
     id?: boolean
     name?: boolean
     template?: boolean
-    description?: boolean
+    variables?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    outgoingEndpointId?: boolean
+    incomingWebhookId?: boolean
   }
 
   export type MessageTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
+    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
   }
   export type MessageTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
+    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
   }
 
   export type $MessageTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MessageTemplate"
     objects: {
-      outgoingEndpoint: Prisma.$OutgoingEndpointPayload<ExtArgs>
+      incomingWebhook: Prisma.$IncomingWebhookPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       template: string
-      description: string | null
+      variables: string[]
       createdAt: Date
       updatedAt: Date
-      outgoingEndpointId: string
+      incomingWebhookId: string
     }, ExtArgs["result"]["messageTemplate"]>
     composites: {}
   }
@@ -5491,7 +3995,7 @@ export namespace Prisma {
    */
   export interface Prisma__MessageTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    outgoingEndpoint<T extends OutgoingEndpointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OutgoingEndpointDefaultArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    incomingWebhook<T extends IncomingWebhookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IncomingWebhookDefaultArgs<ExtArgs>>): Prisma__IncomingWebhookClient<$Result.GetResult<Prisma.$IncomingWebhookPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5524,10 +4028,10 @@ export namespace Prisma {
     readonly id: FieldRef<"MessageTemplate", 'String'>
     readonly name: FieldRef<"MessageTemplate", 'String'>
     readonly template: FieldRef<"MessageTemplate", 'String'>
-    readonly description: FieldRef<"MessageTemplate", 'String'>
+    readonly variables: FieldRef<"MessageTemplate", 'String[]'>
     readonly createdAt: FieldRef<"MessageTemplate", 'DateTime'>
     readonly updatedAt: FieldRef<"MessageTemplate", 'DateTime'>
-    readonly outgoingEndpointId: FieldRef<"MessageTemplate", 'String'>
+    readonly incomingWebhookId: FieldRef<"MessageTemplate", 'String'>
   }
     
 
@@ -5857,2026 +4361,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MessageTemplateInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model PayloadLog
-   */
-
-  export type AggregatePayloadLog = {
-    _count: PayloadLogCountAggregateOutputType | null
-    _min: PayloadLogMinAggregateOutputType | null
-    _max: PayloadLogMaxAggregateOutputType | null
-  }
-
-  export type PayloadLogMinAggregateOutputType = {
-    id: string | null
-    userAgent: string | null
-    ipAddress: string | null
-    receivedAt: Date | null
-    incomingWebhookId: string | null
-  }
-
-  export type PayloadLogMaxAggregateOutputType = {
-    id: string | null
-    userAgent: string | null
-    ipAddress: string | null
-    receivedAt: Date | null
-    incomingWebhookId: string | null
-  }
-
-  export type PayloadLogCountAggregateOutputType = {
-    id: number
-    payload: number
-    headers: number
-    userAgent: number
-    ipAddress: number
-    receivedAt: number
-    incomingWebhookId: number
-    _all: number
-  }
-
-
-  export type PayloadLogMinAggregateInputType = {
-    id?: true
-    userAgent?: true
-    ipAddress?: true
-    receivedAt?: true
-    incomingWebhookId?: true
-  }
-
-  export type PayloadLogMaxAggregateInputType = {
-    id?: true
-    userAgent?: true
-    ipAddress?: true
-    receivedAt?: true
-    incomingWebhookId?: true
-  }
-
-  export type PayloadLogCountAggregateInputType = {
-    id?: true
-    payload?: true
-    headers?: true
-    userAgent?: true
-    ipAddress?: true
-    receivedAt?: true
-    incomingWebhookId?: true
-    _all?: true
-  }
-
-  export type PayloadLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PayloadLog to aggregate.
-     */
-    where?: PayloadLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PayloadLogs to fetch.
-     */
-    orderBy?: PayloadLogOrderByWithRelationInput | PayloadLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PayloadLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PayloadLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PayloadLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PayloadLogs
-    **/
-    _count?: true | PayloadLogCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PayloadLogMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PayloadLogMaxAggregateInputType
-  }
-
-  export type GetPayloadLogAggregateType<T extends PayloadLogAggregateArgs> = {
-        [P in keyof T & keyof AggregatePayloadLog]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePayloadLog[P]>
-      : GetScalarType<T[P], AggregatePayloadLog[P]>
-  }
-
-
-
-
-  export type PayloadLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PayloadLogWhereInput
-    orderBy?: PayloadLogOrderByWithAggregationInput | PayloadLogOrderByWithAggregationInput[]
-    by: PayloadLogScalarFieldEnum[] | PayloadLogScalarFieldEnum
-    having?: PayloadLogScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PayloadLogCountAggregateInputType | true
-    _min?: PayloadLogMinAggregateInputType
-    _max?: PayloadLogMaxAggregateInputType
-  }
-
-  export type PayloadLogGroupByOutputType = {
-    id: string
-    payload: JsonValue
-    headers: JsonValue | null
-    userAgent: string | null
-    ipAddress: string | null
-    receivedAt: Date
-    incomingWebhookId: string
-    _count: PayloadLogCountAggregateOutputType | null
-    _min: PayloadLogMinAggregateOutputType | null
-    _max: PayloadLogMaxAggregateOutputType | null
-  }
-
-  type GetPayloadLogGroupByPayload<T extends PayloadLogGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PayloadLogGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PayloadLogGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PayloadLogGroupByOutputType[P]>
-            : GetScalarType<T[P], PayloadLogGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PayloadLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    payload?: boolean
-    headers?: boolean
-    userAgent?: boolean
-    ipAddress?: boolean
-    receivedAt?: boolean
-    incomingWebhookId?: boolean
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-    deliveryLogs?: boolean | PayloadLog$deliveryLogsArgs<ExtArgs>
-    _count?: boolean | PayloadLogCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["payloadLog"]>
-
-  export type PayloadLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    payload?: boolean
-    headers?: boolean
-    userAgent?: boolean
-    ipAddress?: boolean
-    receivedAt?: boolean
-    incomingWebhookId?: boolean
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["payloadLog"]>
-
-  export type PayloadLogSelectScalar = {
-    id?: boolean
-    payload?: boolean
-    headers?: boolean
-    userAgent?: boolean
-    ipAddress?: boolean
-    receivedAt?: boolean
-    incomingWebhookId?: boolean
-  }
-
-  export type PayloadLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-    deliveryLogs?: boolean | PayloadLog$deliveryLogsArgs<ExtArgs>
-    _count?: boolean | PayloadLogCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type PayloadLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    incomingWebhook?: boolean | IncomingWebhookDefaultArgs<ExtArgs>
-  }
-
-  export type $PayloadLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PayloadLog"
-    objects: {
-      incomingWebhook: Prisma.$IncomingWebhookPayload<ExtArgs>
-      deliveryLogs: Prisma.$DeliveryLogPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      payload: Prisma.JsonValue
-      headers: Prisma.JsonValue | null
-      userAgent: string | null
-      ipAddress: string | null
-      receivedAt: Date
-      incomingWebhookId: string
-    }, ExtArgs["result"]["payloadLog"]>
-    composites: {}
-  }
-
-  type PayloadLogGetPayload<S extends boolean | null | undefined | PayloadLogDefaultArgs> = $Result.GetResult<Prisma.$PayloadLogPayload, S>
-
-  type PayloadLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<PayloadLogFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: PayloadLogCountAggregateInputType | true
-    }
-
-  export interface PayloadLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PayloadLog'], meta: { name: 'PayloadLog' } }
-    /**
-     * Find zero or one PayloadLog that matches the filter.
-     * @param {PayloadLogFindUniqueArgs} args - Arguments to find a PayloadLog
-     * @example
-     * // Get one PayloadLog
-     * const payloadLog = await prisma.payloadLog.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PayloadLogFindUniqueArgs>(args: SelectSubset<T, PayloadLogFindUniqueArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one PayloadLog that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {PayloadLogFindUniqueOrThrowArgs} args - Arguments to find a PayloadLog
-     * @example
-     * // Get one PayloadLog
-     * const payloadLog = await prisma.payloadLog.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PayloadLogFindUniqueOrThrowArgs>(args: SelectSubset<T, PayloadLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first PayloadLog that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogFindFirstArgs} args - Arguments to find a PayloadLog
-     * @example
-     * // Get one PayloadLog
-     * const payloadLog = await prisma.payloadLog.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PayloadLogFindFirstArgs>(args?: SelectSubset<T, PayloadLogFindFirstArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first PayloadLog that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogFindFirstOrThrowArgs} args - Arguments to find a PayloadLog
-     * @example
-     * // Get one PayloadLog
-     * const payloadLog = await prisma.payloadLog.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PayloadLogFindFirstOrThrowArgs>(args?: SelectSubset<T, PayloadLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more PayloadLogs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PayloadLogs
-     * const payloadLogs = await prisma.payloadLog.findMany()
-     * 
-     * // Get first 10 PayloadLogs
-     * const payloadLogs = await prisma.payloadLog.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const payloadLogWithIdOnly = await prisma.payloadLog.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PayloadLogFindManyArgs>(args?: SelectSubset<T, PayloadLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a PayloadLog.
-     * @param {PayloadLogCreateArgs} args - Arguments to create a PayloadLog.
-     * @example
-     * // Create one PayloadLog
-     * const PayloadLog = await prisma.payloadLog.create({
-     *   data: {
-     *     // ... data to create a PayloadLog
-     *   }
-     * })
-     * 
-     */
-    create<T extends PayloadLogCreateArgs>(args: SelectSubset<T, PayloadLogCreateArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many PayloadLogs.
-     * @param {PayloadLogCreateManyArgs} args - Arguments to create many PayloadLogs.
-     * @example
-     * // Create many PayloadLogs
-     * const payloadLog = await prisma.payloadLog.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PayloadLogCreateManyArgs>(args?: SelectSubset<T, PayloadLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PayloadLogs and returns the data saved in the database.
-     * @param {PayloadLogCreateManyAndReturnArgs} args - Arguments to create many PayloadLogs.
-     * @example
-     * // Create many PayloadLogs
-     * const payloadLog = await prisma.payloadLog.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PayloadLogs and only return the `id`
-     * const payloadLogWithIdOnly = await prisma.payloadLog.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PayloadLogCreateManyAndReturnArgs>(args?: SelectSubset<T, PayloadLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a PayloadLog.
-     * @param {PayloadLogDeleteArgs} args - Arguments to delete one PayloadLog.
-     * @example
-     * // Delete one PayloadLog
-     * const PayloadLog = await prisma.payloadLog.delete({
-     *   where: {
-     *     // ... filter to delete one PayloadLog
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PayloadLogDeleteArgs>(args: SelectSubset<T, PayloadLogDeleteArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one PayloadLog.
-     * @param {PayloadLogUpdateArgs} args - Arguments to update one PayloadLog.
-     * @example
-     * // Update one PayloadLog
-     * const payloadLog = await prisma.payloadLog.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PayloadLogUpdateArgs>(args: SelectSubset<T, PayloadLogUpdateArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more PayloadLogs.
-     * @param {PayloadLogDeleteManyArgs} args - Arguments to filter PayloadLogs to delete.
-     * @example
-     * // Delete a few PayloadLogs
-     * const { count } = await prisma.payloadLog.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PayloadLogDeleteManyArgs>(args?: SelectSubset<T, PayloadLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PayloadLogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PayloadLogs
-     * const payloadLog = await prisma.payloadLog.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PayloadLogUpdateManyArgs>(args: SelectSubset<T, PayloadLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one PayloadLog.
-     * @param {PayloadLogUpsertArgs} args - Arguments to update or create a PayloadLog.
-     * @example
-     * // Update or create a PayloadLog
-     * const payloadLog = await prisma.payloadLog.upsert({
-     *   create: {
-     *     // ... data to create a PayloadLog
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PayloadLog we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PayloadLogUpsertArgs>(args: SelectSubset<T, PayloadLogUpsertArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-
-    /**
-     * Count the number of PayloadLogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogCountArgs} args - Arguments to filter PayloadLogs to count.
-     * @example
-     * // Count the number of PayloadLogs
-     * const count = await prisma.payloadLog.count({
-     *   where: {
-     *     // ... the filter for the PayloadLogs we want to count
-     *   }
-     * })
-    **/
-    count<T extends PayloadLogCountArgs>(
-      args?: Subset<T, PayloadLogCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PayloadLogCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PayloadLog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PayloadLogAggregateArgs>(args: Subset<T, PayloadLogAggregateArgs>): Prisma.PrismaPromise<GetPayloadLogAggregateType<T>>
-
-    /**
-     * Group by PayloadLog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PayloadLogGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PayloadLogGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PayloadLogGroupByArgs['orderBy'] }
-        : { orderBy?: PayloadLogGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PayloadLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPayloadLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PayloadLog model
-   */
-  readonly fields: PayloadLogFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PayloadLog.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PayloadLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    incomingWebhook<T extends IncomingWebhookDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IncomingWebhookDefaultArgs<ExtArgs>>): Prisma__IncomingWebhookClient<$Result.GetResult<Prisma.$IncomingWebhookPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    deliveryLogs<T extends PayloadLog$deliveryLogsArgs<ExtArgs> = {}>(args?: Subset<T, PayloadLog$deliveryLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findMany"> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PayloadLog model
-   */ 
-  interface PayloadLogFieldRefs {
-    readonly id: FieldRef<"PayloadLog", 'String'>
-    readonly payload: FieldRef<"PayloadLog", 'Json'>
-    readonly headers: FieldRef<"PayloadLog", 'Json'>
-    readonly userAgent: FieldRef<"PayloadLog", 'String'>
-    readonly ipAddress: FieldRef<"PayloadLog", 'String'>
-    readonly receivedAt: FieldRef<"PayloadLog", 'DateTime'>
-    readonly incomingWebhookId: FieldRef<"PayloadLog", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PayloadLog findUnique
-   */
-  export type PayloadLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * Filter, which PayloadLog to fetch.
-     */
-    where: PayloadLogWhereUniqueInput
-  }
-
-  /**
-   * PayloadLog findUniqueOrThrow
-   */
-  export type PayloadLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * Filter, which PayloadLog to fetch.
-     */
-    where: PayloadLogWhereUniqueInput
-  }
-
-  /**
-   * PayloadLog findFirst
-   */
-  export type PayloadLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * Filter, which PayloadLog to fetch.
-     */
-    where?: PayloadLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PayloadLogs to fetch.
-     */
-    orderBy?: PayloadLogOrderByWithRelationInput | PayloadLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PayloadLogs.
-     */
-    cursor?: PayloadLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PayloadLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PayloadLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PayloadLogs.
-     */
-    distinct?: PayloadLogScalarFieldEnum | PayloadLogScalarFieldEnum[]
-  }
-
-  /**
-   * PayloadLog findFirstOrThrow
-   */
-  export type PayloadLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * Filter, which PayloadLog to fetch.
-     */
-    where?: PayloadLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PayloadLogs to fetch.
-     */
-    orderBy?: PayloadLogOrderByWithRelationInput | PayloadLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PayloadLogs.
-     */
-    cursor?: PayloadLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PayloadLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PayloadLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PayloadLogs.
-     */
-    distinct?: PayloadLogScalarFieldEnum | PayloadLogScalarFieldEnum[]
-  }
-
-  /**
-   * PayloadLog findMany
-   */
-  export type PayloadLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * Filter, which PayloadLogs to fetch.
-     */
-    where?: PayloadLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PayloadLogs to fetch.
-     */
-    orderBy?: PayloadLogOrderByWithRelationInput | PayloadLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PayloadLogs.
-     */
-    cursor?: PayloadLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PayloadLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PayloadLogs.
-     */
-    skip?: number
-    distinct?: PayloadLogScalarFieldEnum | PayloadLogScalarFieldEnum[]
-  }
-
-  /**
-   * PayloadLog create
-   */
-  export type PayloadLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PayloadLog.
-     */
-    data: XOR<PayloadLogCreateInput, PayloadLogUncheckedCreateInput>
-  }
-
-  /**
-   * PayloadLog createMany
-   */
-  export type PayloadLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PayloadLogs.
-     */
-    data: PayloadLogCreateManyInput | PayloadLogCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PayloadLog createManyAndReturn
-   */
-  export type PayloadLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many PayloadLogs.
-     */
-    data: PayloadLogCreateManyInput | PayloadLogCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PayloadLog update
-   */
-  export type PayloadLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PayloadLog.
-     */
-    data: XOR<PayloadLogUpdateInput, PayloadLogUncheckedUpdateInput>
-    /**
-     * Choose, which PayloadLog to update.
-     */
-    where: PayloadLogWhereUniqueInput
-  }
-
-  /**
-   * PayloadLog updateMany
-   */
-  export type PayloadLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PayloadLogs.
-     */
-    data: XOR<PayloadLogUpdateManyMutationInput, PayloadLogUncheckedUpdateManyInput>
-    /**
-     * Filter which PayloadLogs to update
-     */
-    where?: PayloadLogWhereInput
-  }
-
-  /**
-   * PayloadLog upsert
-   */
-  export type PayloadLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PayloadLog to update in case it exists.
-     */
-    where: PayloadLogWhereUniqueInput
-    /**
-     * In case the PayloadLog found by the `where` argument doesn't exist, create a new PayloadLog with this data.
-     */
-    create: XOR<PayloadLogCreateInput, PayloadLogUncheckedCreateInput>
-    /**
-     * In case the PayloadLog was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PayloadLogUpdateInput, PayloadLogUncheckedUpdateInput>
-  }
-
-  /**
-   * PayloadLog delete
-   */
-  export type PayloadLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-    /**
-     * Filter which PayloadLog to delete.
-     */
-    where: PayloadLogWhereUniqueInput
-  }
-
-  /**
-   * PayloadLog deleteMany
-   */
-  export type PayloadLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PayloadLogs to delete
-     */
-    where?: PayloadLogWhereInput
-  }
-
-  /**
-   * PayloadLog.deliveryLogs
-   */
-  export type PayloadLog$deliveryLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    where?: DeliveryLogWhereInput
-    orderBy?: DeliveryLogOrderByWithRelationInput | DeliveryLogOrderByWithRelationInput[]
-    cursor?: DeliveryLogWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DeliveryLogScalarFieldEnum | DeliveryLogScalarFieldEnum[]
-  }
-
-  /**
-   * PayloadLog without action
-   */
-  export type PayloadLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayloadLog
-     */
-    select?: PayloadLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayloadLogInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model DeliveryLog
-   */
-
-  export type AggregateDeliveryLog = {
-    _count: DeliveryLogCountAggregateOutputType | null
-    _avg: DeliveryLogAvgAggregateOutputType | null
-    _sum: DeliveryLogSumAggregateOutputType | null
-    _min: DeliveryLogMinAggregateOutputType | null
-    _max: DeliveryLogMaxAggregateOutputType | null
-  }
-
-  export type DeliveryLogAvgAggregateOutputType = {
-    responseStatus: number | null
-    attemptNumber: number | null
-  }
-
-  export type DeliveryLogSumAggregateOutputType = {
-    responseStatus: number | null
-    attemptNumber: number | null
-  }
-
-  export type DeliveryLogMinAggregateOutputType = {
-    id: string | null
-    status: $Enums.DeliveryStatus | null
-    responseStatus: number | null
-    responseBody: string | null
-    errorMessage: string | null
-    attemptNumber: number | null
-    deliveredAt: Date | null
-    createdAt: Date | null
-    payloadLogId: string | null
-    outgoingEndpointId: string | null
-  }
-
-  export type DeliveryLogMaxAggregateOutputType = {
-    id: string | null
-    status: $Enums.DeliveryStatus | null
-    responseStatus: number | null
-    responseBody: string | null
-    errorMessage: string | null
-    attemptNumber: number | null
-    deliveredAt: Date | null
-    createdAt: Date | null
-    payloadLogId: string | null
-    outgoingEndpointId: string | null
-  }
-
-  export type DeliveryLogCountAggregateOutputType = {
-    id: number
-    status: number
-    transformedPayload: number
-    responseStatus: number
-    responseBody: number
-    errorMessage: number
-    attemptNumber: number
-    deliveredAt: number
-    createdAt: number
-    payloadLogId: number
-    outgoingEndpointId: number
-    _all: number
-  }
-
-
-  export type DeliveryLogAvgAggregateInputType = {
-    responseStatus?: true
-    attemptNumber?: true
-  }
-
-  export type DeliveryLogSumAggregateInputType = {
-    responseStatus?: true
-    attemptNumber?: true
-  }
-
-  export type DeliveryLogMinAggregateInputType = {
-    id?: true
-    status?: true
-    responseStatus?: true
-    responseBody?: true
-    errorMessage?: true
-    attemptNumber?: true
-    deliveredAt?: true
-    createdAt?: true
-    payloadLogId?: true
-    outgoingEndpointId?: true
-  }
-
-  export type DeliveryLogMaxAggregateInputType = {
-    id?: true
-    status?: true
-    responseStatus?: true
-    responseBody?: true
-    errorMessage?: true
-    attemptNumber?: true
-    deliveredAt?: true
-    createdAt?: true
-    payloadLogId?: true
-    outgoingEndpointId?: true
-  }
-
-  export type DeliveryLogCountAggregateInputType = {
-    id?: true
-    status?: true
-    transformedPayload?: true
-    responseStatus?: true
-    responseBody?: true
-    errorMessage?: true
-    attemptNumber?: true
-    deliveredAt?: true
-    createdAt?: true
-    payloadLogId?: true
-    outgoingEndpointId?: true
-    _all?: true
-  }
-
-  export type DeliveryLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DeliveryLog to aggregate.
-     */
-    where?: DeliveryLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DeliveryLogs to fetch.
-     */
-    orderBy?: DeliveryLogOrderByWithRelationInput | DeliveryLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DeliveryLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DeliveryLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DeliveryLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned DeliveryLogs
-    **/
-    _count?: true | DeliveryLogCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: DeliveryLogAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: DeliveryLogSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DeliveryLogMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DeliveryLogMaxAggregateInputType
-  }
-
-  export type GetDeliveryLogAggregateType<T extends DeliveryLogAggregateArgs> = {
-        [P in keyof T & keyof AggregateDeliveryLog]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDeliveryLog[P]>
-      : GetScalarType<T[P], AggregateDeliveryLog[P]>
-  }
-
-
-
-
-  export type DeliveryLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DeliveryLogWhereInput
-    orderBy?: DeliveryLogOrderByWithAggregationInput | DeliveryLogOrderByWithAggregationInput[]
-    by: DeliveryLogScalarFieldEnum[] | DeliveryLogScalarFieldEnum
-    having?: DeliveryLogScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DeliveryLogCountAggregateInputType | true
-    _avg?: DeliveryLogAvgAggregateInputType
-    _sum?: DeliveryLogSumAggregateInputType
-    _min?: DeliveryLogMinAggregateInputType
-    _max?: DeliveryLogMaxAggregateInputType
-  }
-
-  export type DeliveryLogGroupByOutputType = {
-    id: string
-    status: $Enums.DeliveryStatus
-    transformedPayload: JsonValue | null
-    responseStatus: number | null
-    responseBody: string | null
-    errorMessage: string | null
-    attemptNumber: number
-    deliveredAt: Date | null
-    createdAt: Date
-    payloadLogId: string
-    outgoingEndpointId: string
-    _count: DeliveryLogCountAggregateOutputType | null
-    _avg: DeliveryLogAvgAggregateOutputType | null
-    _sum: DeliveryLogSumAggregateOutputType | null
-    _min: DeliveryLogMinAggregateOutputType | null
-    _max: DeliveryLogMaxAggregateOutputType | null
-  }
-
-  type GetDeliveryLogGroupByPayload<T extends DeliveryLogGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DeliveryLogGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DeliveryLogGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DeliveryLogGroupByOutputType[P]>
-            : GetScalarType<T[P], DeliveryLogGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DeliveryLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    status?: boolean
-    transformedPayload?: boolean
-    responseStatus?: boolean
-    responseBody?: boolean
-    errorMessage?: boolean
-    attemptNumber?: boolean
-    deliveredAt?: boolean
-    createdAt?: boolean
-    payloadLogId?: boolean
-    outgoingEndpointId?: boolean
-    payloadLog?: boolean | PayloadLogDefaultArgs<ExtArgs>
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["deliveryLog"]>
-
-  export type DeliveryLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    status?: boolean
-    transformedPayload?: boolean
-    responseStatus?: boolean
-    responseBody?: boolean
-    errorMessage?: boolean
-    attemptNumber?: boolean
-    deliveredAt?: boolean
-    createdAt?: boolean
-    payloadLogId?: boolean
-    outgoingEndpointId?: boolean
-    payloadLog?: boolean | PayloadLogDefaultArgs<ExtArgs>
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["deliveryLog"]>
-
-  export type DeliveryLogSelectScalar = {
-    id?: boolean
-    status?: boolean
-    transformedPayload?: boolean
-    responseStatus?: boolean
-    responseBody?: boolean
-    errorMessage?: boolean
-    attemptNumber?: boolean
-    deliveredAt?: boolean
-    createdAt?: boolean
-    payloadLogId?: boolean
-    outgoingEndpointId?: boolean
-  }
-
-  export type DeliveryLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    payloadLog?: boolean | PayloadLogDefaultArgs<ExtArgs>
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
-  }
-  export type DeliveryLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    payloadLog?: boolean | PayloadLogDefaultArgs<ExtArgs>
-    outgoingEndpoint?: boolean | OutgoingEndpointDefaultArgs<ExtArgs>
-  }
-
-  export type $DeliveryLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "DeliveryLog"
-    objects: {
-      payloadLog: Prisma.$PayloadLogPayload<ExtArgs>
-      outgoingEndpoint: Prisma.$OutgoingEndpointPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      status: $Enums.DeliveryStatus
-      transformedPayload: Prisma.JsonValue | null
-      responseStatus: number | null
-      responseBody: string | null
-      errorMessage: string | null
-      attemptNumber: number
-      deliveredAt: Date | null
-      createdAt: Date
-      payloadLogId: string
-      outgoingEndpointId: string
-    }, ExtArgs["result"]["deliveryLog"]>
-    composites: {}
-  }
-
-  type DeliveryLogGetPayload<S extends boolean | null | undefined | DeliveryLogDefaultArgs> = $Result.GetResult<Prisma.$DeliveryLogPayload, S>
-
-  type DeliveryLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<DeliveryLogFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: DeliveryLogCountAggregateInputType | true
-    }
-
-  export interface DeliveryLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DeliveryLog'], meta: { name: 'DeliveryLog' } }
-    /**
-     * Find zero or one DeliveryLog that matches the filter.
-     * @param {DeliveryLogFindUniqueArgs} args - Arguments to find a DeliveryLog
-     * @example
-     * // Get one DeliveryLog
-     * const deliveryLog = await prisma.deliveryLog.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DeliveryLogFindUniqueArgs>(args: SelectSubset<T, DeliveryLogFindUniqueArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one DeliveryLog that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {DeliveryLogFindUniqueOrThrowArgs} args - Arguments to find a DeliveryLog
-     * @example
-     * // Get one DeliveryLog
-     * const deliveryLog = await prisma.deliveryLog.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DeliveryLogFindUniqueOrThrowArgs>(args: SelectSubset<T, DeliveryLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first DeliveryLog that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogFindFirstArgs} args - Arguments to find a DeliveryLog
-     * @example
-     * // Get one DeliveryLog
-     * const deliveryLog = await prisma.deliveryLog.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DeliveryLogFindFirstArgs>(args?: SelectSubset<T, DeliveryLogFindFirstArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first DeliveryLog that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogFindFirstOrThrowArgs} args - Arguments to find a DeliveryLog
-     * @example
-     * // Get one DeliveryLog
-     * const deliveryLog = await prisma.deliveryLog.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DeliveryLogFindFirstOrThrowArgs>(args?: SelectSubset<T, DeliveryLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more DeliveryLogs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all DeliveryLogs
-     * const deliveryLogs = await prisma.deliveryLog.findMany()
-     * 
-     * // Get first 10 DeliveryLogs
-     * const deliveryLogs = await prisma.deliveryLog.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const deliveryLogWithIdOnly = await prisma.deliveryLog.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DeliveryLogFindManyArgs>(args?: SelectSubset<T, DeliveryLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a DeliveryLog.
-     * @param {DeliveryLogCreateArgs} args - Arguments to create a DeliveryLog.
-     * @example
-     * // Create one DeliveryLog
-     * const DeliveryLog = await prisma.deliveryLog.create({
-     *   data: {
-     *     // ... data to create a DeliveryLog
-     *   }
-     * })
-     * 
-     */
-    create<T extends DeliveryLogCreateArgs>(args: SelectSubset<T, DeliveryLogCreateArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many DeliveryLogs.
-     * @param {DeliveryLogCreateManyArgs} args - Arguments to create many DeliveryLogs.
-     * @example
-     * // Create many DeliveryLogs
-     * const deliveryLog = await prisma.deliveryLog.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DeliveryLogCreateManyArgs>(args?: SelectSubset<T, DeliveryLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many DeliveryLogs and returns the data saved in the database.
-     * @param {DeliveryLogCreateManyAndReturnArgs} args - Arguments to create many DeliveryLogs.
-     * @example
-     * // Create many DeliveryLogs
-     * const deliveryLog = await prisma.deliveryLog.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many DeliveryLogs and only return the `id`
-     * const deliveryLogWithIdOnly = await prisma.deliveryLog.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DeliveryLogCreateManyAndReturnArgs>(args?: SelectSubset<T, DeliveryLogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a DeliveryLog.
-     * @param {DeliveryLogDeleteArgs} args - Arguments to delete one DeliveryLog.
-     * @example
-     * // Delete one DeliveryLog
-     * const DeliveryLog = await prisma.deliveryLog.delete({
-     *   where: {
-     *     // ... filter to delete one DeliveryLog
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DeliveryLogDeleteArgs>(args: SelectSubset<T, DeliveryLogDeleteArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one DeliveryLog.
-     * @param {DeliveryLogUpdateArgs} args - Arguments to update one DeliveryLog.
-     * @example
-     * // Update one DeliveryLog
-     * const deliveryLog = await prisma.deliveryLog.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DeliveryLogUpdateArgs>(args: SelectSubset<T, DeliveryLogUpdateArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more DeliveryLogs.
-     * @param {DeliveryLogDeleteManyArgs} args - Arguments to filter DeliveryLogs to delete.
-     * @example
-     * // Delete a few DeliveryLogs
-     * const { count } = await prisma.deliveryLog.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DeliveryLogDeleteManyArgs>(args?: SelectSubset<T, DeliveryLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DeliveryLogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many DeliveryLogs
-     * const deliveryLog = await prisma.deliveryLog.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DeliveryLogUpdateManyArgs>(args: SelectSubset<T, DeliveryLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one DeliveryLog.
-     * @param {DeliveryLogUpsertArgs} args - Arguments to update or create a DeliveryLog.
-     * @example
-     * // Update or create a DeliveryLog
-     * const deliveryLog = await prisma.deliveryLog.upsert({
-     *   create: {
-     *     // ... data to create a DeliveryLog
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the DeliveryLog we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DeliveryLogUpsertArgs>(args: SelectSubset<T, DeliveryLogUpsertArgs<ExtArgs>>): Prisma__DeliveryLogClient<$Result.GetResult<Prisma.$DeliveryLogPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-
-    /**
-     * Count the number of DeliveryLogs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogCountArgs} args - Arguments to filter DeliveryLogs to count.
-     * @example
-     * // Count the number of DeliveryLogs
-     * const count = await prisma.deliveryLog.count({
-     *   where: {
-     *     // ... the filter for the DeliveryLogs we want to count
-     *   }
-     * })
-    **/
-    count<T extends DeliveryLogCountArgs>(
-      args?: Subset<T, DeliveryLogCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DeliveryLogCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a DeliveryLog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DeliveryLogAggregateArgs>(args: Subset<T, DeliveryLogAggregateArgs>): Prisma.PrismaPromise<GetDeliveryLogAggregateType<T>>
-
-    /**
-     * Group by DeliveryLog.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DeliveryLogGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DeliveryLogGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DeliveryLogGroupByArgs['orderBy'] }
-        : { orderBy?: DeliveryLogGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DeliveryLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDeliveryLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the DeliveryLog model
-   */
-  readonly fields: DeliveryLogFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for DeliveryLog.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DeliveryLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    payloadLog<T extends PayloadLogDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PayloadLogDefaultArgs<ExtArgs>>): Prisma__PayloadLogClient<$Result.GetResult<Prisma.$PayloadLogPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    outgoingEndpoint<T extends OutgoingEndpointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OutgoingEndpointDefaultArgs<ExtArgs>>): Prisma__OutgoingEndpointClient<$Result.GetResult<Prisma.$OutgoingEndpointPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the DeliveryLog model
-   */ 
-  interface DeliveryLogFieldRefs {
-    readonly id: FieldRef<"DeliveryLog", 'String'>
-    readonly status: FieldRef<"DeliveryLog", 'DeliveryStatus'>
-    readonly transformedPayload: FieldRef<"DeliveryLog", 'Json'>
-    readonly responseStatus: FieldRef<"DeliveryLog", 'Int'>
-    readonly responseBody: FieldRef<"DeliveryLog", 'String'>
-    readonly errorMessage: FieldRef<"DeliveryLog", 'String'>
-    readonly attemptNumber: FieldRef<"DeliveryLog", 'Int'>
-    readonly deliveredAt: FieldRef<"DeliveryLog", 'DateTime'>
-    readonly createdAt: FieldRef<"DeliveryLog", 'DateTime'>
-    readonly payloadLogId: FieldRef<"DeliveryLog", 'String'>
-    readonly outgoingEndpointId: FieldRef<"DeliveryLog", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * DeliveryLog findUnique
-   */
-  export type DeliveryLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * Filter, which DeliveryLog to fetch.
-     */
-    where: DeliveryLogWhereUniqueInput
-  }
-
-  /**
-   * DeliveryLog findUniqueOrThrow
-   */
-  export type DeliveryLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * Filter, which DeliveryLog to fetch.
-     */
-    where: DeliveryLogWhereUniqueInput
-  }
-
-  /**
-   * DeliveryLog findFirst
-   */
-  export type DeliveryLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * Filter, which DeliveryLog to fetch.
-     */
-    where?: DeliveryLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DeliveryLogs to fetch.
-     */
-    orderBy?: DeliveryLogOrderByWithRelationInput | DeliveryLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DeliveryLogs.
-     */
-    cursor?: DeliveryLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DeliveryLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DeliveryLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DeliveryLogs.
-     */
-    distinct?: DeliveryLogScalarFieldEnum | DeliveryLogScalarFieldEnum[]
-  }
-
-  /**
-   * DeliveryLog findFirstOrThrow
-   */
-  export type DeliveryLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * Filter, which DeliveryLog to fetch.
-     */
-    where?: DeliveryLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DeliveryLogs to fetch.
-     */
-    orderBy?: DeliveryLogOrderByWithRelationInput | DeliveryLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DeliveryLogs.
-     */
-    cursor?: DeliveryLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DeliveryLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DeliveryLogs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DeliveryLogs.
-     */
-    distinct?: DeliveryLogScalarFieldEnum | DeliveryLogScalarFieldEnum[]
-  }
-
-  /**
-   * DeliveryLog findMany
-   */
-  export type DeliveryLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * Filter, which DeliveryLogs to fetch.
-     */
-    where?: DeliveryLogWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DeliveryLogs to fetch.
-     */
-    orderBy?: DeliveryLogOrderByWithRelationInput | DeliveryLogOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing DeliveryLogs.
-     */
-    cursor?: DeliveryLogWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DeliveryLogs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DeliveryLogs.
-     */
-    skip?: number
-    distinct?: DeliveryLogScalarFieldEnum | DeliveryLogScalarFieldEnum[]
-  }
-
-  /**
-   * DeliveryLog create
-   */
-  export type DeliveryLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * The data needed to create a DeliveryLog.
-     */
-    data: XOR<DeliveryLogCreateInput, DeliveryLogUncheckedCreateInput>
-  }
-
-  /**
-   * DeliveryLog createMany
-   */
-  export type DeliveryLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many DeliveryLogs.
-     */
-    data: DeliveryLogCreateManyInput | DeliveryLogCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * DeliveryLog createManyAndReturn
-   */
-  export type DeliveryLogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many DeliveryLogs.
-     */
-    data: DeliveryLogCreateManyInput | DeliveryLogCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DeliveryLog update
-   */
-  export type DeliveryLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * The data needed to update a DeliveryLog.
-     */
-    data: XOR<DeliveryLogUpdateInput, DeliveryLogUncheckedUpdateInput>
-    /**
-     * Choose, which DeliveryLog to update.
-     */
-    where: DeliveryLogWhereUniqueInput
-  }
-
-  /**
-   * DeliveryLog updateMany
-   */
-  export type DeliveryLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update DeliveryLogs.
-     */
-    data: XOR<DeliveryLogUpdateManyMutationInput, DeliveryLogUncheckedUpdateManyInput>
-    /**
-     * Filter which DeliveryLogs to update
-     */
-    where?: DeliveryLogWhereInput
-  }
-
-  /**
-   * DeliveryLog upsert
-   */
-  export type DeliveryLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * The filter to search for the DeliveryLog to update in case it exists.
-     */
-    where: DeliveryLogWhereUniqueInput
-    /**
-     * In case the DeliveryLog found by the `where` argument doesn't exist, create a new DeliveryLog with this data.
-     */
-    create: XOR<DeliveryLogCreateInput, DeliveryLogUncheckedCreateInput>
-    /**
-     * In case the DeliveryLog was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DeliveryLogUpdateInput, DeliveryLogUncheckedUpdateInput>
-  }
-
-  /**
-   * DeliveryLog delete
-   */
-  export type DeliveryLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
-    /**
-     * Filter which DeliveryLog to delete.
-     */
-    where: DeliveryLogWhereUniqueInput
-  }
-
-  /**
-   * DeliveryLog deleteMany
-   */
-  export type DeliveryLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DeliveryLogs to delete
-     */
-    where?: DeliveryLogWhereInput
-  }
-
-  /**
-   * DeliveryLog without action
-   */
-  export type DeliveryLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DeliveryLog
-     */
-    select?: DeliveryLogSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryLogInclude<ExtArgs> | null
   }
 
 
@@ -10920,77 +7404,27 @@ export namespace Prisma {
   export const IncomingWebhookScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    description: 'description',
     url: 'url',
-    secret: 'secret',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    createdBy: 'createdBy'
+    userId: 'userId'
   };
 
   export type IncomingWebhookScalarFieldEnum = (typeof IncomingWebhookScalarFieldEnum)[keyof typeof IncomingWebhookScalarFieldEnum]
-
-
-  export const OutgoingEndpointScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    url: 'url',
-    method: 'method',
-    headers: 'headers',
-    isActive: 'isActive',
-    retryAttempts: 'retryAttempts',
-    retryDelayMs: 'retryDelayMs',
-    timeoutMs: 'timeoutMs',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    incomingWebhookId: 'incomingWebhookId'
-  };
-
-  export type OutgoingEndpointScalarFieldEnum = (typeof OutgoingEndpointScalarFieldEnum)[keyof typeof OutgoingEndpointScalarFieldEnum]
 
 
   export const MessageTemplateScalarFieldEnum: {
     id: 'id',
     name: 'name',
     template: 'template',
-    description: 'description',
+    variables: 'variables',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    outgoingEndpointId: 'outgoingEndpointId'
-  };
-
-  export type MessageTemplateScalarFieldEnum = (typeof MessageTemplateScalarFieldEnum)[keyof typeof MessageTemplateScalarFieldEnum]
-
-
-  export const PayloadLogScalarFieldEnum: {
-    id: 'id',
-    payload: 'payload',
-    headers: 'headers',
-    userAgent: 'userAgent',
-    ipAddress: 'ipAddress',
-    receivedAt: 'receivedAt',
     incomingWebhookId: 'incomingWebhookId'
   };
 
-  export type PayloadLogScalarFieldEnum = (typeof PayloadLogScalarFieldEnum)[keyof typeof PayloadLogScalarFieldEnum]
-
-
-  export const DeliveryLogScalarFieldEnum: {
-    id: 'id',
-    status: 'status',
-    transformedPayload: 'transformedPayload',
-    responseStatus: 'responseStatus',
-    responseBody: 'responseBody',
-    errorMessage: 'errorMessage',
-    attemptNumber: 'attemptNumber',
-    deliveredAt: 'deliveredAt',
-    createdAt: 'createdAt',
-    payloadLogId: 'payloadLogId',
-    outgoingEndpointId: 'outgoingEndpointId'
-  };
-
-  export type DeliveryLogScalarFieldEnum = (typeof DeliveryLogScalarFieldEnum)[keyof typeof DeliveryLogScalarFieldEnum]
+  export type MessageTemplateScalarFieldEnum = (typeof MessageTemplateScalarFieldEnum)[keyof typeof MessageTemplateScalarFieldEnum]
 
 
   export const SupportPlatformScalarFieldEnum: {
@@ -11058,13 +7492,6 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
-  };
-
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -11161,9 +7588,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
+   * Reference to a field of type 'MeetingOutcome'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+  export type EnumMeetingOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeetingOutcome'>
+    
+
+
+  /**
+   * Reference to a field of type 'MeetingOutcome[]'
+   */
+  export type ListEnumMeetingOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeetingOutcome[]'>
     
 
 
@@ -11182,30 +7616,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DeliveryStatus'
+   * Reference to a field of type 'Json'
    */
-  export type EnumDeliveryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DeliveryStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'DeliveryStatus[]'
-   */
-  export type ListEnumDeliveryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DeliveryStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'MeetingOutcome'
-   */
-  export type EnumMeetingOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeetingOutcome'>
-    
-
-
-  /**
-   * Reference to a field of type 'MeetingOutcome[]'
-   */
-  export type ListEnumMeetingOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MeetingOutcome[]'>
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -11308,31 +7721,25 @@ export namespace Prisma {
     NOT?: IncomingWebhookWhereInput | IncomingWebhookWhereInput[]
     id?: StringFilter<"IncomingWebhook"> | string
     name?: StringFilter<"IncomingWebhook"> | string
-    description?: StringNullableFilter<"IncomingWebhook"> | string | null
     url?: StringFilter<"IncomingWebhook"> | string
-    secret?: StringNullableFilter<"IncomingWebhook"> | string | null
     status?: EnumWebhookStatusFilter<"IncomingWebhook"> | $Enums.WebhookStatus
     createdAt?: DateTimeFilter<"IncomingWebhook"> | Date | string
     updatedAt?: DateTimeFilter<"IncomingWebhook"> | Date | string
-    createdBy?: StringFilter<"IncomingWebhook"> | string
-    creator?: XOR<UserRelationFilter, UserWhereInput>
-    outgoingEndpoints?: OutgoingEndpointListRelationFilter
-    payloadLogs?: PayloadLogListRelationFilter
+    userId?: StringFilter<"IncomingWebhook"> | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    messageTemplates?: MessageTemplateListRelationFilter
   }
 
   export type IncomingWebhookOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
     url?: SortOrder
-    secret?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdBy?: SortOrder
-    creator?: UserOrderByWithRelationInput
-    outgoingEndpoints?: OutgoingEndpointOrderByRelationAggregateInput
-    payloadLogs?: PayloadLogOrderByRelationAggregateInput
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    messageTemplates?: MessageTemplateOrderByRelationAggregateInput
   }
 
   export type IncomingWebhookWhereUniqueInput = Prisma.AtLeast<{
@@ -11342,27 +7749,22 @@ export namespace Prisma {
     OR?: IncomingWebhookWhereInput[]
     NOT?: IncomingWebhookWhereInput | IncomingWebhookWhereInput[]
     name?: StringFilter<"IncomingWebhook"> | string
-    description?: StringNullableFilter<"IncomingWebhook"> | string | null
-    secret?: StringNullableFilter<"IncomingWebhook"> | string | null
     status?: EnumWebhookStatusFilter<"IncomingWebhook"> | $Enums.WebhookStatus
     createdAt?: DateTimeFilter<"IncomingWebhook"> | Date | string
     updatedAt?: DateTimeFilter<"IncomingWebhook"> | Date | string
-    createdBy?: StringFilter<"IncomingWebhook"> | string
-    creator?: XOR<UserRelationFilter, UserWhereInput>
-    outgoingEndpoints?: OutgoingEndpointListRelationFilter
-    payloadLogs?: PayloadLogListRelationFilter
+    userId?: StringFilter<"IncomingWebhook"> | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    messageTemplates?: MessageTemplateListRelationFilter
   }, "id" | "url">
 
   export type IncomingWebhookOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrderInput | SortOrder
     url?: SortOrder
-    secret?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdBy?: SortOrder
+    userId?: SortOrder
     _count?: IncomingWebhookCountOrderByAggregateInput
     _max?: IncomingWebhookMaxOrderByAggregateInput
     _min?: IncomingWebhookMinOrderByAggregateInput
@@ -11374,111 +7776,11 @@ export namespace Prisma {
     NOT?: IncomingWebhookScalarWhereWithAggregatesInput | IncomingWebhookScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"IncomingWebhook"> | string
     name?: StringWithAggregatesFilter<"IncomingWebhook"> | string
-    description?: StringNullableWithAggregatesFilter<"IncomingWebhook"> | string | null
     url?: StringWithAggregatesFilter<"IncomingWebhook"> | string
-    secret?: StringNullableWithAggregatesFilter<"IncomingWebhook"> | string | null
     status?: EnumWebhookStatusWithAggregatesFilter<"IncomingWebhook"> | $Enums.WebhookStatus
     createdAt?: DateTimeWithAggregatesFilter<"IncomingWebhook"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"IncomingWebhook"> | Date | string
-    createdBy?: StringWithAggregatesFilter<"IncomingWebhook"> | string
-  }
-
-  export type OutgoingEndpointWhereInput = {
-    AND?: OutgoingEndpointWhereInput | OutgoingEndpointWhereInput[]
-    OR?: OutgoingEndpointWhereInput[]
-    NOT?: OutgoingEndpointWhereInput | OutgoingEndpointWhereInput[]
-    id?: StringFilter<"OutgoingEndpoint"> | string
-    name?: StringFilter<"OutgoingEndpoint"> | string
-    url?: StringFilter<"OutgoingEndpoint"> | string
-    method?: StringFilter<"OutgoingEndpoint"> | string
-    headers?: JsonNullableFilter<"OutgoingEndpoint">
-    isActive?: BoolFilter<"OutgoingEndpoint"> | boolean
-    retryAttempts?: IntFilter<"OutgoingEndpoint"> | number
-    retryDelayMs?: IntFilter<"OutgoingEndpoint"> | number
-    timeoutMs?: IntFilter<"OutgoingEndpoint"> | number
-    createdAt?: DateTimeFilter<"OutgoingEndpoint"> | Date | string
-    updatedAt?: DateTimeFilter<"OutgoingEndpoint"> | Date | string
-    incomingWebhookId?: StringFilter<"OutgoingEndpoint"> | string
-    incomingWebhook?: XOR<IncomingWebhookRelationFilter, IncomingWebhookWhereInput>
-    deliveryLogs?: DeliveryLogListRelationFilter
-    messageTemplate?: XOR<MessageTemplateNullableRelationFilter, MessageTemplateWhereInput> | null
-  }
-
-  export type OutgoingEndpointOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    url?: SortOrder
-    method?: SortOrder
-    headers?: SortOrderInput | SortOrder
-    isActive?: SortOrder
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-    incomingWebhook?: IncomingWebhookOrderByWithRelationInput
-    deliveryLogs?: DeliveryLogOrderByRelationAggregateInput
-    messageTemplate?: MessageTemplateOrderByWithRelationInput
-  }
-
-  export type OutgoingEndpointWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: OutgoingEndpointWhereInput | OutgoingEndpointWhereInput[]
-    OR?: OutgoingEndpointWhereInput[]
-    NOT?: OutgoingEndpointWhereInput | OutgoingEndpointWhereInput[]
-    name?: StringFilter<"OutgoingEndpoint"> | string
-    url?: StringFilter<"OutgoingEndpoint"> | string
-    method?: StringFilter<"OutgoingEndpoint"> | string
-    headers?: JsonNullableFilter<"OutgoingEndpoint">
-    isActive?: BoolFilter<"OutgoingEndpoint"> | boolean
-    retryAttempts?: IntFilter<"OutgoingEndpoint"> | number
-    retryDelayMs?: IntFilter<"OutgoingEndpoint"> | number
-    timeoutMs?: IntFilter<"OutgoingEndpoint"> | number
-    createdAt?: DateTimeFilter<"OutgoingEndpoint"> | Date | string
-    updatedAt?: DateTimeFilter<"OutgoingEndpoint"> | Date | string
-    incomingWebhookId?: StringFilter<"OutgoingEndpoint"> | string
-    incomingWebhook?: XOR<IncomingWebhookRelationFilter, IncomingWebhookWhereInput>
-    deliveryLogs?: DeliveryLogListRelationFilter
-    messageTemplate?: XOR<MessageTemplateNullableRelationFilter, MessageTemplateWhereInput> | null
-  }, "id">
-
-  export type OutgoingEndpointOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    url?: SortOrder
-    method?: SortOrder
-    headers?: SortOrderInput | SortOrder
-    isActive?: SortOrder
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-    _count?: OutgoingEndpointCountOrderByAggregateInput
-    _avg?: OutgoingEndpointAvgOrderByAggregateInput
-    _max?: OutgoingEndpointMaxOrderByAggregateInput
-    _min?: OutgoingEndpointMinOrderByAggregateInput
-    _sum?: OutgoingEndpointSumOrderByAggregateInput
-  }
-
-  export type OutgoingEndpointScalarWhereWithAggregatesInput = {
-    AND?: OutgoingEndpointScalarWhereWithAggregatesInput | OutgoingEndpointScalarWhereWithAggregatesInput[]
-    OR?: OutgoingEndpointScalarWhereWithAggregatesInput[]
-    NOT?: OutgoingEndpointScalarWhereWithAggregatesInput | OutgoingEndpointScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"OutgoingEndpoint"> | string
-    name?: StringWithAggregatesFilter<"OutgoingEndpoint"> | string
-    url?: StringWithAggregatesFilter<"OutgoingEndpoint"> | string
-    method?: StringWithAggregatesFilter<"OutgoingEndpoint"> | string
-    headers?: JsonNullableWithAggregatesFilter<"OutgoingEndpoint">
-    isActive?: BoolWithAggregatesFilter<"OutgoingEndpoint"> | boolean
-    retryAttempts?: IntWithAggregatesFilter<"OutgoingEndpoint"> | number
-    retryDelayMs?: IntWithAggregatesFilter<"OutgoingEndpoint"> | number
-    timeoutMs?: IntWithAggregatesFilter<"OutgoingEndpoint"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"OutgoingEndpoint"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"OutgoingEndpoint"> | Date | string
-    incomingWebhookId?: StringWithAggregatesFilter<"OutgoingEndpoint"> | string
+    userId?: StringWithAggregatesFilter<"IncomingWebhook"> | string
   }
 
   export type MessageTemplateWhereInput = {
@@ -11488,46 +7790,46 @@ export namespace Prisma {
     id?: StringFilter<"MessageTemplate"> | string
     name?: StringFilter<"MessageTemplate"> | string
     template?: StringFilter<"MessageTemplate"> | string
-    description?: StringNullableFilter<"MessageTemplate"> | string | null
+    variables?: StringNullableListFilter<"MessageTemplate">
     createdAt?: DateTimeFilter<"MessageTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"MessageTemplate"> | Date | string
-    outgoingEndpointId?: StringFilter<"MessageTemplate"> | string
-    outgoingEndpoint?: XOR<OutgoingEndpointRelationFilter, OutgoingEndpointWhereInput>
+    incomingWebhookId?: StringFilter<"MessageTemplate"> | string
+    incomingWebhook?: XOR<IncomingWebhookRelationFilter, IncomingWebhookWhereInput>
   }
 
   export type MessageTemplateOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     template?: SortOrder
-    description?: SortOrderInput | SortOrder
+    variables?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    outgoingEndpointId?: SortOrder
-    outgoingEndpoint?: OutgoingEndpointOrderByWithRelationInput
+    incomingWebhookId?: SortOrder
+    incomingWebhook?: IncomingWebhookOrderByWithRelationInput
   }
 
   export type MessageTemplateWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    outgoingEndpointId?: string
     AND?: MessageTemplateWhereInput | MessageTemplateWhereInput[]
     OR?: MessageTemplateWhereInput[]
     NOT?: MessageTemplateWhereInput | MessageTemplateWhereInput[]
     name?: StringFilter<"MessageTemplate"> | string
     template?: StringFilter<"MessageTemplate"> | string
-    description?: StringNullableFilter<"MessageTemplate"> | string | null
+    variables?: StringNullableListFilter<"MessageTemplate">
     createdAt?: DateTimeFilter<"MessageTemplate"> | Date | string
     updatedAt?: DateTimeFilter<"MessageTemplate"> | Date | string
-    outgoingEndpoint?: XOR<OutgoingEndpointRelationFilter, OutgoingEndpointWhereInput>
-  }, "id" | "outgoingEndpointId">
+    incomingWebhookId?: StringFilter<"MessageTemplate"> | string
+    incomingWebhook?: XOR<IncomingWebhookRelationFilter, IncomingWebhookWhereInput>
+  }, "id">
 
   export type MessageTemplateOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     template?: SortOrder
-    description?: SortOrderInput | SortOrder
+    variables?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    outgoingEndpointId?: SortOrder
+    incomingWebhookId?: SortOrder
     _count?: MessageTemplateCountOrderByAggregateInput
     _max?: MessageTemplateMaxOrderByAggregateInput
     _min?: MessageTemplateMinOrderByAggregateInput
@@ -11540,168 +7842,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"MessageTemplate"> | string
     name?: StringWithAggregatesFilter<"MessageTemplate"> | string
     template?: StringWithAggregatesFilter<"MessageTemplate"> | string
-    description?: StringNullableWithAggregatesFilter<"MessageTemplate"> | string | null
+    variables?: StringNullableListFilter<"MessageTemplate">
     createdAt?: DateTimeWithAggregatesFilter<"MessageTemplate"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MessageTemplate"> | Date | string
-    outgoingEndpointId?: StringWithAggregatesFilter<"MessageTemplate"> | string
-  }
-
-  export type PayloadLogWhereInput = {
-    AND?: PayloadLogWhereInput | PayloadLogWhereInput[]
-    OR?: PayloadLogWhereInput[]
-    NOT?: PayloadLogWhereInput | PayloadLogWhereInput[]
-    id?: StringFilter<"PayloadLog"> | string
-    payload?: JsonFilter<"PayloadLog">
-    headers?: JsonNullableFilter<"PayloadLog">
-    userAgent?: StringNullableFilter<"PayloadLog"> | string | null
-    ipAddress?: StringNullableFilter<"PayloadLog"> | string | null
-    receivedAt?: DateTimeFilter<"PayloadLog"> | Date | string
-    incomingWebhookId?: StringFilter<"PayloadLog"> | string
-    incomingWebhook?: XOR<IncomingWebhookRelationFilter, IncomingWebhookWhereInput>
-    deliveryLogs?: DeliveryLogListRelationFilter
-  }
-
-  export type PayloadLogOrderByWithRelationInput = {
-    id?: SortOrder
-    payload?: SortOrder
-    headers?: SortOrderInput | SortOrder
-    userAgent?: SortOrderInput | SortOrder
-    ipAddress?: SortOrderInput | SortOrder
-    receivedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-    incomingWebhook?: IncomingWebhookOrderByWithRelationInput
-    deliveryLogs?: DeliveryLogOrderByRelationAggregateInput
-  }
-
-  export type PayloadLogWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: PayloadLogWhereInput | PayloadLogWhereInput[]
-    OR?: PayloadLogWhereInput[]
-    NOT?: PayloadLogWhereInput | PayloadLogWhereInput[]
-    payload?: JsonFilter<"PayloadLog">
-    headers?: JsonNullableFilter<"PayloadLog">
-    userAgent?: StringNullableFilter<"PayloadLog"> | string | null
-    ipAddress?: StringNullableFilter<"PayloadLog"> | string | null
-    receivedAt?: DateTimeFilter<"PayloadLog"> | Date | string
-    incomingWebhookId?: StringFilter<"PayloadLog"> | string
-    incomingWebhook?: XOR<IncomingWebhookRelationFilter, IncomingWebhookWhereInput>
-    deliveryLogs?: DeliveryLogListRelationFilter
-  }, "id">
-
-  export type PayloadLogOrderByWithAggregationInput = {
-    id?: SortOrder
-    payload?: SortOrder
-    headers?: SortOrderInput | SortOrder
-    userAgent?: SortOrderInput | SortOrder
-    ipAddress?: SortOrderInput | SortOrder
-    receivedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-    _count?: PayloadLogCountOrderByAggregateInput
-    _max?: PayloadLogMaxOrderByAggregateInput
-    _min?: PayloadLogMinOrderByAggregateInput
-  }
-
-  export type PayloadLogScalarWhereWithAggregatesInput = {
-    AND?: PayloadLogScalarWhereWithAggregatesInput | PayloadLogScalarWhereWithAggregatesInput[]
-    OR?: PayloadLogScalarWhereWithAggregatesInput[]
-    NOT?: PayloadLogScalarWhereWithAggregatesInput | PayloadLogScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PayloadLog"> | string
-    payload?: JsonWithAggregatesFilter<"PayloadLog">
-    headers?: JsonNullableWithAggregatesFilter<"PayloadLog">
-    userAgent?: StringNullableWithAggregatesFilter<"PayloadLog"> | string | null
-    ipAddress?: StringNullableWithAggregatesFilter<"PayloadLog"> | string | null
-    receivedAt?: DateTimeWithAggregatesFilter<"PayloadLog"> | Date | string
-    incomingWebhookId?: StringWithAggregatesFilter<"PayloadLog"> | string
-  }
-
-  export type DeliveryLogWhereInput = {
-    AND?: DeliveryLogWhereInput | DeliveryLogWhereInput[]
-    OR?: DeliveryLogWhereInput[]
-    NOT?: DeliveryLogWhereInput | DeliveryLogWhereInput[]
-    id?: StringFilter<"DeliveryLog"> | string
-    status?: EnumDeliveryStatusFilter<"DeliveryLog"> | $Enums.DeliveryStatus
-    transformedPayload?: JsonNullableFilter<"DeliveryLog">
-    responseStatus?: IntNullableFilter<"DeliveryLog"> | number | null
-    responseBody?: StringNullableFilter<"DeliveryLog"> | string | null
-    errorMessage?: StringNullableFilter<"DeliveryLog"> | string | null
-    attemptNumber?: IntFilter<"DeliveryLog"> | number
-    deliveredAt?: DateTimeNullableFilter<"DeliveryLog"> | Date | string | null
-    createdAt?: DateTimeFilter<"DeliveryLog"> | Date | string
-    payloadLogId?: StringFilter<"DeliveryLog"> | string
-    outgoingEndpointId?: StringFilter<"DeliveryLog"> | string
-    payloadLog?: XOR<PayloadLogRelationFilter, PayloadLogWhereInput>
-    outgoingEndpoint?: XOR<OutgoingEndpointRelationFilter, OutgoingEndpointWhereInput>
-  }
-
-  export type DeliveryLogOrderByWithRelationInput = {
-    id?: SortOrder
-    status?: SortOrder
-    transformedPayload?: SortOrderInput | SortOrder
-    responseStatus?: SortOrderInput | SortOrder
-    responseBody?: SortOrderInput | SortOrder
-    errorMessage?: SortOrderInput | SortOrder
-    attemptNumber?: SortOrder
-    deliveredAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    payloadLogId?: SortOrder
-    outgoingEndpointId?: SortOrder
-    payloadLog?: PayloadLogOrderByWithRelationInput
-    outgoingEndpoint?: OutgoingEndpointOrderByWithRelationInput
-  }
-
-  export type DeliveryLogWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: DeliveryLogWhereInput | DeliveryLogWhereInput[]
-    OR?: DeliveryLogWhereInput[]
-    NOT?: DeliveryLogWhereInput | DeliveryLogWhereInput[]
-    status?: EnumDeliveryStatusFilter<"DeliveryLog"> | $Enums.DeliveryStatus
-    transformedPayload?: JsonNullableFilter<"DeliveryLog">
-    responseStatus?: IntNullableFilter<"DeliveryLog"> | number | null
-    responseBody?: StringNullableFilter<"DeliveryLog"> | string | null
-    errorMessage?: StringNullableFilter<"DeliveryLog"> | string | null
-    attemptNumber?: IntFilter<"DeliveryLog"> | number
-    deliveredAt?: DateTimeNullableFilter<"DeliveryLog"> | Date | string | null
-    createdAt?: DateTimeFilter<"DeliveryLog"> | Date | string
-    payloadLogId?: StringFilter<"DeliveryLog"> | string
-    outgoingEndpointId?: StringFilter<"DeliveryLog"> | string
-    payloadLog?: XOR<PayloadLogRelationFilter, PayloadLogWhereInput>
-    outgoingEndpoint?: XOR<OutgoingEndpointRelationFilter, OutgoingEndpointWhereInput>
-  }, "id">
-
-  export type DeliveryLogOrderByWithAggregationInput = {
-    id?: SortOrder
-    status?: SortOrder
-    transformedPayload?: SortOrderInput | SortOrder
-    responseStatus?: SortOrderInput | SortOrder
-    responseBody?: SortOrderInput | SortOrder
-    errorMessage?: SortOrderInput | SortOrder
-    attemptNumber?: SortOrder
-    deliveredAt?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    payloadLogId?: SortOrder
-    outgoingEndpointId?: SortOrder
-    _count?: DeliveryLogCountOrderByAggregateInput
-    _avg?: DeliveryLogAvgOrderByAggregateInput
-    _max?: DeliveryLogMaxOrderByAggregateInput
-    _min?: DeliveryLogMinOrderByAggregateInput
-    _sum?: DeliveryLogSumOrderByAggregateInput
-  }
-
-  export type DeliveryLogScalarWhereWithAggregatesInput = {
-    AND?: DeliveryLogScalarWhereWithAggregatesInput | DeliveryLogScalarWhereWithAggregatesInput[]
-    OR?: DeliveryLogScalarWhereWithAggregatesInput[]
-    NOT?: DeliveryLogScalarWhereWithAggregatesInput | DeliveryLogScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"DeliveryLog"> | string
-    status?: EnumDeliveryStatusWithAggregatesFilter<"DeliveryLog"> | $Enums.DeliveryStatus
-    transformedPayload?: JsonNullableWithAggregatesFilter<"DeliveryLog">
-    responseStatus?: IntNullableWithAggregatesFilter<"DeliveryLog"> | number | null
-    responseBody?: StringNullableWithAggregatesFilter<"DeliveryLog"> | string | null
-    errorMessage?: StringNullableWithAggregatesFilter<"DeliveryLog"> | string | null
-    attemptNumber?: IntWithAggregatesFilter<"DeliveryLog"> | number
-    deliveredAt?: DateTimeNullableWithAggregatesFilter<"DeliveryLog"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"DeliveryLog"> | Date | string
-    payloadLogId?: StringWithAggregatesFilter<"DeliveryLog"> | string
-    outgoingEndpointId?: StringWithAggregatesFilter<"DeliveryLog"> | string
+    incomingWebhookId?: StringWithAggregatesFilter<"MessageTemplate"> | string
   }
 
   export type SupportPlatformWhereInput = {
@@ -11970,7 +8114,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     dailyReports?: DailyReportCreateNestedManyWithoutUserInput
     meetingReports?: MeetingReportCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookCreateNestedManyWithoutCreatorInput
+    webhooks?: IncomingWebhookCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11984,7 +8128,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutUserInput
     meetingReports?: MeetingReportUncheckedCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutCreatorInput
+    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11998,7 +8142,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyReports?: DailyReportUpdateManyWithoutUserNestedInput
     meetingReports?: MeetingReportUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUpdateManyWithoutCreatorNestedInput
+    webhooks?: IncomingWebhookUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12012,7 +8156,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyReports?: DailyReportUncheckedUpdateManyWithoutUserNestedInput
     meetingReports?: MeetingReportUncheckedUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput
+    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12051,77 +8195,61 @@ export namespace Prisma {
   export type IncomingWebhookCreateInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    creator: UserCreateNestedOneWithoutWebhooksInput
-    outgoingEndpoints?: OutgoingEndpointCreateNestedManyWithoutIncomingWebhookInput
-    payloadLogs?: PayloadLogCreateNestedManyWithoutIncomingWebhookInput
+    user: UserCreateNestedOneWithoutWebhooksInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutIncomingWebhookInput
   }
 
   export type IncomingWebhookUncheckedCreateInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdBy: string
-    outgoingEndpoints?: OutgoingEndpointUncheckedCreateNestedManyWithoutIncomingWebhookInput
-    payloadLogs?: PayloadLogUncheckedCreateNestedManyWithoutIncomingWebhookInput
+    userId: string
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutIncomingWebhookInput
   }
 
   export type IncomingWebhookUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creator?: UserUpdateOneRequiredWithoutWebhooksNestedInput
-    outgoingEndpoints?: OutgoingEndpointUpdateManyWithoutIncomingWebhookNestedInput
-    payloadLogs?: PayloadLogUpdateManyWithoutIncomingWebhookNestedInput
+    user?: UserUpdateOneRequiredWithoutWebhooksNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutIncomingWebhookNestedInput
   }
 
   export type IncomingWebhookUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: StringFieldUpdateOperationsInput | string
-    outgoingEndpoints?: OutgoingEndpointUncheckedUpdateManyWithoutIncomingWebhookNestedInput
-    payloadLogs?: PayloadLogUncheckedUpdateManyWithoutIncomingWebhookNestedInput
+    userId?: StringFieldUpdateOperationsInput | string
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutIncomingWebhookNestedInput
   }
 
   export type IncomingWebhookCreateManyInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdBy: string
+    userId: string
   }
 
   export type IncomingWebhookUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12130,182 +8258,68 @@ export namespace Prisma {
   export type IncomingWebhookUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type OutgoingEndpointCreateInput = {
-    id?: string
-    name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhook: IncomingWebhookCreateNestedOneWithoutOutgoingEndpointsInput
-    deliveryLogs?: DeliveryLogCreateNestedManyWithoutOutgoingEndpointInput
-    messageTemplate?: MessageTemplateCreateNestedOneWithoutOutgoingEndpointInput
-  }
-
-  export type OutgoingEndpointUncheckedCreateInput = {
-    id?: string
-    name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhookId: string
-    deliveryLogs?: DeliveryLogUncheckedCreateNestedManyWithoutOutgoingEndpointInput
-    messageTemplate?: MessageTemplateUncheckedCreateNestedOneWithoutOutgoingEndpointInput
-  }
-
-  export type OutgoingEndpointUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhook?: IncomingWebhookUpdateOneRequiredWithoutOutgoingEndpointsNestedInput
-    deliveryLogs?: DeliveryLogUpdateManyWithoutOutgoingEndpointNestedInput
-    messageTemplate?: MessageTemplateUpdateOneWithoutOutgoingEndpointNestedInput
-  }
-
-  export type OutgoingEndpointUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhookId?: StringFieldUpdateOperationsInput | string
-    deliveryLogs?: DeliveryLogUncheckedUpdateManyWithoutOutgoingEndpointNestedInput
-    messageTemplate?: MessageTemplateUncheckedUpdateOneWithoutOutgoingEndpointNestedInput
-  }
-
-  export type OutgoingEndpointCreateManyInput = {
-    id?: string
-    name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhookId: string
-  }
-
-  export type OutgoingEndpointUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OutgoingEndpointUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhookId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageTemplateCreateInput = {
     id?: string
     name: string
     template: string
-    description?: string | null
+    variables?: MessageTemplateCreatevariablesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    outgoingEndpoint: OutgoingEndpointCreateNestedOneWithoutMessageTemplateInput
+    incomingWebhook: IncomingWebhookCreateNestedOneWithoutMessageTemplatesInput
   }
 
   export type MessageTemplateUncheckedCreateInput = {
     id?: string
     name: string
     template: string
-    description?: string | null
+    variables?: MessageTemplateCreatevariablesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    outgoingEndpointId: string
+    incomingWebhookId: string
   }
 
   export type MessageTemplateUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     template?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpoint?: OutgoingEndpointUpdateOneRequiredWithoutMessageTemplateNestedInput
+    incomingWebhook?: IncomingWebhookUpdateOneRequiredWithoutMessageTemplatesNestedInput
   }
 
   export type MessageTemplateUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     template?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpointId?: StringFieldUpdateOperationsInput | string
+    incomingWebhookId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageTemplateCreateManyInput = {
     id?: string
     name: string
     template: string
-    description?: string | null
+    variables?: MessageTemplateCreatevariablesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    outgoingEndpointId: string
+    incomingWebhookId: string
   }
 
   export type MessageTemplateUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     template?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12314,179 +8328,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     template?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpointId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PayloadLogCreateInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    incomingWebhook: IncomingWebhookCreateNestedOneWithoutPayloadLogsInput
-    deliveryLogs?: DeliveryLogCreateNestedManyWithoutPayloadLogInput
-  }
-
-  export type PayloadLogUncheckedCreateInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    incomingWebhookId: string
-    deliveryLogs?: DeliveryLogUncheckedCreateNestedManyWithoutPayloadLogInput
-  }
-
-  export type PayloadLogUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhook?: IncomingWebhookUpdateOneRequiredWithoutPayloadLogsNestedInput
-    deliveryLogs?: DeliveryLogUpdateManyWithoutPayloadLogNestedInput
-  }
-
-  export type PayloadLogUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     incomingWebhookId?: StringFieldUpdateOperationsInput | string
-    deliveryLogs?: DeliveryLogUncheckedUpdateManyWithoutPayloadLogNestedInput
-  }
-
-  export type PayloadLogCreateManyInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    incomingWebhookId: string
-  }
-
-  export type PayloadLogUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PayloadLogUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhookId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DeliveryLogCreateInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    payloadLog: PayloadLogCreateNestedOneWithoutDeliveryLogsInput
-    outgoingEndpoint: OutgoingEndpointCreateNestedOneWithoutDeliveryLogsInput
-  }
-
-  export type DeliveryLogUncheckedCreateInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    payloadLogId: string
-    outgoingEndpointId: string
-  }
-
-  export type DeliveryLogUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    payloadLog?: PayloadLogUpdateOneRequiredWithoutDeliveryLogsNestedInput
-    outgoingEndpoint?: OutgoingEndpointUpdateOneRequiredWithoutDeliveryLogsNestedInput
-  }
-
-  export type DeliveryLogUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    payloadLogId?: StringFieldUpdateOperationsInput | string
-    outgoingEndpointId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DeliveryLogCreateManyInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    payloadLogId: string
-    outgoingEndpointId: string
-  }
-
-  export type DeliveryLogUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DeliveryLogUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    payloadLogId?: StringFieldUpdateOperationsInput | string
-    outgoingEndpointId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SupportPlatformCreateInput = {
@@ -12932,21 +8777,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type EnumWebhookStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.WebhookStatus | EnumWebhookStatusFieldRefInput<$PrismaModel>
     in?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
@@ -12959,83 +8789,44 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
-  export type OutgoingEndpointListRelationFilter = {
-    every?: OutgoingEndpointWhereInput
-    some?: OutgoingEndpointWhereInput
-    none?: OutgoingEndpointWhereInput
+  export type MessageTemplateListRelationFilter = {
+    every?: MessageTemplateWhereInput
+    some?: MessageTemplateWhereInput
+    none?: MessageTemplateWhereInput
   }
 
-  export type PayloadLogListRelationFilter = {
-    every?: PayloadLogWhereInput
-    some?: PayloadLogWhereInput
-    none?: PayloadLogWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type OutgoingEndpointOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PayloadLogOrderByRelationAggregateInput = {
+  export type MessageTemplateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type IncomingWebhookCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     url?: SortOrder
-    secret?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdBy?: SortOrder
+    userId?: SortOrder
   }
 
   export type IncomingWebhookMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     url?: SortOrder
-    secret?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdBy?: SortOrder
+    userId?: SortOrder
   }
 
   export type IncomingWebhookMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     url?: SortOrder
-    secret?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    createdBy?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    userId?: SortOrder
   }
 
   export type EnumWebhookStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -13047,38 +8838,13 @@ export namespace Prisma {
     _min?: NestedEnumWebhookStatusFilter<$PrismaModel>
     _max?: NestedEnumWebhookStatusFilter<$PrismaModel>
   }
-  export type JsonNullableFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type IncomingWebhookRelationFilter = {
@@ -13086,347 +8852,32 @@ export namespace Prisma {
     isNot?: IncomingWebhookWhereInput
   }
 
-  export type DeliveryLogListRelationFilter = {
-    every?: DeliveryLogWhereInput
-    some?: DeliveryLogWhereInput
-    none?: DeliveryLogWhereInput
-  }
-
-  export type MessageTemplateNullableRelationFilter = {
-    is?: MessageTemplateWhereInput | null
-    isNot?: MessageTemplateWhereInput | null
-  }
-
-  export type DeliveryLogOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OutgoingEndpointCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    url?: SortOrder
-    method?: SortOrder
-    headers?: SortOrder
-    isActive?: SortOrder
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-  }
-
-  export type OutgoingEndpointAvgOrderByAggregateInput = {
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-  }
-
-  export type OutgoingEndpointMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    url?: SortOrder
-    method?: SortOrder
-    isActive?: SortOrder
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-  }
-
-  export type OutgoingEndpointMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    url?: SortOrder
-    method?: SortOrder
-    isActive?: SortOrder
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-  }
-
-  export type OutgoingEndpointSumOrderByAggregateInput = {
-    retryAttempts?: SortOrder
-    retryDelayMs?: SortOrder
-    timeoutMs?: SortOrder
-  }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type OutgoingEndpointRelationFilter = {
-    is?: OutgoingEndpointWhereInput
-    isNot?: OutgoingEndpointWhereInput
-  }
-
   export type MessageTemplateCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     template?: SortOrder
-    description?: SortOrder
+    variables?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    outgoingEndpointId?: SortOrder
+    incomingWebhookId?: SortOrder
   }
 
   export type MessageTemplateMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     template?: SortOrder
-    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    outgoingEndpointId?: SortOrder
+    incomingWebhookId?: SortOrder
   }
 
   export type MessageTemplateMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     template?: SortOrder
-    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    outgoingEndpointId?: SortOrder
-  }
-  export type JsonFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type PayloadLogCountOrderByAggregateInput = {
-    id?: SortOrder
-    payload?: SortOrder
-    headers?: SortOrder
-    userAgent?: SortOrder
-    ipAddress?: SortOrder
-    receivedAt?: SortOrder
     incomingWebhookId?: SortOrder
-  }
-
-  export type PayloadLogMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userAgent?: SortOrder
-    ipAddress?: SortOrder
-    receivedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-  }
-
-  export type PayloadLogMinOrderByAggregateInput = {
-    id?: SortOrder
-    userAgent?: SortOrder
-    ipAddress?: SortOrder
-    receivedAt?: SortOrder
-    incomingWebhookId?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
-  }
-
-  export type EnumDeliveryStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.DeliveryStatus | EnumDeliveryStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumDeliveryStatusFilter<$PrismaModel> | $Enums.DeliveryStatus
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type PayloadLogRelationFilter = {
-    is?: PayloadLogWhereInput
-    isNot?: PayloadLogWhereInput
-  }
-
-  export type DeliveryLogCountOrderByAggregateInput = {
-    id?: SortOrder
-    status?: SortOrder
-    transformedPayload?: SortOrder
-    responseStatus?: SortOrder
-    responseBody?: SortOrder
-    errorMessage?: SortOrder
-    attemptNumber?: SortOrder
-    deliveredAt?: SortOrder
-    createdAt?: SortOrder
-    payloadLogId?: SortOrder
-    outgoingEndpointId?: SortOrder
-  }
-
-  export type DeliveryLogAvgOrderByAggregateInput = {
-    responseStatus?: SortOrder
-    attemptNumber?: SortOrder
-  }
-
-  export type DeliveryLogMaxOrderByAggregateInput = {
-    id?: SortOrder
-    status?: SortOrder
-    responseStatus?: SortOrder
-    responseBody?: SortOrder
-    errorMessage?: SortOrder
-    attemptNumber?: SortOrder
-    deliveredAt?: SortOrder
-    createdAt?: SortOrder
-    payloadLogId?: SortOrder
-    outgoingEndpointId?: SortOrder
-  }
-
-  export type DeliveryLogMinOrderByAggregateInput = {
-    id?: SortOrder
-    status?: SortOrder
-    responseStatus?: SortOrder
-    responseBody?: SortOrder
-    errorMessage?: SortOrder
-    attemptNumber?: SortOrder
-    deliveredAt?: SortOrder
-    createdAt?: SortOrder
-    payloadLogId?: SortOrder
-    outgoingEndpointId?: SortOrder
-  }
-
-  export type DeliveryLogSumOrderByAggregateInput = {
-    responseStatus?: SortOrder
-    attemptNumber?: SortOrder
-  }
-
-  export type EnumDeliveryStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DeliveryStatus | EnumDeliveryStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumDeliveryStatusWithAggregatesFilter<$PrismaModel> | $Enums.DeliveryStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDeliveryStatusFilter<$PrismaModel>
-    _max?: NestedEnumDeliveryStatusFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type SupportPlatformCountOrderByAggregateInput = {
@@ -13453,6 +8904,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type EnumMeetingOutcomeFilter<$PrismaModel = never> = {
     equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
     in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
@@ -13460,17 +8922,29 @@ export namespace Prisma {
     not?: NestedEnumMeetingOutcomeFilter<$PrismaModel> | $Enums.MeetingOutcome
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type UserNullableRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type MeetingReportCountOrderByAggregateInput = {
@@ -13523,6 +8997,20 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type EnumMeetingOutcomeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
     in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
@@ -13531,6 +9019,57 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
     _max?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+  export type JsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type DailyReportUserIdDateCompoundUniqueInput = {
@@ -13598,6 +9137,47 @@ export namespace Prisma {
     callsAttended?: SortOrder
   }
 
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type DailyReportCreateNestedManyWithoutUserInput = {
     create?: XOR<DailyReportCreateWithoutUserInput, DailyReportUncheckedCreateWithoutUserInput> | DailyReportCreateWithoutUserInput[] | DailyReportUncheckedCreateWithoutUserInput[]
     connectOrCreate?: DailyReportCreateOrConnectWithoutUserInput | DailyReportCreateOrConnectWithoutUserInput[]
@@ -13612,10 +9192,10 @@ export namespace Prisma {
     connect?: MeetingReportWhereUniqueInput | MeetingReportWhereUniqueInput[]
   }
 
-  export type IncomingWebhookCreateNestedManyWithoutCreatorInput = {
-    create?: XOR<IncomingWebhookCreateWithoutCreatorInput, IncomingWebhookUncheckedCreateWithoutCreatorInput> | IncomingWebhookCreateWithoutCreatorInput[] | IncomingWebhookUncheckedCreateWithoutCreatorInput[]
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutCreatorInput | IncomingWebhookCreateOrConnectWithoutCreatorInput[]
-    createMany?: IncomingWebhookCreateManyCreatorInputEnvelope
+  export type IncomingWebhookCreateNestedManyWithoutUserInput = {
+    create?: XOR<IncomingWebhookCreateWithoutUserInput, IncomingWebhookUncheckedCreateWithoutUserInput> | IncomingWebhookCreateWithoutUserInput[] | IncomingWebhookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutUserInput | IncomingWebhookCreateOrConnectWithoutUserInput[]
+    createMany?: IncomingWebhookCreateManyUserInputEnvelope
     connect?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
   }
 
@@ -13633,10 +9213,10 @@ export namespace Prisma {
     connect?: MeetingReportWhereUniqueInput | MeetingReportWhereUniqueInput[]
   }
 
-  export type IncomingWebhookUncheckedCreateNestedManyWithoutCreatorInput = {
-    create?: XOR<IncomingWebhookCreateWithoutCreatorInput, IncomingWebhookUncheckedCreateWithoutCreatorInput> | IncomingWebhookCreateWithoutCreatorInput[] | IncomingWebhookUncheckedCreateWithoutCreatorInput[]
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutCreatorInput | IncomingWebhookCreateOrConnectWithoutCreatorInput[]
-    createMany?: IncomingWebhookCreateManyCreatorInputEnvelope
+  export type IncomingWebhookUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<IncomingWebhookCreateWithoutUserInput, IncomingWebhookUncheckedCreateWithoutUserInput> | IncomingWebhookCreateWithoutUserInput[] | IncomingWebhookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutUserInput | IncomingWebhookCreateOrConnectWithoutUserInput[]
+    createMany?: IncomingWebhookCreateManyUserInputEnvelope
     connect?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
   }
 
@@ -13684,17 +9264,17 @@ export namespace Prisma {
     deleteMany?: MeetingReportScalarWhereInput | MeetingReportScalarWhereInput[]
   }
 
-  export type IncomingWebhookUpdateManyWithoutCreatorNestedInput = {
-    create?: XOR<IncomingWebhookCreateWithoutCreatorInput, IncomingWebhookUncheckedCreateWithoutCreatorInput> | IncomingWebhookCreateWithoutCreatorInput[] | IncomingWebhookUncheckedCreateWithoutCreatorInput[]
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutCreatorInput | IncomingWebhookCreateOrConnectWithoutCreatorInput[]
-    upsert?: IncomingWebhookUpsertWithWhereUniqueWithoutCreatorInput | IncomingWebhookUpsertWithWhereUniqueWithoutCreatorInput[]
-    createMany?: IncomingWebhookCreateManyCreatorInputEnvelope
+  export type IncomingWebhookUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IncomingWebhookCreateWithoutUserInput, IncomingWebhookUncheckedCreateWithoutUserInput> | IncomingWebhookCreateWithoutUserInput[] | IncomingWebhookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutUserInput | IncomingWebhookCreateOrConnectWithoutUserInput[]
+    upsert?: IncomingWebhookUpsertWithWhereUniqueWithoutUserInput | IncomingWebhookUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IncomingWebhookCreateManyUserInputEnvelope
     set?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
     disconnect?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
     delete?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
     connect?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
-    update?: IncomingWebhookUpdateWithWhereUniqueWithoutCreatorInput | IncomingWebhookUpdateWithWhereUniqueWithoutCreatorInput[]
-    updateMany?: IncomingWebhookUpdateManyWithWhereWithoutCreatorInput | IncomingWebhookUpdateManyWithWhereWithoutCreatorInput[]
+    update?: IncomingWebhookUpdateWithWhereUniqueWithoutUserInput | IncomingWebhookUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IncomingWebhookUpdateManyWithWhereWithoutUserInput | IncomingWebhookUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: IncomingWebhookScalarWhereInput | IncomingWebhookScalarWhereInput[]
   }
 
@@ -13726,17 +9306,17 @@ export namespace Prisma {
     deleteMany?: MeetingReportScalarWhereInput | MeetingReportScalarWhereInput[]
   }
 
-  export type IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput = {
-    create?: XOR<IncomingWebhookCreateWithoutCreatorInput, IncomingWebhookUncheckedCreateWithoutCreatorInput> | IncomingWebhookCreateWithoutCreatorInput[] | IncomingWebhookUncheckedCreateWithoutCreatorInput[]
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutCreatorInput | IncomingWebhookCreateOrConnectWithoutCreatorInput[]
-    upsert?: IncomingWebhookUpsertWithWhereUniqueWithoutCreatorInput | IncomingWebhookUpsertWithWhereUniqueWithoutCreatorInput[]
-    createMany?: IncomingWebhookCreateManyCreatorInputEnvelope
+  export type IncomingWebhookUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<IncomingWebhookCreateWithoutUserInput, IncomingWebhookUncheckedCreateWithoutUserInput> | IncomingWebhookCreateWithoutUserInput[] | IncomingWebhookUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutUserInput | IncomingWebhookCreateOrConnectWithoutUserInput[]
+    upsert?: IncomingWebhookUpsertWithWhereUniqueWithoutUserInput | IncomingWebhookUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: IncomingWebhookCreateManyUserInputEnvelope
     set?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
     disconnect?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
     delete?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
     connect?: IncomingWebhookWhereUniqueInput | IncomingWebhookWhereUniqueInput[]
-    update?: IncomingWebhookUpdateWithWhereUniqueWithoutCreatorInput | IncomingWebhookUpdateWithWhereUniqueWithoutCreatorInput[]
-    updateMany?: IncomingWebhookUpdateManyWithWhereWithoutCreatorInput | IncomingWebhookUpdateManyWithWhereWithoutCreatorInput[]
+    update?: IncomingWebhookUpdateWithWhereUniqueWithoutUserInput | IncomingWebhookUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: IncomingWebhookUpdateManyWithWhereWithoutUserInput | IncomingWebhookUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: IncomingWebhookScalarWhereInput | IncomingWebhookScalarWhereInput[]
   }
 
@@ -13746,36 +9326,18 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type OutgoingEndpointCreateNestedManyWithoutIncomingWebhookInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput> | OutgoingEndpointCreateWithoutIncomingWebhookInput[] | OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput | OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput[]
-    createMany?: OutgoingEndpointCreateManyIncomingWebhookInputEnvelope
-    connect?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
+  export type MessageTemplateCreateNestedManyWithoutIncomingWebhookInput = {
+    create?: XOR<MessageTemplateCreateWithoutIncomingWebhookInput, MessageTemplateUncheckedCreateWithoutIncomingWebhookInput> | MessageTemplateCreateWithoutIncomingWebhookInput[] | MessageTemplateUncheckedCreateWithoutIncomingWebhookInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutIncomingWebhookInput | MessageTemplateCreateOrConnectWithoutIncomingWebhookInput[]
+    createMany?: MessageTemplateCreateManyIncomingWebhookInputEnvelope
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
   }
 
-  export type PayloadLogCreateNestedManyWithoutIncomingWebhookInput = {
-    create?: XOR<PayloadLogCreateWithoutIncomingWebhookInput, PayloadLogUncheckedCreateWithoutIncomingWebhookInput> | PayloadLogCreateWithoutIncomingWebhookInput[] | PayloadLogUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: PayloadLogCreateOrConnectWithoutIncomingWebhookInput | PayloadLogCreateOrConnectWithoutIncomingWebhookInput[]
-    createMany?: PayloadLogCreateManyIncomingWebhookInputEnvelope
-    connect?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-  }
-
-  export type OutgoingEndpointUncheckedCreateNestedManyWithoutIncomingWebhookInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput> | OutgoingEndpointCreateWithoutIncomingWebhookInput[] | OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput | OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput[]
-    createMany?: OutgoingEndpointCreateManyIncomingWebhookInputEnvelope
-    connect?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-  }
-
-  export type PayloadLogUncheckedCreateNestedManyWithoutIncomingWebhookInput = {
-    create?: XOR<PayloadLogCreateWithoutIncomingWebhookInput, PayloadLogUncheckedCreateWithoutIncomingWebhookInput> | PayloadLogCreateWithoutIncomingWebhookInput[] | PayloadLogUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: PayloadLogCreateOrConnectWithoutIncomingWebhookInput | PayloadLogCreateOrConnectWithoutIncomingWebhookInput[]
-    createMany?: PayloadLogCreateManyIncomingWebhookInputEnvelope
-    connect?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type MessageTemplateUncheckedCreateNestedManyWithoutIncomingWebhookInput = {
+    create?: XOR<MessageTemplateCreateWithoutIncomingWebhookInput, MessageTemplateUncheckedCreateWithoutIncomingWebhookInput> | MessageTemplateCreateWithoutIncomingWebhookInput[] | MessageTemplateUncheckedCreateWithoutIncomingWebhookInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutIncomingWebhookInput | MessageTemplateCreateOrConnectWithoutIncomingWebhookInput[]
+    createMany?: MessageTemplateCreateManyIncomingWebhookInputEnvelope
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
   }
 
   export type EnumWebhookStatusFieldUpdateOperationsInput = {
@@ -13790,270 +9352,55 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWebhooksInput, UserUpdateWithoutWebhooksInput>, UserUncheckedUpdateWithoutWebhooksInput>
   }
 
-  export type OutgoingEndpointUpdateManyWithoutIncomingWebhookNestedInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput> | OutgoingEndpointCreateWithoutIncomingWebhookInput[] | OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput | OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput[]
-    upsert?: OutgoingEndpointUpsertWithWhereUniqueWithoutIncomingWebhookInput | OutgoingEndpointUpsertWithWhereUniqueWithoutIncomingWebhookInput[]
-    createMany?: OutgoingEndpointCreateManyIncomingWebhookInputEnvelope
-    set?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    disconnect?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    delete?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    connect?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    update?: OutgoingEndpointUpdateWithWhereUniqueWithoutIncomingWebhookInput | OutgoingEndpointUpdateWithWhereUniqueWithoutIncomingWebhookInput[]
-    updateMany?: OutgoingEndpointUpdateManyWithWhereWithoutIncomingWebhookInput | OutgoingEndpointUpdateManyWithWhereWithoutIncomingWebhookInput[]
-    deleteMany?: OutgoingEndpointScalarWhereInput | OutgoingEndpointScalarWhereInput[]
+  export type MessageTemplateUpdateManyWithoutIncomingWebhookNestedInput = {
+    create?: XOR<MessageTemplateCreateWithoutIncomingWebhookInput, MessageTemplateUncheckedCreateWithoutIncomingWebhookInput> | MessageTemplateCreateWithoutIncomingWebhookInput[] | MessageTemplateUncheckedCreateWithoutIncomingWebhookInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutIncomingWebhookInput | MessageTemplateCreateOrConnectWithoutIncomingWebhookInput[]
+    upsert?: MessageTemplateUpsertWithWhereUniqueWithoutIncomingWebhookInput | MessageTemplateUpsertWithWhereUniqueWithoutIncomingWebhookInput[]
+    createMany?: MessageTemplateCreateManyIncomingWebhookInputEnvelope
+    set?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    disconnect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    delete?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    update?: MessageTemplateUpdateWithWhereUniqueWithoutIncomingWebhookInput | MessageTemplateUpdateWithWhereUniqueWithoutIncomingWebhookInput[]
+    updateMany?: MessageTemplateUpdateManyWithWhereWithoutIncomingWebhookInput | MessageTemplateUpdateManyWithWhereWithoutIncomingWebhookInput[]
+    deleteMany?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
   }
 
-  export type PayloadLogUpdateManyWithoutIncomingWebhookNestedInput = {
-    create?: XOR<PayloadLogCreateWithoutIncomingWebhookInput, PayloadLogUncheckedCreateWithoutIncomingWebhookInput> | PayloadLogCreateWithoutIncomingWebhookInput[] | PayloadLogUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: PayloadLogCreateOrConnectWithoutIncomingWebhookInput | PayloadLogCreateOrConnectWithoutIncomingWebhookInput[]
-    upsert?: PayloadLogUpsertWithWhereUniqueWithoutIncomingWebhookInput | PayloadLogUpsertWithWhereUniqueWithoutIncomingWebhookInput[]
-    createMany?: PayloadLogCreateManyIncomingWebhookInputEnvelope
-    set?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    disconnect?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    delete?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    connect?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    update?: PayloadLogUpdateWithWhereUniqueWithoutIncomingWebhookInput | PayloadLogUpdateWithWhereUniqueWithoutIncomingWebhookInput[]
-    updateMany?: PayloadLogUpdateManyWithWhereWithoutIncomingWebhookInput | PayloadLogUpdateManyWithWhereWithoutIncomingWebhookInput[]
-    deleteMany?: PayloadLogScalarWhereInput | PayloadLogScalarWhereInput[]
+  export type MessageTemplateUncheckedUpdateManyWithoutIncomingWebhookNestedInput = {
+    create?: XOR<MessageTemplateCreateWithoutIncomingWebhookInput, MessageTemplateUncheckedCreateWithoutIncomingWebhookInput> | MessageTemplateCreateWithoutIncomingWebhookInput[] | MessageTemplateUncheckedCreateWithoutIncomingWebhookInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutIncomingWebhookInput | MessageTemplateCreateOrConnectWithoutIncomingWebhookInput[]
+    upsert?: MessageTemplateUpsertWithWhereUniqueWithoutIncomingWebhookInput | MessageTemplateUpsertWithWhereUniqueWithoutIncomingWebhookInput[]
+    createMany?: MessageTemplateCreateManyIncomingWebhookInputEnvelope
+    set?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    disconnect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    delete?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    update?: MessageTemplateUpdateWithWhereUniqueWithoutIncomingWebhookInput | MessageTemplateUpdateWithWhereUniqueWithoutIncomingWebhookInput[]
+    updateMany?: MessageTemplateUpdateManyWithWhereWithoutIncomingWebhookInput | MessageTemplateUpdateManyWithWhereWithoutIncomingWebhookInput[]
+    deleteMany?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
   }
 
-  export type OutgoingEndpointUncheckedUpdateManyWithoutIncomingWebhookNestedInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput> | OutgoingEndpointCreateWithoutIncomingWebhookInput[] | OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput | OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput[]
-    upsert?: OutgoingEndpointUpsertWithWhereUniqueWithoutIncomingWebhookInput | OutgoingEndpointUpsertWithWhereUniqueWithoutIncomingWebhookInput[]
-    createMany?: OutgoingEndpointCreateManyIncomingWebhookInputEnvelope
-    set?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    disconnect?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    delete?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    connect?: OutgoingEndpointWhereUniqueInput | OutgoingEndpointWhereUniqueInput[]
-    update?: OutgoingEndpointUpdateWithWhereUniqueWithoutIncomingWebhookInput | OutgoingEndpointUpdateWithWhereUniqueWithoutIncomingWebhookInput[]
-    updateMany?: OutgoingEndpointUpdateManyWithWhereWithoutIncomingWebhookInput | OutgoingEndpointUpdateManyWithWhereWithoutIncomingWebhookInput[]
-    deleteMany?: OutgoingEndpointScalarWhereInput | OutgoingEndpointScalarWhereInput[]
+  export type MessageTemplateCreatevariablesInput = {
+    set: string[]
   }
 
-  export type PayloadLogUncheckedUpdateManyWithoutIncomingWebhookNestedInput = {
-    create?: XOR<PayloadLogCreateWithoutIncomingWebhookInput, PayloadLogUncheckedCreateWithoutIncomingWebhookInput> | PayloadLogCreateWithoutIncomingWebhookInput[] | PayloadLogUncheckedCreateWithoutIncomingWebhookInput[]
-    connectOrCreate?: PayloadLogCreateOrConnectWithoutIncomingWebhookInput | PayloadLogCreateOrConnectWithoutIncomingWebhookInput[]
-    upsert?: PayloadLogUpsertWithWhereUniqueWithoutIncomingWebhookInput | PayloadLogUpsertWithWhereUniqueWithoutIncomingWebhookInput[]
-    createMany?: PayloadLogCreateManyIncomingWebhookInputEnvelope
-    set?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    disconnect?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    delete?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    connect?: PayloadLogWhereUniqueInput | PayloadLogWhereUniqueInput[]
-    update?: PayloadLogUpdateWithWhereUniqueWithoutIncomingWebhookInput | PayloadLogUpdateWithWhereUniqueWithoutIncomingWebhookInput[]
-    updateMany?: PayloadLogUpdateManyWithWhereWithoutIncomingWebhookInput | PayloadLogUpdateManyWithWhereWithoutIncomingWebhookInput[]
-    deleteMany?: PayloadLogScalarWhereInput | PayloadLogScalarWhereInput[]
-  }
-
-  export type IncomingWebhookCreateNestedOneWithoutOutgoingEndpointsInput = {
-    create?: XOR<IncomingWebhookCreateWithoutOutgoingEndpointsInput, IncomingWebhookUncheckedCreateWithoutOutgoingEndpointsInput>
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutOutgoingEndpointsInput
+  export type IncomingWebhookCreateNestedOneWithoutMessageTemplatesInput = {
+    create?: XOR<IncomingWebhookCreateWithoutMessageTemplatesInput, IncomingWebhookUncheckedCreateWithoutMessageTemplatesInput>
+    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutMessageTemplatesInput
     connect?: IncomingWebhookWhereUniqueInput
   }
 
-  export type DeliveryLogCreateNestedManyWithoutOutgoingEndpointInput = {
-    create?: XOR<DeliveryLogCreateWithoutOutgoingEndpointInput, DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput> | DeliveryLogCreateWithoutOutgoingEndpointInput[] | DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput | DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput[]
-    createMany?: DeliveryLogCreateManyOutgoingEndpointInputEnvelope
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
+  export type MessageTemplateUpdatevariablesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
-  export type MessageTemplateCreateNestedOneWithoutOutgoingEndpointInput = {
-    create?: XOR<MessageTemplateCreateWithoutOutgoingEndpointInput, MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput>
-    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOutgoingEndpointInput
-    connect?: MessageTemplateWhereUniqueInput
-  }
-
-  export type DeliveryLogUncheckedCreateNestedManyWithoutOutgoingEndpointInput = {
-    create?: XOR<DeliveryLogCreateWithoutOutgoingEndpointInput, DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput> | DeliveryLogCreateWithoutOutgoingEndpointInput[] | DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput | DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput[]
-    createMany?: DeliveryLogCreateManyOutgoingEndpointInputEnvelope
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-  }
-
-  export type MessageTemplateUncheckedCreateNestedOneWithoutOutgoingEndpointInput = {
-    create?: XOR<MessageTemplateCreateWithoutOutgoingEndpointInput, MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput>
-    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOutgoingEndpointInput
-    connect?: MessageTemplateWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type IncomingWebhookUpdateOneRequiredWithoutOutgoingEndpointsNestedInput = {
-    create?: XOR<IncomingWebhookCreateWithoutOutgoingEndpointsInput, IncomingWebhookUncheckedCreateWithoutOutgoingEndpointsInput>
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutOutgoingEndpointsInput
-    upsert?: IncomingWebhookUpsertWithoutOutgoingEndpointsInput
+  export type IncomingWebhookUpdateOneRequiredWithoutMessageTemplatesNestedInput = {
+    create?: XOR<IncomingWebhookCreateWithoutMessageTemplatesInput, IncomingWebhookUncheckedCreateWithoutMessageTemplatesInput>
+    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutMessageTemplatesInput
+    upsert?: IncomingWebhookUpsertWithoutMessageTemplatesInput
     connect?: IncomingWebhookWhereUniqueInput
-    update?: XOR<XOR<IncomingWebhookUpdateToOneWithWhereWithoutOutgoingEndpointsInput, IncomingWebhookUpdateWithoutOutgoingEndpointsInput>, IncomingWebhookUncheckedUpdateWithoutOutgoingEndpointsInput>
-  }
-
-  export type DeliveryLogUpdateManyWithoutOutgoingEndpointNestedInput = {
-    create?: XOR<DeliveryLogCreateWithoutOutgoingEndpointInput, DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput> | DeliveryLogCreateWithoutOutgoingEndpointInput[] | DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput | DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput[]
-    upsert?: DeliveryLogUpsertWithWhereUniqueWithoutOutgoingEndpointInput | DeliveryLogUpsertWithWhereUniqueWithoutOutgoingEndpointInput[]
-    createMany?: DeliveryLogCreateManyOutgoingEndpointInputEnvelope
-    set?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    disconnect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    delete?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    update?: DeliveryLogUpdateWithWhereUniqueWithoutOutgoingEndpointInput | DeliveryLogUpdateWithWhereUniqueWithoutOutgoingEndpointInput[]
-    updateMany?: DeliveryLogUpdateManyWithWhereWithoutOutgoingEndpointInput | DeliveryLogUpdateManyWithWhereWithoutOutgoingEndpointInput[]
-    deleteMany?: DeliveryLogScalarWhereInput | DeliveryLogScalarWhereInput[]
-  }
-
-  export type MessageTemplateUpdateOneWithoutOutgoingEndpointNestedInput = {
-    create?: XOR<MessageTemplateCreateWithoutOutgoingEndpointInput, MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput>
-    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOutgoingEndpointInput
-    upsert?: MessageTemplateUpsertWithoutOutgoingEndpointInput
-    disconnect?: MessageTemplateWhereInput | boolean
-    delete?: MessageTemplateWhereInput | boolean
-    connect?: MessageTemplateWhereUniqueInput
-    update?: XOR<XOR<MessageTemplateUpdateToOneWithWhereWithoutOutgoingEndpointInput, MessageTemplateUpdateWithoutOutgoingEndpointInput>, MessageTemplateUncheckedUpdateWithoutOutgoingEndpointInput>
-  }
-
-  export type DeliveryLogUncheckedUpdateManyWithoutOutgoingEndpointNestedInput = {
-    create?: XOR<DeliveryLogCreateWithoutOutgoingEndpointInput, DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput> | DeliveryLogCreateWithoutOutgoingEndpointInput[] | DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput | DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput[]
-    upsert?: DeliveryLogUpsertWithWhereUniqueWithoutOutgoingEndpointInput | DeliveryLogUpsertWithWhereUniqueWithoutOutgoingEndpointInput[]
-    createMany?: DeliveryLogCreateManyOutgoingEndpointInputEnvelope
-    set?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    disconnect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    delete?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    update?: DeliveryLogUpdateWithWhereUniqueWithoutOutgoingEndpointInput | DeliveryLogUpdateWithWhereUniqueWithoutOutgoingEndpointInput[]
-    updateMany?: DeliveryLogUpdateManyWithWhereWithoutOutgoingEndpointInput | DeliveryLogUpdateManyWithWhereWithoutOutgoingEndpointInput[]
-    deleteMany?: DeliveryLogScalarWhereInput | DeliveryLogScalarWhereInput[]
-  }
-
-  export type MessageTemplateUncheckedUpdateOneWithoutOutgoingEndpointNestedInput = {
-    create?: XOR<MessageTemplateCreateWithoutOutgoingEndpointInput, MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput>
-    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOutgoingEndpointInput
-    upsert?: MessageTemplateUpsertWithoutOutgoingEndpointInput
-    disconnect?: MessageTemplateWhereInput | boolean
-    delete?: MessageTemplateWhereInput | boolean
-    connect?: MessageTemplateWhereUniqueInput
-    update?: XOR<XOR<MessageTemplateUpdateToOneWithWhereWithoutOutgoingEndpointInput, MessageTemplateUpdateWithoutOutgoingEndpointInput>, MessageTemplateUncheckedUpdateWithoutOutgoingEndpointInput>
-  }
-
-  export type OutgoingEndpointCreateNestedOneWithoutMessageTemplateInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutMessageTemplateInput, OutgoingEndpointUncheckedCreateWithoutMessageTemplateInput>
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutMessageTemplateInput
-    connect?: OutgoingEndpointWhereUniqueInput
-  }
-
-  export type OutgoingEndpointUpdateOneRequiredWithoutMessageTemplateNestedInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutMessageTemplateInput, OutgoingEndpointUncheckedCreateWithoutMessageTemplateInput>
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutMessageTemplateInput
-    upsert?: OutgoingEndpointUpsertWithoutMessageTemplateInput
-    connect?: OutgoingEndpointWhereUniqueInput
-    update?: XOR<XOR<OutgoingEndpointUpdateToOneWithWhereWithoutMessageTemplateInput, OutgoingEndpointUpdateWithoutMessageTemplateInput>, OutgoingEndpointUncheckedUpdateWithoutMessageTemplateInput>
-  }
-
-  export type IncomingWebhookCreateNestedOneWithoutPayloadLogsInput = {
-    create?: XOR<IncomingWebhookCreateWithoutPayloadLogsInput, IncomingWebhookUncheckedCreateWithoutPayloadLogsInput>
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutPayloadLogsInput
-    connect?: IncomingWebhookWhereUniqueInput
-  }
-
-  export type DeliveryLogCreateNestedManyWithoutPayloadLogInput = {
-    create?: XOR<DeliveryLogCreateWithoutPayloadLogInput, DeliveryLogUncheckedCreateWithoutPayloadLogInput> | DeliveryLogCreateWithoutPayloadLogInput[] | DeliveryLogUncheckedCreateWithoutPayloadLogInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutPayloadLogInput | DeliveryLogCreateOrConnectWithoutPayloadLogInput[]
-    createMany?: DeliveryLogCreateManyPayloadLogInputEnvelope
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-  }
-
-  export type DeliveryLogUncheckedCreateNestedManyWithoutPayloadLogInput = {
-    create?: XOR<DeliveryLogCreateWithoutPayloadLogInput, DeliveryLogUncheckedCreateWithoutPayloadLogInput> | DeliveryLogCreateWithoutPayloadLogInput[] | DeliveryLogUncheckedCreateWithoutPayloadLogInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutPayloadLogInput | DeliveryLogCreateOrConnectWithoutPayloadLogInput[]
-    createMany?: DeliveryLogCreateManyPayloadLogInputEnvelope
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-  }
-
-  export type IncomingWebhookUpdateOneRequiredWithoutPayloadLogsNestedInput = {
-    create?: XOR<IncomingWebhookCreateWithoutPayloadLogsInput, IncomingWebhookUncheckedCreateWithoutPayloadLogsInput>
-    connectOrCreate?: IncomingWebhookCreateOrConnectWithoutPayloadLogsInput
-    upsert?: IncomingWebhookUpsertWithoutPayloadLogsInput
-    connect?: IncomingWebhookWhereUniqueInput
-    update?: XOR<XOR<IncomingWebhookUpdateToOneWithWhereWithoutPayloadLogsInput, IncomingWebhookUpdateWithoutPayloadLogsInput>, IncomingWebhookUncheckedUpdateWithoutPayloadLogsInput>
-  }
-
-  export type DeliveryLogUpdateManyWithoutPayloadLogNestedInput = {
-    create?: XOR<DeliveryLogCreateWithoutPayloadLogInput, DeliveryLogUncheckedCreateWithoutPayloadLogInput> | DeliveryLogCreateWithoutPayloadLogInput[] | DeliveryLogUncheckedCreateWithoutPayloadLogInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutPayloadLogInput | DeliveryLogCreateOrConnectWithoutPayloadLogInput[]
-    upsert?: DeliveryLogUpsertWithWhereUniqueWithoutPayloadLogInput | DeliveryLogUpsertWithWhereUniqueWithoutPayloadLogInput[]
-    createMany?: DeliveryLogCreateManyPayloadLogInputEnvelope
-    set?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    disconnect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    delete?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    update?: DeliveryLogUpdateWithWhereUniqueWithoutPayloadLogInput | DeliveryLogUpdateWithWhereUniqueWithoutPayloadLogInput[]
-    updateMany?: DeliveryLogUpdateManyWithWhereWithoutPayloadLogInput | DeliveryLogUpdateManyWithWhereWithoutPayloadLogInput[]
-    deleteMany?: DeliveryLogScalarWhereInput | DeliveryLogScalarWhereInput[]
-  }
-
-  export type DeliveryLogUncheckedUpdateManyWithoutPayloadLogNestedInput = {
-    create?: XOR<DeliveryLogCreateWithoutPayloadLogInput, DeliveryLogUncheckedCreateWithoutPayloadLogInput> | DeliveryLogCreateWithoutPayloadLogInput[] | DeliveryLogUncheckedCreateWithoutPayloadLogInput[]
-    connectOrCreate?: DeliveryLogCreateOrConnectWithoutPayloadLogInput | DeliveryLogCreateOrConnectWithoutPayloadLogInput[]
-    upsert?: DeliveryLogUpsertWithWhereUniqueWithoutPayloadLogInput | DeliveryLogUpsertWithWhereUniqueWithoutPayloadLogInput[]
-    createMany?: DeliveryLogCreateManyPayloadLogInputEnvelope
-    set?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    disconnect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    delete?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    connect?: DeliveryLogWhereUniqueInput | DeliveryLogWhereUniqueInput[]
-    update?: DeliveryLogUpdateWithWhereUniqueWithoutPayloadLogInput | DeliveryLogUpdateWithWhereUniqueWithoutPayloadLogInput[]
-    updateMany?: DeliveryLogUpdateManyWithWhereWithoutPayloadLogInput | DeliveryLogUpdateManyWithWhereWithoutPayloadLogInput[]
-    deleteMany?: DeliveryLogScalarWhereInput | DeliveryLogScalarWhereInput[]
-  }
-
-  export type PayloadLogCreateNestedOneWithoutDeliveryLogsInput = {
-    create?: XOR<PayloadLogCreateWithoutDeliveryLogsInput, PayloadLogUncheckedCreateWithoutDeliveryLogsInput>
-    connectOrCreate?: PayloadLogCreateOrConnectWithoutDeliveryLogsInput
-    connect?: PayloadLogWhereUniqueInput
-  }
-
-  export type OutgoingEndpointCreateNestedOneWithoutDeliveryLogsInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutDeliveryLogsInput, OutgoingEndpointUncheckedCreateWithoutDeliveryLogsInput>
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutDeliveryLogsInput
-    connect?: OutgoingEndpointWhereUniqueInput
-  }
-
-  export type EnumDeliveryStatusFieldUpdateOperationsInput = {
-    set?: $Enums.DeliveryStatus
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type PayloadLogUpdateOneRequiredWithoutDeliveryLogsNestedInput = {
-    create?: XOR<PayloadLogCreateWithoutDeliveryLogsInput, PayloadLogUncheckedCreateWithoutDeliveryLogsInput>
-    connectOrCreate?: PayloadLogCreateOrConnectWithoutDeliveryLogsInput
-    upsert?: PayloadLogUpsertWithoutDeliveryLogsInput
-    connect?: PayloadLogWhereUniqueInput
-    update?: XOR<XOR<PayloadLogUpdateToOneWithWhereWithoutDeliveryLogsInput, PayloadLogUpdateWithoutDeliveryLogsInput>, PayloadLogUncheckedUpdateWithoutDeliveryLogsInput>
-  }
-
-  export type OutgoingEndpointUpdateOneRequiredWithoutDeliveryLogsNestedInput = {
-    create?: XOR<OutgoingEndpointCreateWithoutDeliveryLogsInput, OutgoingEndpointUncheckedCreateWithoutDeliveryLogsInput>
-    connectOrCreate?: OutgoingEndpointCreateOrConnectWithoutDeliveryLogsInput
-    upsert?: OutgoingEndpointUpsertWithoutDeliveryLogsInput
-    connect?: OutgoingEndpointWhereUniqueInput
-    update?: XOR<XOR<OutgoingEndpointUpdateToOneWithWhereWithoutDeliveryLogsInput, OutgoingEndpointUpdateWithoutDeliveryLogsInput>, OutgoingEndpointUncheckedUpdateWithoutDeliveryLogsInput>
+    update?: XOR<XOR<IncomingWebhookUpdateToOneWithWhereWithoutMessageTemplatesInput, IncomingWebhookUpdateWithoutMessageTemplatesInput>, IncomingWebhookUncheckedUpdateWithoutMessageTemplatesInput>
   }
 
   export type MeetingReportCreateattendeesInput = {
@@ -14070,8 +9417,16 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type EnumMeetingOutcomeFieldUpdateOperationsInput = {
     set?: $Enums.MeetingOutcome
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type MeetingReportUpdateattendeesInput = {
@@ -14102,6 +9457,14 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutDailyReportsInput, UserUncheckedCreateWithoutDailyReportsInput>
     connectOrCreate?: UserCreateOrConnectWithoutDailyReportsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type DailyReportUpdatelinksInput = {
@@ -14214,6 +9577,41 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumWebhookStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.WebhookStatus | EnumWebhookStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWebhookStatusFilter<$PrismaModel> | $Enums.WebhookStatus
+  }
+
+  export type NestedEnumWebhookStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WebhookStatus | EnumWebhookStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumWebhookStatusWithAggregatesFilter<$PrismaModel> | $Enums.WebhookStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWebhookStatusFilter<$PrismaModel>
+    _max?: NestedEnumWebhookStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumMeetingOutcomeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMeetingOutcomeFilter<$PrismaModel> | $Enums.MeetingOutcome
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -14228,11 +9626,39 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedEnumWebhookStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.WebhookStatus | EnumWebhookStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumWebhookStatusFilter<$PrismaModel> | $Enums.WebhookStatus
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumMeetingOutcomeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMeetingOutcomeWithAggregatesFilter<$PrismaModel> | $Enums.MeetingOutcome
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
+    _max?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14250,49 +9676,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumWebhookStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.WebhookStatus | EnumWebhookStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.WebhookStatus[] | ListEnumWebhookStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumWebhookStatusWithAggregatesFilter<$PrismaModel> | $Enums.WebhookStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumWebhookStatusFilter<$PrismaModel>
-    _max?: NestedEnumWebhookStatusFilter<$PrismaModel>
-  }
-  export type NestedJsonNullableFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -14321,14 +9704,14 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
-  export type NestedJsonFilter<$PrismaModel = never> = 
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     string_contains?: string | StringFieldRefInput<$PrismaModel>
@@ -14342,92 +9725,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedEnumDeliveryStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.DeliveryStatus | EnumDeliveryStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumDeliveryStatusFilter<$PrismaModel> | $Enums.DeliveryStatus
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedEnumDeliveryStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DeliveryStatus | EnumDeliveryStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DeliveryStatus[] | ListEnumDeliveryStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumDeliveryStatusWithAggregatesFilter<$PrismaModel> | $Enums.DeliveryStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDeliveryStatusFilter<$PrismaModel>
-    _max?: NestedEnumDeliveryStatusFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumMeetingOutcomeFilter<$PrismaModel = never> = {
-    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    not?: NestedEnumMeetingOutcomeFilter<$PrismaModel> | $Enums.MeetingOutcome
-  }
-
-  export type NestedEnumMeetingOutcomeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MeetingOutcome | EnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    in?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MeetingOutcome[] | ListEnumMeetingOutcomeFieldRefInput<$PrismaModel>
-    not?: NestedEnumMeetingOutcomeWithAggregatesFilter<$PrismaModel> | $Enums.MeetingOutcome
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
-    _max?: NestedEnumMeetingOutcomeFilter<$PrismaModel>
   }
 
   export type DailyReportCreateWithoutUserInput = {
@@ -14514,39 +9811,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type IncomingWebhookCreateWithoutCreatorInput = {
+  export type IncomingWebhookCreateWithoutUserInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    outgoingEndpoints?: OutgoingEndpointCreateNestedManyWithoutIncomingWebhookInput
-    payloadLogs?: PayloadLogCreateNestedManyWithoutIncomingWebhookInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutIncomingWebhookInput
   }
 
-  export type IncomingWebhookUncheckedCreateWithoutCreatorInput = {
+  export type IncomingWebhookUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    outgoingEndpoints?: OutgoingEndpointUncheckedCreateNestedManyWithoutIncomingWebhookInput
-    payloadLogs?: PayloadLogUncheckedCreateNestedManyWithoutIncomingWebhookInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutIncomingWebhookInput
   }
 
-  export type IncomingWebhookCreateOrConnectWithoutCreatorInput = {
+  export type IncomingWebhookCreateOrConnectWithoutUserInput = {
     where: IncomingWebhookWhereUniqueInput
-    create: XOR<IncomingWebhookCreateWithoutCreatorInput, IncomingWebhookUncheckedCreateWithoutCreatorInput>
+    create: XOR<IncomingWebhookCreateWithoutUserInput, IncomingWebhookUncheckedCreateWithoutUserInput>
   }
 
-  export type IncomingWebhookCreateManyCreatorInputEnvelope = {
-    data: IncomingWebhookCreateManyCreatorInput | IncomingWebhookCreateManyCreatorInput[]
+  export type IncomingWebhookCreateManyUserInputEnvelope = {
+    data: IncomingWebhookCreateManyUserInput | IncomingWebhookCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -14622,20 +9913,20 @@ export namespace Prisma {
     userId?: StringNullableFilter<"MeetingReport"> | string | null
   }
 
-  export type IncomingWebhookUpsertWithWhereUniqueWithoutCreatorInput = {
+  export type IncomingWebhookUpsertWithWhereUniqueWithoutUserInput = {
     where: IncomingWebhookWhereUniqueInput
-    update: XOR<IncomingWebhookUpdateWithoutCreatorInput, IncomingWebhookUncheckedUpdateWithoutCreatorInput>
-    create: XOR<IncomingWebhookCreateWithoutCreatorInput, IncomingWebhookUncheckedCreateWithoutCreatorInput>
+    update: XOR<IncomingWebhookUpdateWithoutUserInput, IncomingWebhookUncheckedUpdateWithoutUserInput>
+    create: XOR<IncomingWebhookCreateWithoutUserInput, IncomingWebhookUncheckedCreateWithoutUserInput>
   }
 
-  export type IncomingWebhookUpdateWithWhereUniqueWithoutCreatorInput = {
+  export type IncomingWebhookUpdateWithWhereUniqueWithoutUserInput = {
     where: IncomingWebhookWhereUniqueInput
-    data: XOR<IncomingWebhookUpdateWithoutCreatorInput, IncomingWebhookUncheckedUpdateWithoutCreatorInput>
+    data: XOR<IncomingWebhookUpdateWithoutUserInput, IncomingWebhookUncheckedUpdateWithoutUserInput>
   }
 
-  export type IncomingWebhookUpdateManyWithWhereWithoutCreatorInput = {
+  export type IncomingWebhookUpdateManyWithWhereWithoutUserInput = {
     where: IncomingWebhookScalarWhereInput
-    data: XOR<IncomingWebhookUpdateManyMutationInput, IncomingWebhookUncheckedUpdateManyWithoutCreatorInput>
+    data: XOR<IncomingWebhookUpdateManyMutationInput, IncomingWebhookUncheckedUpdateManyWithoutUserInput>
   }
 
   export type IncomingWebhookScalarWhereInput = {
@@ -14644,13 +9935,11 @@ export namespace Prisma {
     NOT?: IncomingWebhookScalarWhereInput | IncomingWebhookScalarWhereInput[]
     id?: StringFilter<"IncomingWebhook"> | string
     name?: StringFilter<"IncomingWebhook"> | string
-    description?: StringNullableFilter<"IncomingWebhook"> | string | null
     url?: StringFilter<"IncomingWebhook"> | string
-    secret?: StringNullableFilter<"IncomingWebhook"> | string | null
     status?: EnumWebhookStatusFilter<"IncomingWebhook"> | $Enums.WebhookStatus
     createdAt?: DateTimeFilter<"IncomingWebhook"> | Date | string
     updatedAt?: DateTimeFilter<"IncomingWebhook"> | Date | string
-    createdBy?: StringFilter<"IncomingWebhook"> | string
+    userId?: StringFilter<"IncomingWebhook"> | string
   }
 
   export type UserCreateWithoutWebhooksInput = {
@@ -14684,75 +9973,31 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutWebhooksInput, UserUncheckedCreateWithoutWebhooksInput>
   }
 
-  export type OutgoingEndpointCreateWithoutIncomingWebhookInput = {
+  export type MessageTemplateCreateWithoutIncomingWebhookInput = {
     id?: string
     name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
+    template: string
+    variables?: MessageTemplateCreatevariablesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    deliveryLogs?: DeliveryLogCreateNestedManyWithoutOutgoingEndpointInput
-    messageTemplate?: MessageTemplateCreateNestedOneWithoutOutgoingEndpointInput
   }
 
-  export type OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput = {
+  export type MessageTemplateUncheckedCreateWithoutIncomingWebhookInput = {
     id?: string
     name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
+    template: string
+    variables?: MessageTemplateCreatevariablesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    deliveryLogs?: DeliveryLogUncheckedCreateNestedManyWithoutOutgoingEndpointInput
-    messageTemplate?: MessageTemplateUncheckedCreateNestedOneWithoutOutgoingEndpointInput
   }
 
-  export type OutgoingEndpointCreateOrConnectWithoutIncomingWebhookInput = {
-    where: OutgoingEndpointWhereUniqueInput
-    create: XOR<OutgoingEndpointCreateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput>
+  export type MessageTemplateCreateOrConnectWithoutIncomingWebhookInput = {
+    where: MessageTemplateWhereUniqueInput
+    create: XOR<MessageTemplateCreateWithoutIncomingWebhookInput, MessageTemplateUncheckedCreateWithoutIncomingWebhookInput>
   }
 
-  export type OutgoingEndpointCreateManyIncomingWebhookInputEnvelope = {
-    data: OutgoingEndpointCreateManyIncomingWebhookInput | OutgoingEndpointCreateManyIncomingWebhookInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PayloadLogCreateWithoutIncomingWebhookInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    deliveryLogs?: DeliveryLogCreateNestedManyWithoutPayloadLogInput
-  }
-
-  export type PayloadLogUncheckedCreateWithoutIncomingWebhookInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    deliveryLogs?: DeliveryLogUncheckedCreateNestedManyWithoutPayloadLogInput
-  }
-
-  export type PayloadLogCreateOrConnectWithoutIncomingWebhookInput = {
-    where: PayloadLogWhereUniqueInput
-    create: XOR<PayloadLogCreateWithoutIncomingWebhookInput, PayloadLogUncheckedCreateWithoutIncomingWebhookInput>
-  }
-
-  export type PayloadLogCreateManyIncomingWebhookInputEnvelope = {
-    data: PayloadLogCreateManyIncomingWebhookInput | PayloadLogCreateManyIncomingWebhookInput[]
+  export type MessageTemplateCreateManyIncomingWebhookInputEnvelope = {
+    data: MessageTemplateCreateManyIncomingWebhookInput | MessageTemplateCreateManyIncomingWebhookInput[]
     skipDuplicates?: boolean
   }
 
@@ -14793,592 +10038,89 @@ export namespace Prisma {
     meetingReports?: MeetingReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type OutgoingEndpointUpsertWithWhereUniqueWithoutIncomingWebhookInput = {
-    where: OutgoingEndpointWhereUniqueInput
-    update: XOR<OutgoingEndpointUpdateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedUpdateWithoutIncomingWebhookInput>
-    create: XOR<OutgoingEndpointCreateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedCreateWithoutIncomingWebhookInput>
-  }
-
-  export type OutgoingEndpointUpdateWithWhereUniqueWithoutIncomingWebhookInput = {
-    where: OutgoingEndpointWhereUniqueInput
-    data: XOR<OutgoingEndpointUpdateWithoutIncomingWebhookInput, OutgoingEndpointUncheckedUpdateWithoutIncomingWebhookInput>
-  }
-
-  export type OutgoingEndpointUpdateManyWithWhereWithoutIncomingWebhookInput = {
-    where: OutgoingEndpointScalarWhereInput
-    data: XOR<OutgoingEndpointUpdateManyMutationInput, OutgoingEndpointUncheckedUpdateManyWithoutIncomingWebhookInput>
-  }
-
-  export type OutgoingEndpointScalarWhereInput = {
-    AND?: OutgoingEndpointScalarWhereInput | OutgoingEndpointScalarWhereInput[]
-    OR?: OutgoingEndpointScalarWhereInput[]
-    NOT?: OutgoingEndpointScalarWhereInput | OutgoingEndpointScalarWhereInput[]
-    id?: StringFilter<"OutgoingEndpoint"> | string
-    name?: StringFilter<"OutgoingEndpoint"> | string
-    url?: StringFilter<"OutgoingEndpoint"> | string
-    method?: StringFilter<"OutgoingEndpoint"> | string
-    headers?: JsonNullableFilter<"OutgoingEndpoint">
-    isActive?: BoolFilter<"OutgoingEndpoint"> | boolean
-    retryAttempts?: IntFilter<"OutgoingEndpoint"> | number
-    retryDelayMs?: IntFilter<"OutgoingEndpoint"> | number
-    timeoutMs?: IntFilter<"OutgoingEndpoint"> | number
-    createdAt?: DateTimeFilter<"OutgoingEndpoint"> | Date | string
-    updatedAt?: DateTimeFilter<"OutgoingEndpoint"> | Date | string
-    incomingWebhookId?: StringFilter<"OutgoingEndpoint"> | string
-  }
-
-  export type PayloadLogUpsertWithWhereUniqueWithoutIncomingWebhookInput = {
-    where: PayloadLogWhereUniqueInput
-    update: XOR<PayloadLogUpdateWithoutIncomingWebhookInput, PayloadLogUncheckedUpdateWithoutIncomingWebhookInput>
-    create: XOR<PayloadLogCreateWithoutIncomingWebhookInput, PayloadLogUncheckedCreateWithoutIncomingWebhookInput>
-  }
-
-  export type PayloadLogUpdateWithWhereUniqueWithoutIncomingWebhookInput = {
-    where: PayloadLogWhereUniqueInput
-    data: XOR<PayloadLogUpdateWithoutIncomingWebhookInput, PayloadLogUncheckedUpdateWithoutIncomingWebhookInput>
-  }
-
-  export type PayloadLogUpdateManyWithWhereWithoutIncomingWebhookInput = {
-    where: PayloadLogScalarWhereInput
-    data: XOR<PayloadLogUpdateManyMutationInput, PayloadLogUncheckedUpdateManyWithoutIncomingWebhookInput>
-  }
-
-  export type PayloadLogScalarWhereInput = {
-    AND?: PayloadLogScalarWhereInput | PayloadLogScalarWhereInput[]
-    OR?: PayloadLogScalarWhereInput[]
-    NOT?: PayloadLogScalarWhereInput | PayloadLogScalarWhereInput[]
-    id?: StringFilter<"PayloadLog"> | string
-    payload?: JsonFilter<"PayloadLog">
-    headers?: JsonNullableFilter<"PayloadLog">
-    userAgent?: StringNullableFilter<"PayloadLog"> | string | null
-    ipAddress?: StringNullableFilter<"PayloadLog"> | string | null
-    receivedAt?: DateTimeFilter<"PayloadLog"> | Date | string
-    incomingWebhookId?: StringFilter<"PayloadLog"> | string
-  }
-
-  export type IncomingWebhookCreateWithoutOutgoingEndpointsInput = {
-    id?: string
-    name: string
-    description?: string | null
-    url: string
-    secret?: string | null
-    status?: $Enums.WebhookStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    creator: UserCreateNestedOneWithoutWebhooksInput
-    payloadLogs?: PayloadLogCreateNestedManyWithoutIncomingWebhookInput
-  }
-
-  export type IncomingWebhookUncheckedCreateWithoutOutgoingEndpointsInput = {
-    id?: string
-    name: string
-    description?: string | null
-    url: string
-    secret?: string | null
-    status?: $Enums.WebhookStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    createdBy: string
-    payloadLogs?: PayloadLogUncheckedCreateNestedManyWithoutIncomingWebhookInput
-  }
-
-  export type IncomingWebhookCreateOrConnectWithoutOutgoingEndpointsInput = {
-    where: IncomingWebhookWhereUniqueInput
-    create: XOR<IncomingWebhookCreateWithoutOutgoingEndpointsInput, IncomingWebhookUncheckedCreateWithoutOutgoingEndpointsInput>
-  }
-
-  export type DeliveryLogCreateWithoutOutgoingEndpointInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    payloadLog: PayloadLogCreateNestedOneWithoutDeliveryLogsInput
-  }
-
-  export type DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    payloadLogId: string
-  }
-
-  export type DeliveryLogCreateOrConnectWithoutOutgoingEndpointInput = {
-    where: DeliveryLogWhereUniqueInput
-    create: XOR<DeliveryLogCreateWithoutOutgoingEndpointInput, DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput>
-  }
-
-  export type DeliveryLogCreateManyOutgoingEndpointInputEnvelope = {
-    data: DeliveryLogCreateManyOutgoingEndpointInput | DeliveryLogCreateManyOutgoingEndpointInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MessageTemplateCreateWithoutOutgoingEndpointInput = {
-    id?: string
-    name: string
-    template: string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput = {
-    id?: string
-    name: string
-    template: string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MessageTemplateCreateOrConnectWithoutOutgoingEndpointInput = {
+  export type MessageTemplateUpsertWithWhereUniqueWithoutIncomingWebhookInput = {
     where: MessageTemplateWhereUniqueInput
-    create: XOR<MessageTemplateCreateWithoutOutgoingEndpointInput, MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput>
+    update: XOR<MessageTemplateUpdateWithoutIncomingWebhookInput, MessageTemplateUncheckedUpdateWithoutIncomingWebhookInput>
+    create: XOR<MessageTemplateCreateWithoutIncomingWebhookInput, MessageTemplateUncheckedCreateWithoutIncomingWebhookInput>
   }
 
-  export type IncomingWebhookUpsertWithoutOutgoingEndpointsInput = {
-    update: XOR<IncomingWebhookUpdateWithoutOutgoingEndpointsInput, IncomingWebhookUncheckedUpdateWithoutOutgoingEndpointsInput>
-    create: XOR<IncomingWebhookCreateWithoutOutgoingEndpointsInput, IncomingWebhookUncheckedCreateWithoutOutgoingEndpointsInput>
-    where?: IncomingWebhookWhereInput
+  export type MessageTemplateUpdateWithWhereUniqueWithoutIncomingWebhookInput = {
+    where: MessageTemplateWhereUniqueInput
+    data: XOR<MessageTemplateUpdateWithoutIncomingWebhookInput, MessageTemplateUncheckedUpdateWithoutIncomingWebhookInput>
   }
 
-  export type IncomingWebhookUpdateToOneWithWhereWithoutOutgoingEndpointsInput = {
-    where?: IncomingWebhookWhereInput
-    data: XOR<IncomingWebhookUpdateWithoutOutgoingEndpointsInput, IncomingWebhookUncheckedUpdateWithoutOutgoingEndpointsInput>
+  export type MessageTemplateUpdateManyWithWhereWithoutIncomingWebhookInput = {
+    where: MessageTemplateScalarWhereInput
+    data: XOR<MessageTemplateUpdateManyMutationInput, MessageTemplateUncheckedUpdateManyWithoutIncomingWebhookInput>
   }
 
-  export type IncomingWebhookUpdateWithoutOutgoingEndpointsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creator?: UserUpdateOneRequiredWithoutWebhooksNestedInput
-    payloadLogs?: PayloadLogUpdateManyWithoutIncomingWebhookNestedInput
+  export type MessageTemplateScalarWhereInput = {
+    AND?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
+    OR?: MessageTemplateScalarWhereInput[]
+    NOT?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
+    id?: StringFilter<"MessageTemplate"> | string
+    name?: StringFilter<"MessageTemplate"> | string
+    template?: StringFilter<"MessageTemplate"> | string
+    variables?: StringNullableListFilter<"MessageTemplate">
+    createdAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    incomingWebhookId?: StringFilter<"MessageTemplate"> | string
   }
 
-  export type IncomingWebhookUncheckedUpdateWithoutOutgoingEndpointsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: StringFieldUpdateOperationsInput | string
-    payloadLogs?: PayloadLogUncheckedUpdateManyWithoutIncomingWebhookNestedInput
-  }
-
-  export type DeliveryLogUpsertWithWhereUniqueWithoutOutgoingEndpointInput = {
-    where: DeliveryLogWhereUniqueInput
-    update: XOR<DeliveryLogUpdateWithoutOutgoingEndpointInput, DeliveryLogUncheckedUpdateWithoutOutgoingEndpointInput>
-    create: XOR<DeliveryLogCreateWithoutOutgoingEndpointInput, DeliveryLogUncheckedCreateWithoutOutgoingEndpointInput>
-  }
-
-  export type DeliveryLogUpdateWithWhereUniqueWithoutOutgoingEndpointInput = {
-    where: DeliveryLogWhereUniqueInput
-    data: XOR<DeliveryLogUpdateWithoutOutgoingEndpointInput, DeliveryLogUncheckedUpdateWithoutOutgoingEndpointInput>
-  }
-
-  export type DeliveryLogUpdateManyWithWhereWithoutOutgoingEndpointInput = {
-    where: DeliveryLogScalarWhereInput
-    data: XOR<DeliveryLogUpdateManyMutationInput, DeliveryLogUncheckedUpdateManyWithoutOutgoingEndpointInput>
-  }
-
-  export type DeliveryLogScalarWhereInput = {
-    AND?: DeliveryLogScalarWhereInput | DeliveryLogScalarWhereInput[]
-    OR?: DeliveryLogScalarWhereInput[]
-    NOT?: DeliveryLogScalarWhereInput | DeliveryLogScalarWhereInput[]
-    id?: StringFilter<"DeliveryLog"> | string
-    status?: EnumDeliveryStatusFilter<"DeliveryLog"> | $Enums.DeliveryStatus
-    transformedPayload?: JsonNullableFilter<"DeliveryLog">
-    responseStatus?: IntNullableFilter<"DeliveryLog"> | number | null
-    responseBody?: StringNullableFilter<"DeliveryLog"> | string | null
-    errorMessage?: StringNullableFilter<"DeliveryLog"> | string | null
-    attemptNumber?: IntFilter<"DeliveryLog"> | number
-    deliveredAt?: DateTimeNullableFilter<"DeliveryLog"> | Date | string | null
-    createdAt?: DateTimeFilter<"DeliveryLog"> | Date | string
-    payloadLogId?: StringFilter<"DeliveryLog"> | string
-    outgoingEndpointId?: StringFilter<"DeliveryLog"> | string
-  }
-
-  export type MessageTemplateUpsertWithoutOutgoingEndpointInput = {
-    update: XOR<MessageTemplateUpdateWithoutOutgoingEndpointInput, MessageTemplateUncheckedUpdateWithoutOutgoingEndpointInput>
-    create: XOR<MessageTemplateCreateWithoutOutgoingEndpointInput, MessageTemplateUncheckedCreateWithoutOutgoingEndpointInput>
-    where?: MessageTemplateWhereInput
-  }
-
-  export type MessageTemplateUpdateToOneWithWhereWithoutOutgoingEndpointInput = {
-    where?: MessageTemplateWhereInput
-    data: XOR<MessageTemplateUpdateWithoutOutgoingEndpointInput, MessageTemplateUncheckedUpdateWithoutOutgoingEndpointInput>
-  }
-
-  export type MessageTemplateUpdateWithoutOutgoingEndpointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    template?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MessageTemplateUncheckedUpdateWithoutOutgoingEndpointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    template?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OutgoingEndpointCreateWithoutMessageTemplateInput = {
+  export type IncomingWebhookCreateWithoutMessageTemplatesInput = {
     id?: string
     name: string
     url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhook: IncomingWebhookCreateNestedOneWithoutOutgoingEndpointsInput
-    deliveryLogs?: DeliveryLogCreateNestedManyWithoutOutgoingEndpointInput
-  }
-
-  export type OutgoingEndpointUncheckedCreateWithoutMessageTemplateInput = {
-    id?: string
-    name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhookId: string
-    deliveryLogs?: DeliveryLogUncheckedCreateNestedManyWithoutOutgoingEndpointInput
-  }
-
-  export type OutgoingEndpointCreateOrConnectWithoutMessageTemplateInput = {
-    where: OutgoingEndpointWhereUniqueInput
-    create: XOR<OutgoingEndpointCreateWithoutMessageTemplateInput, OutgoingEndpointUncheckedCreateWithoutMessageTemplateInput>
-  }
-
-  export type OutgoingEndpointUpsertWithoutMessageTemplateInput = {
-    update: XOR<OutgoingEndpointUpdateWithoutMessageTemplateInput, OutgoingEndpointUncheckedUpdateWithoutMessageTemplateInput>
-    create: XOR<OutgoingEndpointCreateWithoutMessageTemplateInput, OutgoingEndpointUncheckedCreateWithoutMessageTemplateInput>
-    where?: OutgoingEndpointWhereInput
-  }
-
-  export type OutgoingEndpointUpdateToOneWithWhereWithoutMessageTemplateInput = {
-    where?: OutgoingEndpointWhereInput
-    data: XOR<OutgoingEndpointUpdateWithoutMessageTemplateInput, OutgoingEndpointUncheckedUpdateWithoutMessageTemplateInput>
-  }
-
-  export type OutgoingEndpointUpdateWithoutMessageTemplateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhook?: IncomingWebhookUpdateOneRequiredWithoutOutgoingEndpointsNestedInput
-    deliveryLogs?: DeliveryLogUpdateManyWithoutOutgoingEndpointNestedInput
-  }
-
-  export type OutgoingEndpointUncheckedUpdateWithoutMessageTemplateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhookId?: StringFieldUpdateOperationsInput | string
-    deliveryLogs?: DeliveryLogUncheckedUpdateManyWithoutOutgoingEndpointNestedInput
-  }
-
-  export type IncomingWebhookCreateWithoutPayloadLogsInput = {
-    id?: string
-    name: string
-    description?: string | null
-    url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    creator: UserCreateNestedOneWithoutWebhooksInput
-    outgoingEndpoints?: OutgoingEndpointCreateNestedManyWithoutIncomingWebhookInput
+    user: UserCreateNestedOneWithoutWebhooksInput
   }
 
-  export type IncomingWebhookUncheckedCreateWithoutPayloadLogsInput = {
+  export type IncomingWebhookUncheckedCreateWithoutMessageTemplatesInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    createdBy: string
-    outgoingEndpoints?: OutgoingEndpointUncheckedCreateNestedManyWithoutIncomingWebhookInput
+    userId: string
   }
 
-  export type IncomingWebhookCreateOrConnectWithoutPayloadLogsInput = {
+  export type IncomingWebhookCreateOrConnectWithoutMessageTemplatesInput = {
     where: IncomingWebhookWhereUniqueInput
-    create: XOR<IncomingWebhookCreateWithoutPayloadLogsInput, IncomingWebhookUncheckedCreateWithoutPayloadLogsInput>
+    create: XOR<IncomingWebhookCreateWithoutMessageTemplatesInput, IncomingWebhookUncheckedCreateWithoutMessageTemplatesInput>
   }
 
-  export type DeliveryLogCreateWithoutPayloadLogInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    outgoingEndpoint: OutgoingEndpointCreateNestedOneWithoutDeliveryLogsInput
-  }
-
-  export type DeliveryLogUncheckedCreateWithoutPayloadLogInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    outgoingEndpointId: string
-  }
-
-  export type DeliveryLogCreateOrConnectWithoutPayloadLogInput = {
-    where: DeliveryLogWhereUniqueInput
-    create: XOR<DeliveryLogCreateWithoutPayloadLogInput, DeliveryLogUncheckedCreateWithoutPayloadLogInput>
-  }
-
-  export type DeliveryLogCreateManyPayloadLogInputEnvelope = {
-    data: DeliveryLogCreateManyPayloadLogInput | DeliveryLogCreateManyPayloadLogInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type IncomingWebhookUpsertWithoutPayloadLogsInput = {
-    update: XOR<IncomingWebhookUpdateWithoutPayloadLogsInput, IncomingWebhookUncheckedUpdateWithoutPayloadLogsInput>
-    create: XOR<IncomingWebhookCreateWithoutPayloadLogsInput, IncomingWebhookUncheckedCreateWithoutPayloadLogsInput>
+  export type IncomingWebhookUpsertWithoutMessageTemplatesInput = {
+    update: XOR<IncomingWebhookUpdateWithoutMessageTemplatesInput, IncomingWebhookUncheckedUpdateWithoutMessageTemplatesInput>
+    create: XOR<IncomingWebhookCreateWithoutMessageTemplatesInput, IncomingWebhookUncheckedCreateWithoutMessageTemplatesInput>
     where?: IncomingWebhookWhereInput
   }
 
-  export type IncomingWebhookUpdateToOneWithWhereWithoutPayloadLogsInput = {
+  export type IncomingWebhookUpdateToOneWithWhereWithoutMessageTemplatesInput = {
     where?: IncomingWebhookWhereInput
-    data: XOR<IncomingWebhookUpdateWithoutPayloadLogsInput, IncomingWebhookUncheckedUpdateWithoutPayloadLogsInput>
+    data: XOR<IncomingWebhookUpdateWithoutMessageTemplatesInput, IncomingWebhookUncheckedUpdateWithoutMessageTemplatesInput>
   }
 
-  export type IncomingWebhookUpdateWithoutPayloadLogsInput = {
+  export type IncomingWebhookUpdateWithoutMessageTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creator?: UserUpdateOneRequiredWithoutWebhooksNestedInput
-    outgoingEndpoints?: OutgoingEndpointUpdateManyWithoutIncomingWebhookNestedInput
+    user?: UserUpdateOneRequiredWithoutWebhooksNestedInput
   }
 
-  export type IncomingWebhookUncheckedUpdateWithoutPayloadLogsInput = {
+  export type IncomingWebhookUncheckedUpdateWithoutMessageTemplatesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: StringFieldUpdateOperationsInput | string
-    outgoingEndpoints?: OutgoingEndpointUncheckedUpdateManyWithoutIncomingWebhookNestedInput
-  }
-
-  export type DeliveryLogUpsertWithWhereUniqueWithoutPayloadLogInput = {
-    where: DeliveryLogWhereUniqueInput
-    update: XOR<DeliveryLogUpdateWithoutPayloadLogInput, DeliveryLogUncheckedUpdateWithoutPayloadLogInput>
-    create: XOR<DeliveryLogCreateWithoutPayloadLogInput, DeliveryLogUncheckedCreateWithoutPayloadLogInput>
-  }
-
-  export type DeliveryLogUpdateWithWhereUniqueWithoutPayloadLogInput = {
-    where: DeliveryLogWhereUniqueInput
-    data: XOR<DeliveryLogUpdateWithoutPayloadLogInput, DeliveryLogUncheckedUpdateWithoutPayloadLogInput>
-  }
-
-  export type DeliveryLogUpdateManyWithWhereWithoutPayloadLogInput = {
-    where: DeliveryLogScalarWhereInput
-    data: XOR<DeliveryLogUpdateManyMutationInput, DeliveryLogUncheckedUpdateManyWithoutPayloadLogInput>
-  }
-
-  export type PayloadLogCreateWithoutDeliveryLogsInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    incomingWebhook: IncomingWebhookCreateNestedOneWithoutPayloadLogsInput
-  }
-
-  export type PayloadLogUncheckedCreateWithoutDeliveryLogsInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-    incomingWebhookId: string
-  }
-
-  export type PayloadLogCreateOrConnectWithoutDeliveryLogsInput = {
-    where: PayloadLogWhereUniqueInput
-    create: XOR<PayloadLogCreateWithoutDeliveryLogsInput, PayloadLogUncheckedCreateWithoutDeliveryLogsInput>
-  }
-
-  export type OutgoingEndpointCreateWithoutDeliveryLogsInput = {
-    id?: string
-    name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhook: IncomingWebhookCreateNestedOneWithoutOutgoingEndpointsInput
-    messageTemplate?: MessageTemplateCreateNestedOneWithoutOutgoingEndpointInput
-  }
-
-  export type OutgoingEndpointUncheckedCreateWithoutDeliveryLogsInput = {
-    id?: string
-    name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    incomingWebhookId: string
-    messageTemplate?: MessageTemplateUncheckedCreateNestedOneWithoutOutgoingEndpointInput
-  }
-
-  export type OutgoingEndpointCreateOrConnectWithoutDeliveryLogsInput = {
-    where: OutgoingEndpointWhereUniqueInput
-    create: XOR<OutgoingEndpointCreateWithoutDeliveryLogsInput, OutgoingEndpointUncheckedCreateWithoutDeliveryLogsInput>
-  }
-
-  export type PayloadLogUpsertWithoutDeliveryLogsInput = {
-    update: XOR<PayloadLogUpdateWithoutDeliveryLogsInput, PayloadLogUncheckedUpdateWithoutDeliveryLogsInput>
-    create: XOR<PayloadLogCreateWithoutDeliveryLogsInput, PayloadLogUncheckedCreateWithoutDeliveryLogsInput>
-    where?: PayloadLogWhereInput
-  }
-
-  export type PayloadLogUpdateToOneWithWhereWithoutDeliveryLogsInput = {
-    where?: PayloadLogWhereInput
-    data: XOR<PayloadLogUpdateWithoutDeliveryLogsInput, PayloadLogUncheckedUpdateWithoutDeliveryLogsInput>
-  }
-
-  export type PayloadLogUpdateWithoutDeliveryLogsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhook?: IncomingWebhookUpdateOneRequiredWithoutPayloadLogsNestedInput
-  }
-
-  export type PayloadLogUncheckedUpdateWithoutDeliveryLogsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhookId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type OutgoingEndpointUpsertWithoutDeliveryLogsInput = {
-    update: XOR<OutgoingEndpointUpdateWithoutDeliveryLogsInput, OutgoingEndpointUncheckedUpdateWithoutDeliveryLogsInput>
-    create: XOR<OutgoingEndpointCreateWithoutDeliveryLogsInput, OutgoingEndpointUncheckedCreateWithoutDeliveryLogsInput>
-    where?: OutgoingEndpointWhereInput
-  }
-
-  export type OutgoingEndpointUpdateToOneWithWhereWithoutDeliveryLogsInput = {
-    where?: OutgoingEndpointWhereInput
-    data: XOR<OutgoingEndpointUpdateWithoutDeliveryLogsInput, OutgoingEndpointUncheckedUpdateWithoutDeliveryLogsInput>
-  }
-
-  export type OutgoingEndpointUpdateWithoutDeliveryLogsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhook?: IncomingWebhookUpdateOneRequiredWithoutOutgoingEndpointsNestedInput
-    messageTemplate?: MessageTemplateUpdateOneWithoutOutgoingEndpointNestedInput
-  }
-
-  export type OutgoingEndpointUncheckedUpdateWithoutDeliveryLogsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    incomingWebhookId?: StringFieldUpdateOperationsInput | string
-    messageTemplate?: MessageTemplateUncheckedUpdateOneWithoutOutgoingEndpointNestedInput
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateWithoutMeetingReportsInput = {
@@ -15391,7 +10133,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyReports?: DailyReportCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookCreateNestedManyWithoutCreatorInput
+    webhooks?: IncomingWebhookCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMeetingReportsInput = {
@@ -15404,7 +10146,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     dailyReports?: DailyReportUncheckedCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutCreatorInput
+    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMeetingReportsInput = {
@@ -15433,7 +10175,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyReports?: DailyReportUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUpdateManyWithoutCreatorNestedInput
+    webhooks?: IncomingWebhookUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMeetingReportsInput = {
@@ -15446,7 +10188,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dailyReports?: DailyReportUncheckedUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput
+    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutDailyReportsInput = {
@@ -15459,7 +10201,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     meetingReports?: MeetingReportCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookCreateNestedManyWithoutCreatorInput
+    webhooks?: IncomingWebhookCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDailyReportsInput = {
@@ -15472,7 +10214,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     meetingReports?: MeetingReportUncheckedCreateNestedManyWithoutUserInput
-    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutCreatorInput
+    webhooks?: IncomingWebhookUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDailyReportsInput = {
@@ -15501,7 +10243,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     meetingReports?: MeetingReportUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUpdateManyWithoutCreatorNestedInput
+    webhooks?: IncomingWebhookUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDailyReportsInput = {
@@ -15514,7 +10256,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     meetingReports?: MeetingReportUncheckedUpdateManyWithoutUserNestedInput
-    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutCreatorNestedInput
+    webhooks?: IncomingWebhookUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DailyReportCreateManyUserInput = {
@@ -15549,12 +10291,10 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type IncomingWebhookCreateManyCreatorInput = {
+  export type IncomingWebhookCreateManyUserInput = {
     id?: string
     name: string
-    description?: string | null
     url: string
-    secret?: string | null
     status?: $Enums.WebhookStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15656,243 +10396,69 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type IncomingWebhookUpdateWithoutCreatorInput = {
+  export type IncomingWebhookUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpoints?: OutgoingEndpointUpdateManyWithoutIncomingWebhookNestedInput
-    payloadLogs?: PayloadLogUpdateManyWithoutIncomingWebhookNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutIncomingWebhookNestedInput
   }
 
-  export type IncomingWebhookUncheckedUpdateWithoutCreatorInput = {
+  export type IncomingWebhookUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpoints?: OutgoingEndpointUncheckedUpdateManyWithoutIncomingWebhookNestedInput
-    payloadLogs?: PayloadLogUncheckedUpdateManyWithoutIncomingWebhookNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutIncomingWebhookNestedInput
   }
 
-  export type IncomingWebhookUncheckedUpdateManyWithoutCreatorInput = {
+  export type IncomingWebhookUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     url?: StringFieldUpdateOperationsInput | string
-    secret?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumWebhookStatusFieldUpdateOperationsInput | $Enums.WebhookStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OutgoingEndpointCreateManyIncomingWebhookInput = {
+  export type MessageTemplateCreateManyIncomingWebhookInput = {
     id?: string
     name: string
-    url: string
-    method?: string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: boolean
-    retryAttempts?: number
-    retryDelayMs?: number
-    timeoutMs?: number
+    template: string
+    variables?: MessageTemplateCreatevariablesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type PayloadLogCreateManyIncomingWebhookInput = {
-    id?: string
-    payload: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: string | null
-    ipAddress?: string | null
-    receivedAt?: Date | string
-  }
-
-  export type OutgoingEndpointUpdateWithoutIncomingWebhookInput = {
+  export type MessageTemplateUpdateWithoutIncomingWebhookInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deliveryLogs?: DeliveryLogUpdateManyWithoutOutgoingEndpointNestedInput
-    messageTemplate?: MessageTemplateUpdateOneWithoutOutgoingEndpointNestedInput
-  }
-
-  export type OutgoingEndpointUncheckedUpdateWithoutIncomingWebhookInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deliveryLogs?: DeliveryLogUncheckedUpdateManyWithoutOutgoingEndpointNestedInput
-    messageTemplate?: MessageTemplateUncheckedUpdateOneWithoutOutgoingEndpointNestedInput
-  }
-
-  export type OutgoingEndpointUncheckedUpdateManyWithoutIncomingWebhookInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    method?: StringFieldUpdateOperationsInput | string
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    retryAttempts?: IntFieldUpdateOperationsInput | number
-    retryDelayMs?: IntFieldUpdateOperationsInput | number
-    timeoutMs?: IntFieldUpdateOperationsInput | number
+    template?: StringFieldUpdateOperationsInput | string
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PayloadLogUpdateWithoutIncomingWebhookInput = {
+  export type MessageTemplateUncheckedUpdateWithoutIncomingWebhookInput = {
     id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deliveryLogs?: DeliveryLogUpdateManyWithoutPayloadLogNestedInput
-  }
-
-  export type PayloadLogUncheckedUpdateWithoutIncomingWebhookInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deliveryLogs?: DeliveryLogUncheckedUpdateManyWithoutPayloadLogNestedInput
-  }
-
-  export type PayloadLogUncheckedUpdateManyWithoutIncomingWebhookInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    payload?: JsonNullValueInput | InputJsonValue
-    headers?: NullableJsonNullValueInput | InputJsonValue
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    receivedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DeliveryLogCreateManyOutgoingEndpointInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    payloadLogId: string
-  }
-
-  export type DeliveryLogUpdateWithoutOutgoingEndpointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    template?: StringFieldUpdateOperationsInput | string
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    payloadLog?: PayloadLogUpdateOneRequiredWithoutDeliveryLogsNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DeliveryLogUncheckedUpdateWithoutOutgoingEndpointInput = {
+  export type MessageTemplateUncheckedUpdateManyWithoutIncomingWebhookInput = {
     id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    template?: StringFieldUpdateOperationsInput | string
+    variables?: MessageTemplateUpdatevariablesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    payloadLogId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DeliveryLogUncheckedUpdateManyWithoutOutgoingEndpointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    payloadLogId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DeliveryLogCreateManyPayloadLogInput = {
-    id?: string
-    status?: $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: number | null
-    responseBody?: string | null
-    errorMessage?: string | null
-    attemptNumber?: number
-    deliveredAt?: Date | string | null
-    createdAt?: Date | string
-    outgoingEndpointId: string
-  }
-
-  export type DeliveryLogUpdateWithoutPayloadLogInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpoint?: OutgoingEndpointUpdateOneRequiredWithoutDeliveryLogsNestedInput
-  }
-
-  export type DeliveryLogUncheckedUpdateWithoutPayloadLogInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpointId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DeliveryLogUncheckedUpdateManyWithoutPayloadLogInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    transformedPayload?: NullableJsonNullValueInput | InputJsonValue
-    responseStatus?: NullableIntFieldUpdateOperationsInput | number | null
-    responseBody?: NullableStringFieldUpdateOperationsInput | string | null
-    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
-    attemptNumber?: IntFieldUpdateOperationsInput | number
-    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    outgoingEndpointId?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -15909,14 +10475,6 @@ export namespace Prisma {
      */
     export type IncomingWebhookCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = IncomingWebhookCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use OutgoingEndpointCountOutputTypeDefaultArgs instead
-     */
-    export type OutgoingEndpointCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OutgoingEndpointCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PayloadLogCountOutputTypeDefaultArgs instead
-     */
-    export type PayloadLogCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PayloadLogCountOutputTypeDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
@@ -15925,21 +10483,9 @@ export namespace Prisma {
      */
     export type IncomingWebhookArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = IncomingWebhookDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use OutgoingEndpointDefaultArgs instead
-     */
-    export type OutgoingEndpointArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OutgoingEndpointDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use MessageTemplateDefaultArgs instead
      */
     export type MessageTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MessageTemplateDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use PayloadLogDefaultArgs instead
-     */
-    export type PayloadLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PayloadLogDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use DeliveryLogDefaultArgs instead
-     */
-    export type DeliveryLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DeliveryLogDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SupportPlatformDefaultArgs instead
      */

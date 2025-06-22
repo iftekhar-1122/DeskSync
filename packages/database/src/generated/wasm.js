@@ -136,62 +136,21 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.IncomingWebhookScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  description: 'description',
   url: 'url',
-  secret: 'secret',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  createdBy: 'createdBy'
-};
-
-exports.Prisma.OutgoingEndpointScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  url: 'url',
-  method: 'method',
-  headers: 'headers',
-  isActive: 'isActive',
-  retryAttempts: 'retryAttempts',
-  retryDelayMs: 'retryDelayMs',
-  timeoutMs: 'timeoutMs',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  incomingWebhookId: 'incomingWebhookId'
+  userId: 'userId'
 };
 
 exports.Prisma.MessageTemplateScalarFieldEnum = {
   id: 'id',
   name: 'name',
   template: 'template',
-  description: 'description',
+  variables: 'variables',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  outgoingEndpointId: 'outgoingEndpointId'
-};
-
-exports.Prisma.PayloadLogScalarFieldEnum = {
-  id: 'id',
-  payload: 'payload',
-  headers: 'headers',
-  userAgent: 'userAgent',
-  ipAddress: 'ipAddress',
-  receivedAt: 'receivedAt',
   incomingWebhookId: 'incomingWebhookId'
-};
-
-exports.Prisma.DeliveryLogScalarFieldEnum = {
-  id: 'id',
-  status: 'status',
-  transformedPayload: 'transformedPayload',
-  responseStatus: 'responseStatus',
-  responseBody: 'responseBody',
-  errorMessage: 'errorMessage',
-  attemptNumber: 'attemptNumber',
-  deliveredAt: 'deliveredAt',
-  createdAt: 'createdAt',
-  payloadLogId: 'payloadLogId',
-  outgoingEndpointId: 'outgoingEndpointId'
 };
 
 exports.Prisma.SupportPlatformScalarFieldEnum = {
@@ -246,10 +205,6 @@ exports.Prisma.NullableJsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
-};
-
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -273,31 +228,20 @@ exports.UserRole = exports.$Enums.UserRole = {
 exports.WebhookStatus = exports.$Enums.WebhookStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
-  DELETED: 'DELETED'
-};
-
-exports.DeliveryStatus = exports.$Enums.DeliveryStatus = {
-  PENDING: 'PENDING',
-  SUCCESS: 'SUCCESS',
-  FAILED: 'FAILED',
-  RETRYING: 'RETRYING'
+  PAUSED: 'PAUSED'
 };
 
 exports.MeetingOutcome = exports.$Enums.MeetingOutcome = {
-  SUCCESSFUL: 'SUCCESSFUL',
-  CLIENT_ABSENT: 'CLIENT_ABSENT',
-  TECHNICAL_ISSUES: 'TECHNICAL_ISSUES',
-  RESCHEDULED: 'RESCHEDULED',
-  CANCELLED: 'CANCELLED'
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  NO_SHOW: 'NO_SHOW',
+  RESCHEDULED: 'RESCHEDULED'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
   IncomingWebhook: 'IncomingWebhook',
-  OutgoingEndpoint: 'OutgoingEndpoint',
   MessageTemplate: 'MessageTemplate',
-  PayloadLog: 'PayloadLog',
-  DeliveryLog: 'DeliveryLog',
   SupportPlatform: 'SupportPlatform',
   MeetingReport: 'MeetingReport',
   DailyReport: 'DailyReport'
