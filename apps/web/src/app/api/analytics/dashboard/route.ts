@@ -33,7 +33,14 @@ export async function GET(request: NextRequest) {
         reportCount: 42,
         completionRate: 95.5,
         averageScore: 8.7,
-        trend: 12
+        trend: 12,
+        platformStats: [
+          { platform: 'Facebook', totalTickets: 125, averageTickets: 8.3 },
+          { platform: 'YouTube', totalTickets: 98, averageTickets: 6.5 },
+          { platform: 'Crisp Chat', totalTickets: 87, averageTickets: 5.8 },
+          { platform: 'Email Support', totalTickets: 156, averageTickets: 10.4 },
+          { platform: 'Phone Support', totalTickets: 67, averageTickets: 4.5 }
+        ]
       },
       timeSeries: [
         { date: '2024-01-01', tickets: 15, chats: 8, emails: 12, calls: 5, githubIssues: 3 },

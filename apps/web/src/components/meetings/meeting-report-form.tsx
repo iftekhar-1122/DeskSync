@@ -21,6 +21,9 @@ const meetingReportSchema = z.object({
   notes: z.string().optional(),
   attendees: z.array(z.string()).optional(),
   actionItems: z.array(z.string()).optional(),
+  customerName: z.string().optional(),
+  customerEmail: z.string().email('Invalid email format').optional().or(z.literal('')),
+  hostId: z.string().optional(),
 })
 
 type MeetingReportForm = z.infer<typeof meetingReportSchema>
@@ -51,14 +54,17 @@ export function MeetingReportForm({ initialData, onSuccess, onCancel }: MeetingR
     resolver: zodResolver(meetingReportSchema),
     defaultValues: {
       title: initialData?.title || '',
-      startTime: initialData?.startTime 
+      startTime: initialData?.startTime
         ? new Date(initialData.startTime).toISOString().slice(0, 16)
         : new Date().toISOString().slice(0, 16),
-      endTime: initialData?.endTime 
+      endTime: initialData?.endTime
         ? new Date(initialData.endTime).toISOString().slice(0, 16)
         : '',
       outcome: initialData?.outcome || 'PENDING',
       notes: initialData?.notes || '',
+      customerName: initialData?.customerName || '',
+      customerEmail: initialData?.customerEmail || '',
+      hostId: initialData?.hostId || '',
     },
   })
 
@@ -119,6 +125,9 @@ export function MeetingReportForm({ initialData, onSuccess, onCancel }: MeetingR
       ...data,
       attendees: attendees.length > 0 ? attendees : undefined,
       actionItems: actionItems.length > 0 ? actionItems : undefined,
+      customerName: data.customerName || undefined,
+      customerEmail: data.customerEmail || undefined,
+      hostId: data.hostId || undefined,
     }
 
     if (initialData) {
@@ -176,6 +185,65 @@ export function MeetingReportForm({ initialData, onSuccess, onCancel }: MeetingR
             {errors.title.message}
           </p>
         )}
+      </div>
+
+      {/* Customer Information */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="customerName" className="block text-sm font-medium mb-2">
+            Customer Name (Optional)
+          </label>
+          <Input
+            id="customerName"
+            placeholder="Enter customer name"
+            {...register('customerName')}
+            className={errors.customerName ? 'border-destructive' : ''}
+          />
+          {errors.customerName && (
+            <p className="mt-1 text-sm text-destructive">
+              {errors.customerName.message}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="customerEmail" className="block text-sm font-medium mb-2">
+            Customer Email (Optional)
+          </label>
+          <Input
+            id="customerEmail"
+            type="email"
+            placeholder="customer@example.com"
+            {...register('customerEmail')}
+            className={errors.customerEmail ? 'border-destructive' : ''}
+          />
+          {errors.customerEmail && (
+            <p className="mt-1 text-sm text-destructive">
+              {errors.customerEmail.message}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Host Information */}
+      <div>
+        <label htmlFor="hostId" className="block text-sm font-medium mb-2">
+          Host ID (Optional)
+        </label>
+        <Input
+          id="hostId"
+          placeholder="Enter host identifier (email or username)"
+          {...register('hostId')}
+          className={errors.hostId ? 'border-destructive' : ''}
+        />
+        {errors.hostId && (
+          <p className="mt-1 text-sm text-destructive">
+            {errors.hostId.message}
+          </p>
+        )}
+        <p className="mt-1 text-xs text-muted-foreground">
+          Used for automatic assignment when meetings are created via webhooks
+        </p>
       </div>
 
       {/* Time Fields */}

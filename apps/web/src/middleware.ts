@@ -24,7 +24,7 @@ export default withAuth(
       }
 
       // Check admin-only routes
-      const adminRoutes = ['/dashboard/webhooks', '/dashboard/users', '/dashboard/health']
+      const adminRoutes = ['/dashboard/webhooks', '/dashboard/users', '/dashboard/health', '/dashboard/admin']
       const isAdminRoute = adminRoutes.some(route => pathname.startsWith(route))
       
       if (isAdminRoute && token.role !== 'ADMIN') {

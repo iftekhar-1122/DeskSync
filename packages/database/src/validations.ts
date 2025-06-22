@@ -85,6 +85,7 @@ export const createDailyReportSchema = z.object({
   githubIssues: z.number().int().min(0).default(0),
   emailsProcessed: z.number().int().min(0).default(0),
   callsAttended: z.number().int().min(0).default(0),
+  platformReports: z.array(platformReportSchema).optional(),
   notes: z.string().optional(),
   links: z.array(z.string().url()).default([]),
   userId: z.string().cuid('Invalid user ID'),
@@ -96,6 +97,7 @@ export const updateDailyReportSchema = z.object({
   githubIssues: z.number().int().min(0).optional(),
   emailsProcessed: z.number().int().min(0).optional(),
   callsAttended: z.number().int().min(0).optional(),
+  platformReports: z.array(platformReportSchema).optional(),
   notes: z.string().optional(),
   links: z.array(z.string().url()).optional(),
 });
@@ -109,7 +111,11 @@ export const createMeetingReportSchema = z.object({
   notes: z.string().optional(),
   attendees: z.array(z.string()).default([]),
   actionItems: z.array(z.string()).default([]),
-  userId: z.string().cuid('Invalid user ID'),
+  customerName: z.string().optional(),
+  customerEmail: z.string().email().optional(),
+  hostId: z.string().optional(),
+  isAssigned: z.boolean().default(true),
+  userId: z.string().cuid('Invalid user ID').nullable(),
 }).refine(
   (data) => !data.endTime || data.endTime > data.startTime,
   {
@@ -126,6 +132,10 @@ export const updateMeetingReportSchema = z.object({
   notes: z.string().optional(),
   attendees: z.array(z.string()).optional(),
   actionItems: z.array(z.string()).optional(),
+  customerName: z.string().optional(),
+  customerEmail: z.string().email().optional(),
+  hostId: z.string().optional(),
+  isAssigned: z.boolean().optional(),
 }).refine(
   (data) => !data.endTime || !data.startTime || data.endTime > data.startTime,
   {
@@ -133,6 +143,34 @@ export const updateMeetingReportSchema = z.object({
     path: ['endTime'],
   }
 );
+
+// Support platform validation schemas
+export const createSupportPlatformSchema = z.object({
+  name: z.string().min(1, 'Platform name is required').max(100, 'Platform name must be less than 100 characters'),
+  isActive: z.boolean().default(true),
+});
+
+export const updateSupportPlatformSchema = z.object({
+  name: z.string().min(1, 'Platform name is required').max(100, 'Platform name must be less than 100 characters').optional(),
+  isActive: z.boolean().optional(),
+});
+
+// Platform report schema for daily reports
+export const platformReportSchema = z.object({
+  platform: z.string().min(1, 'Platform name is required'),
+  ticketsHandled: z.number().int().min(0, 'Tickets handled must be non-negative'),
+});
+
+// Webhook meeting payload schema
+export const webhookMeetingPayloadSchema = z.object({
+  meeting_id: z.string().optional(),
+  meeting_title: z.string().min(1, 'Meeting title is required'),
+  start_time: z.string().datetime(),
+  end_time: z.string().datetime().optional(),
+  host_id: z.string().optional(),
+  customer_name: z.string().optional(),
+  customer_email: z.string().email().optional(),
+});
 
 // Analytics filter validation schemas
 export const dateRangeFilterSchema = z.object({
@@ -179,6 +217,10 @@ export type CreateDailyReportInput = z.infer<typeof createDailyReportSchema>;
 export type UpdateDailyReportInput = z.infer<typeof updateDailyReportSchema>;
 export type CreateMeetingReportInput = z.infer<typeof createMeetingReportSchema>;
 export type UpdateMeetingReportInput = z.infer<typeof updateMeetingReportSchema>;
+export type CreateSupportPlatformInput = z.infer<typeof createSupportPlatformSchema>;
+export type UpdateSupportPlatformInput = z.infer<typeof updateSupportPlatformSchema>;
+export type PlatformReportInput = z.infer<typeof platformReportSchema>;
+export type WebhookMeetingPayload = z.infer<typeof webhookMeetingPayloadSchema>;
 export type DateRangeFilter = z.infer<typeof dateRangeFilterSchema>;
 export type UserFilter = z.infer<typeof userFilterSchema>;
 export type WebhookFilter = z.infer<typeof webhookFilterSchema>;

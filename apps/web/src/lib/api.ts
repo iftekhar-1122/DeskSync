@@ -190,6 +190,10 @@ export const dailyReportsApi = {
     githubIssues?: number
     emailsProcessed?: number
     callsAttended?: number
+    platformReports?: Array<{
+      platform: string
+      ticketsHandled: number
+    }>
     notes?: string
     links?: string[]
   }) =>
@@ -201,6 +205,10 @@ export const dailyReportsApi = {
     githubIssues: number
     emailsProcessed: number
     callsAttended: number
+    platformReports: Array<{
+      platform: string
+      ticketsHandled: number
+    }>
     notes: string
     links: string[]
   }>) =>
@@ -239,6 +247,10 @@ export const meetingReportsApi = {
     notes?: string
     attendees?: string[]
     actionItems?: string[]
+    customerName?: string
+    customerEmail?: string
+    hostId?: string
+    isAssigned?: boolean
   }) =>
     apiClient.post<ApiResponse<any>>('/reports/meeting', data),
   
@@ -250,6 +262,10 @@ export const meetingReportsApi = {
     notes: string
     attendees: string[]
     actionItems: string[]
+    customerName: string
+    customerEmail: string
+    hostId: string
+    isAssigned: boolean
   }>) =>
     apiClient.put<ApiResponse<any>>(`/reports/meeting/${id}`, data),
   

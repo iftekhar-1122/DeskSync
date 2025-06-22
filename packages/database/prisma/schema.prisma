@@ -147,6 +147,41 @@ model DeliveryLog {
   @@map("delivery_logs")
 }
 
+
+
+model SupportPlatform {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("support_platforms")
+}
+
+model MeetingReport {
+  id           String         @id @default(cuid())
+  title        String
+  startTime    DateTime
+  endTime      DateTime?
+  outcome      MeetingOutcome
+  notes        String?
+  attendees    String[]       // Array of attendee names/emails
+  actionItems  String[]       // Array of action items
+  customerName String?        // Customer name from webhook
+  customerEmail String?       // Customer email from webhook
+  hostId       String?        // Original host_id from webhook payload
+  isAssigned   Boolean        @default(true) // Track if meeting is assigned to a user
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  userId       String?        // Nullable for unassigned meetings
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("meeting_reports")
+}
+
 model DailyReport {
   id               String   @id @default(cuid())
   date             DateTime @db.Date
@@ -155,6 +190,7 @@ model DailyReport {
   githubIssues     Int      @default(0)
   emailsProcessed  Int      @default(0)
   callsAttended    Int      @default(0)
+  platformReports  Json?    // Array of platform-specific reports
   notes            String?
   links            String[] // Array of relevant links
   createdAt        DateTime @default(now())
@@ -166,23 +202,4 @@ model DailyReport {
 
   @@unique([userId, date])
   @@map("daily_reports")
-}
-
-model MeetingReport {
-  id          String         @id @default(cuid())
-  title       String
-  startTime   DateTime
-  endTime     DateTime?
-  outcome     MeetingOutcome
-  notes       String?
-  attendees   String[]       // Array of attendee names/emails
-  actionItems String[]       // Array of action items
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  userId      String
-
-  // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("meeting_reports")
 }

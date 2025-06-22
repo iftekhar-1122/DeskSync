@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Activity,
   MessageSquare,
+  Database,
 } from 'lucide-react'
 
 interface NavItem {
@@ -64,6 +65,12 @@ const navItems: NavItem[] = [
     title: 'System Health',
     href: '/dashboard/health',
     icon: Activity,
+    adminOnly: true,
+  },
+  {
+    title: 'Platforms',
+    href: '/dashboard/admin/platforms',
+    icon: Database,
     adminOnly: true,
   },
   {

@@ -28,7 +28,8 @@ export type {
   PayloadLog,
   DeliveryLog,
   DailyReport,
-  MeetingReport
+  MeetingReport,
+  SupportPlatform
 } from './generated';
 
 // Re-export enums individually
@@ -56,6 +57,10 @@ export type {
   UpdateDailyReportInput,
   CreateMeetingReportInput,
   UpdateMeetingReportInput,
+  CreateSupportPlatformInput,
+  UpdateSupportPlatformInput,
+  PlatformReport,
+  DailyReportWithPlatforms,
   DailyReportAnalytics,
   UserPerformanceMetrics,
   WebhookAnalytics,

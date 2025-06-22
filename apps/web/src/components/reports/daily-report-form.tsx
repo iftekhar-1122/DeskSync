@@ -1,16 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient, useQuery } from 'react-query'
 import { z } from 'zod'
 import { dailyReportsApi } from '@/lib/api'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useToast } from '@/components/ui/use-toast'
-import { Loader2, Save, X } from 'lucide-react'
+import { Loader2, Save, X, Plus, Trash2 } from 'lucide-react'
+
+const platformReportSchema = z.object({
+  platform: z.string().min(1, 'Platform name is required'),
+  ticketsHandled: z.number().min(0, 'Must be 0 or greater'),
+})
 
 const dailyReportSchema = z.object({
   date: z.string().optional(),
@@ -19,11 +26,19 @@ const dailyReportSchema = z.object({
   githubIssues: z.number().min(0, 'Must be 0 or greater').default(0),
   emailsProcessed: z.number().min(0, 'Must be 0 or greater').default(0),
   callsAttended: z.number().min(0, 'Must be 0 or greater').default(0),
+  platformReports: z.array(platformReportSchema).optional(),
   notes: z.string().optional(),
   links: z.array(z.string().url('Invalid URL')).optional(),
 })
 
 type DailyReportForm = z.infer<typeof dailyReportSchema>
+type PlatformReport = z.infer<typeof platformReportSchema>
+
+interface SupportPlatform {
+  id: string
+  name: string
+  isActive: boolean
+}
 
 interface DailyReportFormProps {
   initialData?: any
@@ -35,8 +50,26 @@ export function DailyReportForm({ initialData, onSuccess, onCancel }: DailyRepor
   const [linksInput, setLinksInput] = useState(
     initialData?.links?.join('\n') || ''
   )
+  const [platformReports, setPlatformReports] = useState<PlatformReport[]>(
+    initialData?.platformReports || []
+  )
   const { toast } = useToast()
   const queryClient = useQueryClient()
+
+  // Fetch available platforms
+  const { data: platformsData, isLoading: loadingPlatforms } = useQuery(
+    'support-platforms',
+    async () => {
+      const response = await fetch('/api/platforms?activeOnly=true')
+      if (!response.ok) {
+        throw new Error('Failed to fetch platforms')
+      }
+      return response.json()
+    },
+    {
+      select: (response) => response.data,
+    }
+  )
 
   const {
     register,
@@ -100,6 +133,23 @@ export function DailyReportForm({ initialData, onSuccess, onCancel }: DailyRepor
     }
   )
 
+  // Platform report handlers
+  const addPlatformReport = (platformName: string) => {
+    if (!platformReports.find(pr => pr.platform === platformName)) {
+      setPlatformReports([...platformReports, { platform: platformName, ticketsHandled: 0 }])
+    }
+  }
+
+  const updatePlatformReport = (index: number, ticketsHandled: number) => {
+    const updated = [...platformReports]
+    updated[index].ticketsHandled = ticketsHandled
+    setPlatformReports(updated)
+  }
+
+  const removePlatformReport = (index: number) => {
+    setPlatformReports(platformReports.filter((_, i) => i !== index))
+  }
+
   const onSubmit = (data: DailyReportForm) => {
     // Process links
     const links = linksInput
@@ -109,6 +159,7 @@ export function DailyReportForm({ initialData, onSuccess, onCancel }: DailyRepor
 
     const submitData = {
       ...data,
+      platformReports: platformReports.length > 0 ? platformReports : undefined,
       links: links.length > 0 ? links : undefined,
     }
 
@@ -233,6 +284,83 @@ export function DailyReportForm({ initialData, onSuccess, onCancel }: DailyRepor
           )}
         </div>
       </div>
+
+      {/* Platform Reports */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Platform-Specific Reports</CardTitle>
+          <CardDescription>
+            Track tickets handled per support platform
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Platform Selection */}
+          {!loadingPlatforms && platformsData && (
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Add Platform
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {platformsData
+                  .filter((platform: SupportPlatform) =>
+                    !platformReports.find(pr => pr.platform === platform.name)
+                  )
+                  .map((platform: SupportPlatform) => (
+                    <Button
+                      key={platform.id}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => addPlatformReport(platform.name)}
+                    >
+                      <Plus className="h-3 w-3 mr-1" />
+                      {platform.name}
+                    </Button>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* Platform Reports List */}
+          {platformReports.length > 0 && (
+            <div className="space-y-3">
+              <label className="block text-sm font-medium">
+                Platform Reports
+              </label>
+              {platformReports.map((report, index) => (
+                <div key={index} className="flex items-center space-x-3 p-3 border rounded-lg">
+                  <div className="flex-1">
+                    <span className="font-medium">{report.platform}</span>
+                  </div>
+                  <div className="w-32">
+                    <Input
+                      type="number"
+                      min="0"
+                      value={report.ticketsHandled}
+                      onChange={(e) => updatePlatformReport(index, parseInt(e.target.value) || 0)}
+                      placeholder="Tickets"
+                    />
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => removePlatformReport(index)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {platformReports.length === 0 && (
+            <div className="text-center py-4 text-muted-foreground">
+              No platform reports added. Select platforms above to track platform-specific tickets.
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Notes */}
       <div>

@@ -1,11 +1,12 @@
-import { 
-  User, 
-  IncomingWebhook, 
-  OutgoingEndpoint, 
-  PayloadLog, 
-  DeliveryLog, 
-  DailyReport, 
+import {
+  User,
+  IncomingWebhook,
+  OutgoingEndpoint,
+  PayloadLog,
+  DeliveryLog,
+  DailyReport,
   MeetingReport,
+  SupportPlatform,
   MessageTemplate,
   UserRole,
   WebhookStatus,
@@ -37,6 +38,21 @@ export type UpdateDailyReportInput = Partial<Omit<DailyReport, 'id' | 'createdAt
 export type CreateMeetingReportInput = Omit<MeetingReport, 'id' | 'createdAt' | 'updatedAt'>;
 export type UpdateMeetingReportInput = Partial<Omit<MeetingReport, 'id' | 'createdAt' | 'updatedAt' | 'userId'>>;
 
+// Support platform types
+export type CreateSupportPlatformInput = Omit<SupportPlatform, 'id' | 'createdAt' | 'updatedAt'>;
+export type UpdateSupportPlatformInput = Partial<Omit<SupportPlatform, 'id' | 'createdAt' | 'updatedAt'>>;
+
+// Platform report interface for daily reports
+export interface PlatformReport {
+  platform: string;
+  ticketsHandled: number;
+}
+
+// Enhanced daily report with platform reports
+export interface DailyReportWithPlatforms extends Omit<DailyReport, 'platformReports'> {
+  platformReports: PlatformReport[];
+}
+
 // Analytics types
 export interface DailyReportAnalytics {
   totalTickets: number;
@@ -50,6 +66,11 @@ export interface DailyReportAnalytics {
   averageEmails: number;
   averageCalls: number;
   reportCount: number;
+  platformStats: Array<{
+    platform: string;
+    totalTickets: number;
+    averageTickets: number;
+  }>;
 }
 
 export interface UserPerformanceMetrics {
