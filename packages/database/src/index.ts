@@ -29,8 +29,15 @@ export type {
   SupportPlatform
 } from './generated';
 
-// Re-export enums individually
+// Re-export enums individually (both types and values)
 export type {
+  UserRole,
+  WebhookStatus,
+  MeetingOutcome
+} from './generated';
+
+// Re-export enum values for runtime usage
+export {
   UserRole,
   WebhookStatus,
   MeetingOutcome

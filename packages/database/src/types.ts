@@ -108,5 +108,5 @@ export interface WebhookFilter {
   status?: WebhookStatus[];
 }
 
-// Export enums for convenience
-export { UserRole, WebhookStatus, MeetingOutcome };
+// Export enums for convenience (already exported from index.ts)
+// export { UserRole, WebhookStatus, MeetingOutcome };
